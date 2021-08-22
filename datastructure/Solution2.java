@@ -77,7 +77,29 @@ public class Solution2 {
     }
 
     public boolean searchMatrix(int[][] matrix, int target) {
+        int searchCount = 0;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int i = 0;
+        int j = n - 1;
+        while (i < m && j >= 0) {
+            searchCount++;
+            if (matrix[i][j] == target) {
+                System.out.println(searchCount);
+                return true;
+            }
+            if (matrix[i][j] > target) {
+                j--;
+                continue;
+            }
+            if (matrix[i][j] < target) {
+                i++;
+                continue;
+            }
+        }
 
+        System.out.println("本次搜索共计遍历 " + searchCount + " 次");
+        return false;
     }
 
 }
