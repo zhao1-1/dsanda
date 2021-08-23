@@ -28,6 +28,24 @@ public class Solution2 {
     }
 
 
+    public boolean isStraight(int[] nums) {
+        boolean[] dup = new boolean[14];
+        int min = 14;
+        int max = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                if (dup[nums[i]])
+                    return false;
+                else
+                    dup[nums[i]] = true;
+
+                if (nums[i] < min) min = nums[i];
+                if (nums[i] > max) max = nums[i];
+            }
+        }
+        return (max - min) < nums.length;
+    }
+
 
     public void setZeroes(int[][] matrix) {
         Set<Integer> iSet = new HashSet<>();
@@ -45,6 +63,43 @@ public class Solution2 {
                 if (iSet.contains(i) || jSet.contains(j)) matrix[i][j] = 0;
             }
         }
+        for (int i = 0; i < matrix.length; i++) {
+            System.out.println(Arrays.toString(matrix[i]));
+        }
+        System.out.println("==============================");
+    }
+
+
+
+    public void setZeroes_2(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean rowFlag = false;
+        boolean colFlag = false;
+        for (int i = 0; i < m; i++) {
+            if (matrix[i][0] == 0) colFlag = true;
+        }
+        for (int j = 0; j < n; j++) {
+            if (matrix[0][j] == 0) rowFlag = true;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][j] == 0) matrix[i][0] = matrix[0][j] = 0;
+            }
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) matrix[i][j] = 0;
+            }
+        }
+        if (colFlag)
+            for (int i = 0; i < m; i++) {
+                matrix[i][0] = 0;
+            }
+        if (rowFlag)
+            for (int j = 0; j < n; j++) {
+                matrix[0][j] = 0;
+            }
         for (int i = 0; i < matrix.length; i++) {
             System.out.println(Arrays.toString(matrix[i]));
         }
@@ -101,23 +156,42 @@ public class Solution2 {
     }
 
 
-    public boolean isStraight(int[] nums) {
-        boolean[] dup = new boolean[14];
-        int min = 14;
-        int max = -1;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0) {
-                if (dup[nums[i]])
-                    return false;
-                else
-                    dup[nums[i]] = true;
+    public boolean oneEditAway_3(String first, String second) {
+        if (Objects.isNull(first) || Objects.isNull(second)) return false;
 
-                if (nums[i] < min) min = nums[i];
-                if (nums[i] > max) max = nums[i];
-            }
+        int fN = first.length();
+        int sN = second.length();
+        if (Math.abs(fN - sN) > 1) return false;
+
+        int fPoint = 0;
+        int sPoint = 0;
+        while (fPoint < fN && sPoint < sN && first.charAt(fPoint) == second.charAt(sPoint)){
+            fPoint++;
+            sPoint++;
         }
-        return (max - min) < nums.length;
+        if (fN == sN) {
+            fPoint++;
+            sPoint++;
+        } else if (fN > sN) {
+            fPoint++;
+        } else {
+            sPoint++;
+        }
+        // 这么写也是内存溢出！
+//        while (fPoint < fN && sPoint < sN && first.charAt(fPoint++) == second.charAt(sPoint++)) ;
+//        if (fN > sN) sPoint--;
+//        if (fN < sN) fPoint--;
+        // 如果这么写，会内存溢出！！
+//        while (fPoint < fN && sPoint < sN && first.charAt(fPoint++) == second.charAt(sPoint++)) ;
+//        return fPoint == fN ? true : false;
+        while (fPoint < fN && sPoint < sN) {
+            if (first.charAt(fPoint) != second.charAt(sPoint)) return false;
+            fPoint++;
+            sPoint++;
+        }
+        return true;
     }
+
 
 
     public int[] masterMind(String solution, String guess) {
@@ -266,6 +340,38 @@ public class Solution2 {
         }
         return true;
     }
+
+
+//    public boolean canJump_2(int[] nums) {
+//        if (nums.length == 1) return true;
+//        int n = nums.length;
+//        boolean[] flags = new boolean[n];
+//        int k = 0;
+//        for (int i = 0; i < n; i++) {
+//            for (k = i; k < nums[i]+i; k++) {
+//                if (!flags[k])
+//                    flags[k] = true;
+//            }
+//        }
+//        for (int i = 1; i < n; i++) {
+//            if (flags[i] == false) return false;
+//        }
+//        return true;
+//
+//    }
+
+
+    public boolean canJump_3(int[] nums) {
+        int maxJump = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > maxJump) return false;
+            if (nums[i] + i > maxJump) maxJump = nums[i] + i;
+            if (maxJump >= nums.length - 1) return true;
+        }
+        return false;
+    }
+
+
 
     // 解法2：原地旋转
     public void rotate_2(int[][] matrix) {

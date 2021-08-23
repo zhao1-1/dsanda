@@ -16,6 +16,12 @@ public class Test2 {
 //        sl2.setZeroes(new int[][]{{1}});
 //        sl2.setZeroes(new int[][]{{0,1}});
 
+//        sl2.setZeroes_2(new int[][]{{0,1,2,0},{3,4,5,2},{1,3,1,5}});
+//        sl2.setZeroes_2(new int[][]{{1,1,1},{1,0,1},{1,1,1}});
+//        sl2.setZeroes_2(new int[][]{{0}});
+//        sl2.setZeroes_2(new int[][]{{1}});
+//        sl2.setZeroes_2(new int[][]{{0,1}});
+
 //        System.out.println(Arrays.toString(sl2.divingBoard(1,2,3)));
 //        System.out.println(Arrays.toString(sl2.divingBoard(1,2,4)));
 //        System.out.println(Arrays.toString(sl2.divingBoard(5,5,2)));
@@ -33,6 +39,16 @@ public class Test2 {
 //        System.out.println(sl2.oneEditAway_2("pale", "plae"));
 //        System.out.println(sl2.oneEditAway_2("pales", "pal"));
 //        System.out.println(sl2.oneEditAway_2("teacher", "beacher"));
+//        System.out.println(sl2.oneEditAway_2("", ""));
+//        System.out.println(sl2.oneEditAway_2("", "a"));
+
+//        System.out.println(sl2.oneEditAway_3("pale", "ple"));
+//        System.out.println(sl2.oneEditAway_3("pale", "plea"));
+//        System.out.println(sl2.oneEditAway_3("pale", "plae"));
+//        System.out.println(sl2.oneEditAway_3("pales", "pal"));
+//        System.out.println(sl2.oneEditAway_3("teacher", "beacher"));
+//        System.out.println(sl2.oneEditAway_3("", ""));
+//        System.out.println(sl2.oneEditAway_3("", "a"));
 
 //        System.out.println(sl2.isStraight(new int[]{0,0,1,2,5}));
 //        System.out.println(sl2.isStraight(new int[]{0,3,4,4,5}));
@@ -57,6 +73,13 @@ public class Test2 {
 //        System.out.println(sl2.canJump(new int[]{8,6,2,0,2,1,1,0,1}));
 //        System.out.println(sl2.canJump(new int[]{7,6,2,0,2,1,1,0,1}));
 
+        System.out.println(sl2.canJump_3(new int[]{2,3,1,1,4}));
+        System.out.println(sl2.canJump_3(new int[]{3,2,1,0,4}));
+        System.out.println(sl2.canJump_3(new int[]{2,0}));
+        System.out.println(sl2.canJump_3(new int[]{2,0,0}));
+        System.out.println(sl2.canJump_3(new int[]{8,6,2,0,2,1,1,0,1}));
+        System.out.println(sl2.canJump_3(new int[]{7,6,2,0,2,1,1,0,1}));
+
 //        sl2.rotate_2(new int[][]{{1}});
 //        sl2.rotate_2(new int[][]{{1,2},{3,4}});
 //        sl2.rotate_2(new int[][]{{1,2,3},{4,5,6},{7,8,9}});
@@ -65,9 +88,9 @@ public class Test2 {
 //        System.out.println(sl2.spiralOrder_1(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));
 //        System.out.println(sl2.spiralOrder_1(new int[][]{{1,2,3,4},{5,6,7,8},{9,10,11,12}}));
 
-        System.out.println(sl2.searchMatrix(new int[][]{{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}, 5));
-        System.out.println(sl2.searchMatrix(new int[][]{{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}, 20));
-        System.out.println(sl2.searchMatrix(new int[][]{{-5}}, -10));
+//        System.out.println(sl2.searchMatrix(new int[][]{{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}, 5));
+//        System.out.println(sl2.searchMatrix(new int[][]{{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}}, 20));
+//        System.out.println(sl2.searchMatrix(new int[][]{{-5}}, -10));
 
     }
 }
