@@ -36,12 +36,7 @@ public class Solution3 {
             }
         }
 
-        ListNode ppp = newHead.next;
-        while (ppp.next != null) {
-            System.out.println(ppp.val);
-            ppp = ppp.next;
-        }
-        System.out.println("===========");
+        this.printList(newHead.next);
 
         return newHead.next;
     }
@@ -57,12 +52,7 @@ public class Solution3 {
         }
         if (val == head.val) head = head.next;
 
-        ListNode ppp = head;
-        while (ppp.next != null) {
-            System.out.println(ppp.val);
-            ppp = ppp.next;
-        }
-        System.out.println("===========");
+        this.printList(head);
 
         return head;
     }
@@ -82,14 +72,77 @@ public class Solution3 {
             p = temp;
         }
 
-        ListNode ppp = newHead.next;
-        while (ppp.next != null) {
-            System.out.println(ppp.val);
-            ppp = ppp.next;
-        }
-        System.out.println("===========");
+        this.printList(newHead.next);
 
         return newHead.next;
+    }
+
+
+    public ListNode middleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        this.printList(slow);
+
+        return slow;
+    }
+
+
+    public ListNode middleNode_2(ListNode head) {
+        ListNode p = head;
+        int pLoc = 0;
+        int middleLoc = 0;
+        while (p != null) {
+            p = p.next;
+            pLoc++;
+        }
+        int listLength = pLoc;
+        middleLoc = listLength / 2;
+        p = head;
+        pLoc = 0;
+        while (p != null && pLoc != middleLoc) {
+            p = p.next;
+            pLoc++;
+        }
+        this.printList(p);
+        return p;
+    }
+
+
+
+
+
+    // ============= 公共方法 ==================
+
+    public ListNode buildList(int[] inputArray) {
+        if (null == inputArray || inputArray.length ==0) return null;
+        ListNode head = new ListNode();
+        ListNode p = head;
+        for (int i = 0; i < inputArray.length; i++) {
+            p.val = inputArray[i];
+            if (i != inputArray.length - 1) {
+                p.next = new ListNode();
+                p = p.next;
+            }
+        }
+        p.next = null;
+        return head;
+    }
+
+    private void printList(ListNode head) {
+        ListNode newHead = new ListNode();
+        newHead.next = head;
+        ListNode p = newHead;
+        while (p.next != null) {
+            System.out.print(p.next.val);
+            p = p.next;
+        }
+        System.out.println("");
+        System.out.println("------------");
     }
 
 }
