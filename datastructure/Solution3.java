@@ -132,7 +132,24 @@ public class Solution3 {
 
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-
+        ListNode p1 = l1;
+        ListNode p2 = l2;
+        ListNode newHead = new ListNode();
+        ListNode tail = newHead;
+        while (p1 != null && p2 != null) {
+            if (p1.val <= p2.val) {
+                tail.next = p1;
+                p1 = p1.next;
+            } else {
+                tail.next = p2;
+                p2 = p2.next;
+            }
+            tail = tail.next;
+        }
+        if (p1 == null) tail.next = p2;
+        if (p2 == null) tail.next = p1;
+        this.printList(newHead.next);
+        return newHead.next;
     }
 
 
