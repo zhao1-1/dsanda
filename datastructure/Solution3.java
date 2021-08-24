@@ -114,6 +114,29 @@ public class Solution3 {
 
 
 
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return null;
+        ListNode p = head;
+        while (p.next != null) {
+            if (p.val == p.next.val) {
+                p.next = p.next.next;
+            } else {
+                p = p.next;
+            }
+        }
+        this.printList(head);
+        return head;
+    }
+
+
+
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+    }
+
+
+
 
 
     // ============= 公共方法 ==================

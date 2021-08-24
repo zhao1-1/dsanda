@@ -25,11 +25,20 @@ public class Test3 {
 //        sl3.middleNode(sl3.buildList(new int[]{1}));
 //        sl3.middleNode(sl3.buildList(new int[]{1,2}));
 
-        sl3.middleNode_2(sl3.buildList(new int[]{1,2,3,4,5}));
-        sl3.middleNode_2(sl3.buildList(new int[]{1,2,3,4,5,6}));
-        sl3.middleNode_2(sl3.buildList(new int[]{}));
-        sl3.middleNode_2(sl3.buildList(new int[]{1}));
-        sl3.middleNode_2(sl3.buildList(new int[]{1,2}));
+//        sl3.middleNode_2(sl3.buildList(new int[]{1,2,3,4,5}));
+//        sl3.middleNode_2(sl3.buildList(new int[]{1,2,3,4,5,6}));
+//        sl3.middleNode_2(sl3.buildList(new int[]{}));
+//        sl3.middleNode_2(sl3.buildList(new int[]{1}));
+//        sl3.middleNode_2(sl3.buildList(new int[]{1,2}));
+
+        sl3.deleteDuplicates(sl3.buildList(new int[]{0,1,1}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{0,0,1}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{1,1,2}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{1,1,2,3,3}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{1}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{1,1}));
+        sl3.deleteDuplicates(sl3.buildList(new int[]{1,2}));
 
     }
 }
