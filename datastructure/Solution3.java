@@ -1,6 +1,8 @@
 package datastructure;
 import datastructure.ListNode;
 
+import java.util.List;
+
 public class Solution3 {
 
 //    public ListNode removeElements(ListNode head, int val) {
@@ -153,6 +155,126 @@ public class Solution3 {
     }
 
 
+    // 不能用这个思路，会出现溢出
+//    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//        ListNode p1 = l1;
+//        ListNode p2 = l2;
+//        ListNode rHead = new ListNode();
+//        ListNode rTail = rHead;
+//        long num1 = 0;
+//        long num2 = 0;
+//        long sum = 0;
+//        int i1 = 0;
+//        int i2 = 0;
+//        while (p1 != null) {
+//            num1 += p1.val * Math.pow(10, i1++);
+//            p1 = p1.next;
+//        }
+//        while (p2 != null) {
+//            num2 += p2.val * Math.pow(10, i2++);
+//            p2 = p2.next;
+//        }
+//        sum = num1 + num2;
+//        if (sum == 0) return new ListNode(0);
+//        while (sum > 0) {
+//            rTail.next = new ListNode((int) (sum % 10));
+//            sum /= 10;
+//            rTail = rTail.next;
+//        }
+//        this.printList(rHead.next);
+//        return rHead.next;
+//    }
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode p1 = l1;
+        ListNode p2 = l2;
+        int isTen = 0;
+        ListNode rHead = new ListNode();
+        ListNode rTail = rHead;
+        int temp = 0;
+        while (p1 != null && p2 != null) {
+            temp = p1.val + p2.val + 1 * isTen;
+            rTail.next = new ListNode(temp % 10);
+            isTen = temp / 10;
+            rTail = rTail.next;
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        while (p1 != null) {
+            temp = p1.val + 1 * isTen;
+            rTail.next = new ListNode(temp % 10);
+            isTen = temp / 10;
+            rTail = rTail.next;
+            p1 = p1.next;
+        }
+        while (p2 != null) {
+            temp = p2.val + 1 * isTen;
+            rTail.next = new ListNode(temp % 10);
+            isTen = temp / 10;
+            rTail = rTail.next;
+            p2 = p2.next;
+        }
+        if (isTen != 0) rTail.next = new ListNode(1);
+        this.printList(rHead.next);
+        return rHead.next;
+    }
+
+
+
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode p1 = head;
+        ListNode p2 = head.next;
+        ListNode p3 = head.next.next;
+
+        while (p3 != null) {
+            p2.next = p1;
+            p1 = p2;
+            p2 = p3;
+            p3 = p3.next;
+        }
+        p2.next = p1;
+        head.next = null;
+        this.printList(p2);
+        return p2;
+    }
+
+
+
+    public boolean isPalindrome(ListNode head) {
+        boolean isPalindrome = false;
+
+        return isPalindrome;
+    }
+
+
+
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null || head.next.next == null) return head;
+
+        ListNode oddNode = head;
+        ListNode evenNode = head.next;
+        ListNode p1 = head;
+        ListNode p2 = head.next;
+        ListNode p3 = head.next.next;
+        while (p3 != null && p3.next != null) {
+            p1.next = p3;
+            p2.next = p3.next;
+            p1 = p3;
+            p2 = p3.next;
+            p3 = p3.next.next;
+        }
+        if (p3 == null)
+            p1.next = evenNode;
+        else
+            p1.next = p3;
+            p2.next = p3.next;
+            p3.next = evenNode;
+        this.printList(oddNode);
+        return oddNode;
+    }
 
 
 
@@ -178,9 +300,10 @@ public class Solution3 {
         newHead.next = head;
         ListNode p = newHead;
         while (p.next != null) {
-            System.out.print(p.next.val);
+            System.out.print(p.next.val + " -> ");
             p = p.next;
         }
+        System.out.println("NULL");
         System.out.println("");
         System.out.println("------------");
     }
