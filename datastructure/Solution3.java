@@ -73,9 +73,24 @@ public class Solution3 {
             }
             p = temp;
         }
-
         this.printList(newHead.next);
+        return newHead.next;
+    }
 
+
+    public ListNode removeElements_4(ListNode head, int val) {
+        ListNode newHead = new ListNode();
+        ListNode newTail = newHead;
+        ListNode curr = head;
+        while (curr != null) {
+            if (curr.val != val) {
+                newTail.next = curr;
+                newTail = newTail.next;
+            }
+            curr = curr.next;
+        }
+        newTail.next = null;
+        this.printList(newHead.next);
         return newHead.next;
     }
 
@@ -130,6 +145,23 @@ public class Solution3 {
         return head;
     }
 
+    public ListNode deleteDuplicates_2(ListNode head) {
+        // 初始值给-101，因为题中有每个节点的取值范围，如果范围固定的话，那就只能用我的穿针法了，或者不用虚拟头结点。
+        ListNode newHead = new ListNode(-101);
+        ListNode newTail = newHead;
+        ListNode curr = head;
+        while (curr != null) {
+            if (curr.val != newTail.val) {
+                newTail.next = curr;
+                newTail = newTail.next;
+            }
+            curr = curr.next;
+        }
+        // 这里结束的时候，尾指针的next必须指向null，否则断不开，11233这种情况就打印1233了！
+        newTail.next = null;
+        this.printList(newHead.next);
+        return newHead.next;
+    }
 
 
 
@@ -277,7 +309,29 @@ public class Solution3 {
 
 
     public boolean isPalindrome(ListNode head) {
+        if (head == null) return false;
 
+        ListNode curr = head;
+        int n = 0;
+        while (curr != null) {
+            curr = curr.next;
+            n++;
+        }
+        int[] listNode = new int[n];
+        curr = head;
+        int k = 0;
+        while (curr != null && k < n) {
+            listNode[k] = curr.val;
+            curr = curr.next;
+            k++;
+        }
+        int i = 0;
+        int j = listNode.length - 1;
+        while (i < j) {
+            if (listNode[i] != listNode[j]) return false;
+            i++;
+            j--;
+        }
         return true;
     }
 
@@ -323,6 +377,57 @@ public class Solution3 {
             p3.next = evenNode;
         this.printList(oddNode);
         return oddNode;
+    }
+
+
+
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode former = head;
+        ListNode latter = head;
+        int i = 0;
+        // 考虑fast!=null是为了避免k大于链表长度的问题，当大于长度时，就输出整个链表。
+        while (i < k && latter != null) {
+            latter = latter.next;
+            i++;
+        }
+        while (latter != null) {
+            latter = latter.next;
+            former = former.next;
+        }
+        this.printList(former);
+        return former;
+    }
+
+
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null || head.next == null) return null;
+        ListNode former = head;
+        ListNode latter = head;
+        int i = 0;
+        while (i < n && latter != null) {
+            latter = latter.next;
+            i++;
+        }
+        if (latter == null) {
+            this.printList(former.next);
+            return former.next;
+        } else {
+            latter = latter.next;
+        }
+        while (latter != null) {
+            former = former.next;
+            latter = latter.next;
+        }
+        former.next = former.next.next;
+        this.printList(head);
+        return head;
+    }
+
+
+
+    public boolean hasCycle(ListNode head) {
+        return false;
     }
 
 
