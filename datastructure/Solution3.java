@@ -243,10 +243,59 @@ public class Solution3 {
 
 
 
-    public boolean isPalindrome(ListNode head) {
-        boolean isPalindrome = false;
+    public ListNode reverseList_2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode newHead = new ListNode();
+        ListNode p = head;
+        ListNode temp = p.next;
+        while (p.next != null) {
+            p.next = newHead.next;
+            newHead.next = p;
+            p = temp;
+            temp = temp.next;
+        }
+        p.next = newHead.next;
+        newHead.next = p;
+        this.printList(newHead.next);
+        return newHead.next;
+    }
 
-        return isPalindrome;
+
+
+    public ListNode reverseList_3(ListNode head) {
+        ListNode newHead = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode temp = curr.next;
+            curr.next = newHead;
+            newHead = curr;
+            curr = temp;
+        }
+        this.printList(newHead);
+        return newHead;
+    }
+
+
+    public boolean isPalindrome(ListNode head) {
+
+        return true;
+    }
+
+
+    public boolean isPalindrome_3(ListNode head) {
+        if (head == null) return false;
+
+        ListNode halfNode = this.middleNode(head);
+        ListNode halfReverseNode = this.reverseList(halfNode);
+        ListNode firstTail = head;
+        ListNode secondTail = halfReverseNode;
+        // 注意：此处不能用firstTail来判断，因为first链的尾部没有与second没反转前的链表头部断开！！
+        while (secondTail != null) {
+            if (firstTail.val != secondTail.val) return false;
+            firstTail = firstTail.next;
+            secondTail = secondTail.next;
+        }
+        return true;
     }
 
 
@@ -303,7 +352,7 @@ public class Solution3 {
             System.out.print(p.next.val + " -> ");
             p = p.next;
         }
-        System.out.println("NULL");
+        System.out.print("NULL");
         System.out.println("");
         System.out.println("------------");
     }
