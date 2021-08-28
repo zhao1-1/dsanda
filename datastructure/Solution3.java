@@ -1,7 +1,9 @@
 package datastructure;
 import datastructure.ListNode;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Solution3 {
 
@@ -354,6 +356,7 @@ public class Solution3 {
 
 
 
+    // 第一次想出来的方法各种p1，2，3的很容易p懵逼
     public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null || head.next.next == null) return head;
 
@@ -377,6 +380,29 @@ public class Solution3 {
             p3.next = evenNode;
         this.printList(oddNode);
         return oddNode;
+    }
+
+
+    public ListNode oddEvenList_2(ListNode head) {
+        if (head == null) return head;
+
+        ListNode oddHead = head;
+        ListNode oddTail = oddHead;
+        ListNode evenHead = head.next;
+        ListNode evenTail = evenHead;
+        ListNode temp;
+        while (evenTail != null && evenTail.next != null) {
+            temp = oddTail.next.next;
+            oddTail.next = oddTail.next.next;
+            oddTail = temp;
+
+            temp = evenTail.next.next;
+            evenTail.next = evenTail.next.next;
+            evenTail = temp;
+        }
+        oddTail.next = evenHead;
+        this.printList(oddHead);
+        return oddHead;
     }
 
 
@@ -425,9 +451,86 @@ public class Solution3 {
     }
 
 
-
-    public boolean hasCycle(ListNode head) {
+    // 解法1：【快慢针扣圈法】，不是环乌龟永远在兔子后面，是环的话，俩兽早晚相遇（扣圈）。
+    public boolean hasCycle_1(ListNode head) {
+        // 无需考虑特殊情况
+        // if (head == null || head.next == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            // 注意：这俩必须写在扣圈判断之前，否则起始的时候fast肯定等于slow都等于head！
+            slow = slow.next;
+            fast = fast.next.next;
+            // 相遇了（扣圈了）
+            if (slow == fast) return true;
+        }
         return false;
+    }
+
+
+    // 解法2：【哈希表记录】，o(n)内存
+    public boolean hasCycle_2(ListNode head) {
+        Set<ListNode> nodePools = new HashSet<>();
+        ListNode curr = head;
+        while (curr != null) {
+            if (!nodePools.add(curr)) return true;
+            curr = curr.next;
+        }
+        return false;
+    }
+
+
+
+
+
+    // 解法2：【哈希表记录】
+    public ListNode getIntersectionNode_2(ListNode headA, ListNode headB) {
+        Set<ListNode> nodePools = new HashSet<>();
+        ListNode currA = headA;
+        ListNode currB = headB;
+        while (currA != null) {
+            nodePools.add(currA);
+            currA = currA.next;
+        }
+        while (currB != null) {
+            if (!nodePools.add(currB)) return currB;
+            currB = currB.next;
+        }
+        return null;
+    }
+
+
+    // 解法3：【循环计数】
+    public ListNode getIntersectionNode_3(ListNode headA, ListNode headB) {
+        ListNode currA = headA;
+        ListNode currB = headB;
+        int nA = 0;
+        int nB = 0;
+        while (currA != null) {
+            nA++;
+            currA = currA.next;
+        }
+        while (currB != null) {
+            nB++;
+            currB = currB.next;
+        }
+        currA = headA;
+        currB = headB;
+        if (nA >= nB) {
+            for (int i = 0; i < nA - nB; i++) {
+                currA = currA.next;
+            }
+        } else {
+            for (int i = 0; i < nB - nA; i++) {
+                currB = currB.next;
+            }
+        }
+        while (currA != null) {
+            if (currA == currB) return currA;
+            currA = currA.next;
+            currB = currB.next;
+        }
+        return null;
     }
 
 
@@ -460,6 +563,26 @@ public class Solution3 {
         System.out.print("NULL");
         System.out.println("");
         System.out.println("------------");
+    }
+
+
+    public ListNode buildCycleList(int[] inputArray, int pos) {
+        if (null == inputArray || inputArray.length == 0) return null;
+
+        ListNode head = new ListNode();
+        ListNode tail = head;
+        for (int i = 0; i < inputArray.length; i++) {
+            tail.next = new ListNode(inputArray[i]);
+            tail = tail.next;
+        }
+        if (pos != -1) {
+            ListNode curr = head.next;
+            for (int i = 0; i < pos; i++) {
+                curr = curr.next;
+            }
+            tail.next = curr;
+        }
+        return head.next;
     }
 
 }
