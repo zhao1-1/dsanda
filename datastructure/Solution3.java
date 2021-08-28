@@ -355,6 +355,23 @@ public class Solution3 {
     }
 
 
+    public boolean isPalindrome_4(ListNode head) {
+        if (head == null) return false;
+
+        ListNode curr = head;
+        long s1 = 0;
+        long s2 = 0;
+        long t = 1;
+        while (curr != null) {
+            s1 = s1 * 10 + curr.val;
+            s2 += curr.val * t;
+            t *= 10;
+            curr = curr.next;
+        }
+        return s1 == s2;
+    }
+
+
 
     // 第一次想出来的方法各种p1，2，3的很容易p懵逼
     public ListNode oddEvenList(ListNode head) {

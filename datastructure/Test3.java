@@ -106,6 +106,14 @@ public class Test3 {
 //        System.out.println(sl3.isPalindrome(sl3.buildList(new int[]{1})));
 //        System.out.println(sl3.isPalindrome(sl3.buildList(new int[]{})));
 
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1,2,3,4,2,1})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1,2,3,2,1})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1,2,2,1})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1,2,1})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1,2})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1,1})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{1})));
+        System.out.println(sl3.isPalindrome_4(sl3.buildList(new int[]{})));
 
 
 
