@@ -2,43 +2,46 @@ package datastructure;
 
 /**
  * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/8/31 14:41
+ * @since 2021/8/31 17:35
  */
-public class LinkedListStack {
+public class LinkedListQueue {
     class Node {
-        int data;
+        String data;
         Node next;
         public Node() {}
-        public Node(int data) {
+        public Node(String data, Node next) {
             this.data = data;
+            this.next = next;
         }
     }
 
     private Node head = null;
+    private Node tail = null;
     private int count = 0;
 
-    public int push(int value) {
-        Node newNode = new Node(value);
-        newNode.next = head;
-        head = newNode;
+    public LinkedListQueue() {}
+
+    public int enQueue(String item) {
+        Node newNode = new Node(item,null);
+        if (head == null) {
+            head = newNode;
+            tail = head;
+        } else {
+            tail.next = newNode;
+            tail = tail.next;
+        }
         return ++count;
     }
 
-    public int pop() {
-        if (head == null) return -1;
-        int popValue = head.data;
+    public String deQueue() {
+        if (head == null) return null;
+        String result = head.data;
         head = head.next;
         count--;
-        return popValue;
+        return result;
     }
 
-    public int peek() {
-        if (head == null) return -1;
-        return head.data;
-    }
-
-
-    public void printStack() {
+    public void printQueue() {
         Node newHead = new Node();
         newHead.next = head;
         Node p = newHead;
