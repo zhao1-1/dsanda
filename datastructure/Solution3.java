@@ -424,6 +424,35 @@ public class Solution3 {
 
 
 
+    public ListNode oddEvenList_3(ListNode head) {
+        ListNode oddHead = new ListNode();
+        ListNode oddTail = oddHead;
+        ListNode evenHead = new ListNode();
+        ListNode evenTail = evenHead;
+        ListNode curr = head;
+        int count = 1;
+        while (curr != null) {
+            if (count % 2 == 1) {
+                oddTail.next = curr;
+                curr = curr.next;
+                oddTail = oddTail.next;
+                oddTail.next = null;
+            } else {
+                evenTail.next = curr;
+                curr = curr.next;
+                evenTail = evenTail.next;
+                evenTail.next = null;
+            }
+            count++;
+        }
+        oddTail.next = evenHead.next;
+        this.printList(oddHead.next);
+        return oddHead.next;
+    }
+
+
+
+
     public ListNode getKthFromEnd(ListNode head, int k) {
         ListNode former = head;
         ListNode latter = head;
@@ -480,6 +509,16 @@ public class Solution3 {
             fast = fast.next.next;
             // 相遇了（扣圈了）
             if (slow == fast) return true;
+        }
+        return false;
+    }
+
+
+    public boolean hasCycle_1_2(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != slow) {
+
         }
         return false;
     }
