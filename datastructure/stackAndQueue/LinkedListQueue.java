@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.stackAndQueue;
 
 /**
  * @author bin2.zhao (D52B48 in ZhangMen)

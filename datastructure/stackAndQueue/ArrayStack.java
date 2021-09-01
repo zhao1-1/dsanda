@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.stackAndQueue;
 
 import com.sun.deploy.util.StringUtils;
 
