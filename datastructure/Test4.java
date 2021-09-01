@@ -1,5 +1,7 @@
 package datastructure;
 
+import datastructure.stackAndQueue.TripleInOne1;
+
 /**
  * @author bin2.zhao (D52B48 in ZhangMen)
  * @since 2021/8/31 14:38
@@ -81,6 +83,31 @@ public class Test4 {
 //            System.out.println(llq.deQueue());
 //        }
 //        System.out.println(llq.deQueue());
+
+
+
+
+//        TripleInOne1 tio1 = new TripleInOne1(1);
+//        tio1.push(0,1);
+//        tio1.push(0,2);
+//        System.out.println(tio1.pop(0));
+//        System.out.println(tio1.pop(0));
+//        System.out.println(tio1.pop(0));
+//        System.out.println(tio1.isEmpty(0));
+//        tio1.push(2,40);
+//        System.out.println(tio1.pop(2));
+
+
+
+        Solution4 sl4 = new Solution4();
+
+        System.out.println(sl4.isValidSign_1("(){}[]"));
+        System.out.println(sl4.isValidSign_1("{[()]}"));
+        System.out.println(sl4.isValidSign_1("{[]}()"));
+        System.out.println(sl4.isValidSign_1("([)]"));
+        System.out.println(sl4.isValidSign_1(")(][}{"));
+        System.out.println(sl4.isValidSign_1("{[()][]}"));
+        System.out.println(sl4.isValidSign_1("{[()}]"));
 
     }
 }
