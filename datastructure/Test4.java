@@ -101,13 +101,29 @@ public class Test4 {
 
         Solution4 sl4 = new Solution4();
 
-        System.out.println(sl4.isValidSign_1("(){}[]"));
-        System.out.println(sl4.isValidSign_1("{[()]}"));
-        System.out.println(sl4.isValidSign_1("{[]}()"));
-        System.out.println(sl4.isValidSign_1("([)]"));
-        System.out.println(sl4.isValidSign_1(")(][}{"));
-        System.out.println(sl4.isValidSign_1("{[()][]}"));
-        System.out.println(sl4.isValidSign_1("{[()}]"));
+//        System.out.println(sl4.isValidSign_1("(){}[]"));
+//        System.out.println(sl4.isValidSign_1("{[()]}"));
+//        System.out.println(sl4.isValidSign_1("{[]}()"));
+//        System.out.println(sl4.isValidSign_1("([)]"));
+//        System.out.println(sl4.isValidSign_1(")(][}{"));
+//        System.out.println(sl4.isValidSign_1("{[()][]}"));
+//        System.out.println(sl4.isValidSign_1("{[()}]"));
+
+
+//        // 连续三个删除测试
+//        System.out.println(sl4.removeXLink_1("abbaaabcc"));
+//        System.out.println(sl4.removeXLink_1("ccabbbaac"));
+//        // 连续两个删除测试
+//        System.out.println(sl4.removeXLink_1("abbaca"));
+
+
+
+
+
+//        sl4.dailyTemperatures_2(new int[]{73,74,75,71,69,72,76,73});
+//        sl4.dailyTemperatures_2(new int[]{103,73,73,74,75,71,69,72,76,73});
+//        sl4.dailyTemperatures_2(new int[]{30,40,50,60});
+//        sl4.dailyTemperatures_2(new int[]{90,60,30});
 
     }
 }
