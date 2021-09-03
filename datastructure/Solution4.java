@@ -1,5 +1,7 @@
 package datastructure;
 
+import com.sun.scenario.animation.shared.ClipEnvelope;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -184,5 +186,34 @@ public class Solution4 {
     }
 
 
+
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Stack<Integer> pushedStack = new Stack<>();
+        Stack<Integer> poppedStack = new Stack<>();
+        for (int i = popped.length - 1; i >= 0; i--) {
+            poppedStack.push(popped[i]);
+        }
+        for (int i = 0; i < pushed.length; i++) {
+            pushedStack.push(pushed[i]);
+            while (!pushedStack.isEmpty() && pushedStack.peek() == poppedStack.peek()) {
+                pushedStack.pop();
+                poppedStack.pop();
+            }
+        }
+        return pushedStack.isEmpty();
+    }
+
+    public boolean validateStackSequences_2(int[] pushed, int[] popped) {
+        Stack<Integer> calStack = new Stack<>();
+        int poppedIndex = 0;
+        for (int i = 0; i < pushed.length; i++) {
+            calStack.push(pushed[i]);
+            while (!calStack.isEmpty() && popped[poppedIndex] == calStack.peek()) {
+                calStack.pop();
+                poppedIndex++;
+            }
+        }
+        return calStack.isEmpty();
+    }
 
 }
