@@ -129,4 +129,60 @@ public class Solution4 {
         return result;
     }
 
+
+
+    public int calculate(String s) {
+        Stack<Integer> numStack = new Stack<>();
+        Stack<Character> opStack = new Stack<>();
+
+        char[] chs = s.toCharArray();
+        int temNum = 0;
+        for (int i = 0; i < chs.length; i++) {
+            if (chs[i] == ' ') continue;
+            if (isDigit(chs[i])) {
+                temNum = temNum * 10 + (chs[i] - '0');
+            }
+            if (isOp(chs[i])) {
+                numStack.push(temNum);
+                temNum = 0;
+                while (!opStack.isEmpty() && !prior(chs[i], opStack.peek()))
+                    fetchAndCal(numStack, opStack);
+                opStack.push(chs[i]);
+            }
+        }
+        numStack.push(temNum);
+        while (!opStack.isEmpty())
+            fetchAndCal(numStack, opStack);
+        return numStack.pop();
+    }
+
+    private boolean isDigit(char c) {
+        return (c >= '0' && c <= '9');
+    }
+    private boolean isOp(char c) {
+        return (c == '+' || c == '-' || c == '*' || c == '/');
+    }
+    private boolean prior(char a, char b) {
+        if ((a == '*' || a == '/') && (b == '+' || b == '-')) return true;
+        return false;
+    }
+    private int cal(char op, int num1, int num2) {
+        switch (op) {
+            case '+' : return num1 + num2;
+            case '-' : return num1 - num2;
+            case '*' : return num1 * num2;
+            case '/' : return num1 / num2;
+        }
+        return Integer.MIN_VALUE;
+    }
+    private void fetchAndCal(Stack<Integer> numStack, Stack<Character> opStack) {
+        // 先出来的一定是num2
+        int num2 = numStack.pop();
+        int num1 = numStack.pop();
+        char op = opStack.pop();
+        numStack.push(cal(op, num1, num2));
+    }
+
+
+
 }

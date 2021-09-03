@@ -125,5 +125,13 @@ public class Test4 {
 //        sl4.dailyTemperatures_2(new int[]{30,40,50,60});
 //        sl4.dailyTemperatures_2(new int[]{90,60,30});
 
+
+        System.out.println(sl4.calculate("  3+5 / 2  "));
+        System.out.println(sl4.calculate("  3+5 / 2 -1  "));
+        System.out.println(sl4.calculate("  13+05 / 12  "));
+        System.out.println(sl4.calculate("3/2"));
+        System.out.println(sl4.calculate("3+2*2"));
+        System.out.println(sl4.calculate("23+12*2"));
+
     }
 }
