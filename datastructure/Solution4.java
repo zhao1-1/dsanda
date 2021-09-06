@@ -239,6 +239,7 @@ public class Solution4 {
         return result;
     }
 
+
     /**
      * 解法二：【前后缀统计法】，找柱状雨量
      * 时间复杂度：o(3n)，循环三次
@@ -272,13 +273,23 @@ public class Solution4 {
     /**
      * 解法三：【单调栈】，找出每层的雨量
      * 本质跟“每日温度”一样，
-     * 时间复杂度：
-     * 空间复杂度：
-     * @param height
-     * @return
+     * 时间复杂度：o(2n)，所有的数进一次栈再出一次栈
+     * 空间复杂度：o(n)，最差是n全进栈（降序），最好是只进出一个（升序）
      */
-//    public int trap_3(int[] height) {
-//
-//    }
+    public int trap_3(int[] height) {
+        Stack<Integer> indexStack = new Stack<>();
+        int result = 0;
+        for (int i = 0; i < height.length; i++) {
+            while (!indexStack.isEmpty() && height[i] >= height[indexStack.peek()]) {
+                int midIndex = indexStack.pop();
+                if (indexStack.isEmpty()) break;
+                int top = Math.min(height[indexStack.peek()], height[i]) - height[midIndex];
+                int bottom = i - indexStack.peek() - 1;
+                result += top * bottom;
+            }
+            indexStack.push(i);
+        }
+        return result;
+    }
 
 }
