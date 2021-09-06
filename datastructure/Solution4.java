@@ -195,7 +195,7 @@ public class Solution4 {
         }
         for (int i = 0; i < pushed.length; i++) {
             pushedStack.push(pushed[i]);
-            while (!pushedStack.isEmpty() && pushedStack.peek() == poppedStack.peek()) {
+            while (!pushedStack.isEmpty() && pushedStack.peek().equals(poppedStack.peek())) {
                 pushedStack.pop();
                 poppedStack.pop();
             }
@@ -215,5 +215,70 @@ public class Solution4 {
         }
         return calStack.isEmpty();
     }
+
+
+    /**
+     * 解法一：【暴力遍历】找柱状雨量
+     * 时间复杂度：o(n^2)
+     * 空间复杂度：o(1)
+     */
+    public int trap_1(int[] height) {
+        int result = 0;
+        for (int i = 1; i < height.length - 1; i++) {
+            int leftMax = 0;
+            int rightMax = 0;
+            for (int j = 0; j < i; j++) {
+                if (height[j] > leftMax) leftMax = height[j];
+            }
+            for (int j = i+1; j < height.length; j++) {
+                if (height[j] > rightMax) rightMax = height[j];
+            }
+            int barCarry = (leftMax < rightMax ? leftMax : rightMax) - height[i];
+            result += barCarry > 0 ? barCarry : 0;
+        }
+        return result;
+    }
+
+    /**
+     * 解法二：【前后缀统计法】，找柱状雨量
+     * 时间复杂度：o(3n)，循环三次
+     * 空间复杂度：o(2n)，需要两个辅助数组
+     */
+    public int trap_2(int[] height) {
+        int n = height.length;
+
+        // 前缀统计
+        int[] leftMax = new int[n];
+        for (int i = 1; i < n - 1; i++) {
+            leftMax[i] = height[i-1] > leftMax[i-1] ? height[i-1] : leftMax[i-1];
+        }
+
+        // 后缀统计
+        int[] rightMax = new int[n];
+        for (int i = n - 2; i > 0; i--) {
+            rightMax[i] = height[i+1] > rightMax[i+1] ? height[i+1] : rightMax[i+1];
+        }
+
+        // 计算每个柱子之上承载的雨量
+        int result = 0;
+        for (int i = 1; i < n - 1; i++) {
+            int barCarry = (leftMax[i] < rightMax[i] ? leftMax[i] : rightMax[i]) - height[i];
+            result += barCarry > 0 ? barCarry : 0;
+        }
+        return result;
+    }
+
+
+    /**
+     * 解法三：【单调栈】，找出每层的雨量
+     * 本质跟“每日温度”一样，
+     * 时间复杂度：
+     * 空间复杂度：
+     * @param height
+     * @return
+     */
+//    public int trap_3(int[] height) {
+//
+//    }
 
 }
