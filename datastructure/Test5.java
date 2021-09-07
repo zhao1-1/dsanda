@@ -31,9 +31,27 @@ public class Test5 {
 
 
         Solution3 sl3 = new Solution3();
-        sl5.reversePrint(sl3.buildList(new int[]{1,3,2}));
-        sl5.reversePrint(sl3.buildList(new int[]{2}));
-        sl5.reversePrint(sl3.buildList(new int[]{1,2,3,4,5,6,7,8,9,10}));
+//        sl5.reversePrint(sl3.buildList(new int[]{1,3,2}));
+//        sl5.reversePrint(sl3.buildList(new int[]{2}));
+//        sl5.reversePrint(sl3.buildList(new int[]{1,2,3,4,5,6,7,8,9,10}));
+
+
+        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1,2,5}), sl3.buildList(new int[]{1,3,4})));
+        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1,3,5,7}), sl3.buildList(new int[]{2,4,6,8})));
+        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1}), sl3.buildList(new int[]{2})));
+
+//        System.out.println(sl5.myPow_2(2.00, 5));
+//        System.out.println(sl5.myPow_2(2, 10));
+//        System.out.println(sl5.myPow_2(2, 20));
+//        System.out.println(sl5.myPow_2(2.10, 3));
+//        System.out.println(sl5.myPow_2(2.10000, 3));
+//        System.out.println(sl5.myPow_2(2.000, -2));
+//        System.out.println(sl5.myPow_2(2, -4));
+
+
+//        System.out.println(sl5.multiply_2(10, 3));
+//        System.out.println(sl5.multiply_2(3, 4));
+//        System.out.println(sl5.multiply_2(1, 10));
 
     }
 }

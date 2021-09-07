@@ -608,7 +608,7 @@ public class Solution3 {
         return head;
     }
 
-    private void printList(ListNode head) {
+    public void printList(ListNode head) {
         ListNode newHead = new ListNode();
         newHead.next = head;
         ListNode p = newHead;
