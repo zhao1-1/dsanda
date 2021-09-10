@@ -7,6 +7,10 @@ import java.util.*;
  */
 public class Solution2 {
 
+    /**
+     *【2-1】换啤酒
+     * {阿里钉钉} {滴滴}
+     */
     public int drinkBeer(int x) {
         int bottleCount = x;
         int bodyCount = x;
@@ -31,6 +35,10 @@ public class Solution2 {
     }
 
 
+    /**
+     *【2-2】扑克牌中的顺子
+     * {剑指Offer-61}
+     */
     public boolean isStraight(int[] nums) {
         boolean[] dup = new boolean[14];
         int min = 14;
@@ -50,6 +58,11 @@ public class Solution2 {
     }
 
 
+    /**
+     *【2-3】零矩阵
+     * {面试题金典-01.08}
+     * 解法1：自己、性能只超过35%
+     */
     public void setZeroes(int[][] matrix) {
         Set<Integer> iSet = new HashSet<>();
         Set<Integer> jSet = new HashSet<>();
@@ -72,9 +85,38 @@ public class Solution2 {
         System.out.println("==============================");
     }
 
-
-
+    // 解法2：不用容器工具类，空间o(m+n)，空间o(m*n)
     public void setZeroes_2(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+
+        // 可以不用Set类
+        boolean[] row = new boolean[m];
+        boolean[] col = new boolean[n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = col[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    /**
+     *【2-3】零矩阵
+     * {面试题金典-01.08}
+     * 解法3*：标记变量法
+     * 时间复杂度：o(m*n + 2*(m+n))
+     * 空间复杂度：o(1)
+     */
+    public void setZeroes_3(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
         boolean rowFlag = false;
@@ -110,18 +152,36 @@ public class Solution2 {
     }
 
 
+    /**
+     *【2-4】跳水板
+     * {面金16.11}
+     */
     public int[] divingBoard(int shorter, int longer, int k) {
+        /*
+        注意：
+        （1）new int[0]    --->  []
+        （2）new int[1]    --->  [0]
+        （3）new int[]{0}  --->  [0]
+        结论：下面两个判断不能换顺序！！否则输出不了[]这种形式，都将是[0]
+        */
         if (k == 0) return new int[0];
         if (shorter == longer) return new int[]{shorter * k};
 
         int[] a = new int[k+1];
-        for (int i = 0; i <= k; i++) {
-            a[i] = shorter * (k - i) + longer * i;
+        for (int i = k; i >= 0 ; i--) {
+            a[k-i] = shorter * i + longer * (k - i);
         }
         return a;
     }
 
 
+    /**
+     *【2-5*】一次编辑
+     * {面金01.05}
+     * 解法一：双指针法
+     * 时间复杂度：o(fN+sN)
+     * 空间复杂度：o(1)
+     */
     public boolean oneEditAway(String first, String second) {
         int fN = first.length();
         int sN = second.length();
@@ -142,6 +202,20 @@ public class Solution2 {
     }
 
 
+    /**
+     *【2-5*】一次编辑
+     * {面金01.05}
+     * 解法二：单指针，性能高
+     * 时间复杂度：o(N)
+     * 空间复杂度：o(1)
+     */
+    /*
+    	高性能思路：只有一个地方需要修改，那么不妨定位到不同字符处。有以下两种情况
+            + 长度相同：leetcode 与 leetkode。
+              那么我们需要找到 'c' 和 'k'，然后比较 'ode' 和 'ode' 是否相同。
+            + 长度不同：leetcode 与 leetode。
+              我们发现 'c' 和 'o' 不相同，然后比较 'ode' 和 'ode' 是否相同。
+    */
     public boolean oneEditAway_2(String first, String second) {
         if (Objects.isNull(first) || Objects.isNull(second)) return false;
 
@@ -159,6 +233,13 @@ public class Solution2 {
     }
 
 
+    /**
+     *【2-5*】一次编辑
+     * {面金01.05}
+     * 解法三：王争实现（逻辑清晰）
+     * 时间复杂度：
+     * 空间复杂度：
+     */
     public boolean oneEditAway_3(String first, String second) {
         if (Objects.isNull(first) || Objects.isNull(second)) return false;
 
@@ -196,7 +277,12 @@ public class Solution2 {
     }
 
 
-
+    /**
+     *【2-6】珠玑妙算
+     * {面金-16.15}
+     * 解法一：暴力枚举
+     * 时间复杂度：o(n^2)
+     */
     public int[] masterMind(String solution, String guess) {
         char FLAG = '%';
         char[] solutions = solution.toCharArray();
@@ -224,6 +310,20 @@ public class Solution2 {
         return result;
     }
 
+    /**
+     *【2-6】珠玑妙算
+     * {面金-16.15}
+     * 解法1-2：暴力枚举，不用FALG，而是用标记数组（王争习题课思路）
+     * 时间复杂度：o(n^2)
+     */
+
+
+    /**
+     *【2-6】珠玑妙算
+     * {面金-16.15}
+     * 解法2：一次遍历梭哈，用大小为26的数组作为A-Z的map
+     * 时间复杂度：o(n)
+     */
     public int[] masterMind_2(String solution, String guess) {
         int[] countMap = new int[26];
         int realCount = 0;
@@ -247,6 +347,11 @@ public class Solution2 {
         return new int[]{realCount, fakeCount};
     }
 
+
+    /**
+     *【2-7】井字游戏
+     * {面金-16.04}
+     */
 //    public String tictactoe(String[] board) {
 //        int N = board.length;
 //        int rowCountO = 0;
@@ -319,7 +424,11 @@ public class Solution2 {
     */
 
 
-    // 错误思路，注意是最大跳跃长度，即你可以跳比这个数小的步数。
+    /**
+     *【2-8】跳跃游戏
+     * {LeetCode-55}
+     // 错误思路，注意是最大跳跃长度，即你可以跳比这个数小的步数。
+     */
     public boolean canJump_x(int[] nums) {
         int i = 0;
         while (i < nums.length) {
@@ -330,6 +439,11 @@ public class Solution2 {
         return false;
     }
 
+    /**
+     *【2-8】跳跃游戏
+     * {LeetCode-55}
+     * 解法1：自己的思路（很不容易，完全正确！）
+     */
     public boolean canJump(int[] nums) {
         if (nums.length == 1) return true;
         for (int i = 0; i < nums.length; i++) {
@@ -344,7 +458,7 @@ public class Solution2 {
         return true;
     }
 
-
+    // 解法2：用数组标记所有可达点（王争）
 //    public boolean canJump_2(int[] nums) {
 //        if (nums.length == 1) return true;
 //        int n = nums.length;
@@ -363,7 +477,7 @@ public class Solution2 {
 //
 //    }
 
-
+    // 解法3：最大跳跃距离----解法2的优化（王争）
     public boolean canJump_3(int[] nums) {
         int maxJump = 0;
         for (int i = 0; i < nums.length; i++) {
@@ -376,16 +490,88 @@ public class Solution2 {
 
 
 
-    // 解法2：原地旋转
-    public void rotate_2(int[][] matrix) {
+    /**
+     *【2-9】旋转图像*
+     * {LeetCode-48}
+     // 解法1：使用辅助数组（思路和实现都简单，但是不符合题意）
+     * 注意：三种解法都需要掌握！
+     */
+    /*
+ 扩展题型：
+（1）n*n的⼆维矩阵，沿上下中线翻转、沿左右中线翻转；
+（2）n*n的⼆维矩阵，沿左上-右下对⻆线翻转、沿左下-右上对⻆线翻转；
+（3）n*n的⼆维矩阵，旋转90度、180度、270度；
+（4）n*m的⼆维矩阵，沿上下中线翻转、沿左右中线翻转
+（5）n*m的⼆维矩阵，沿左上-右下对⻆线翻转、沿左下-右上对⻆线翻转
+（6）n*m的⼆维矩阵，旋转90度、180度、270度
+     */
+    public void rotate_1(int[][] matrix) {
         int n = matrix.length;
-        for (int i = 0; i < n / 2; i++) {
-            for (int j = 0; j < n / 2; j++) {
+        int[][] matrix_new = new int[n][n];
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                matrix_new[j][n-1-i] = matrix[i][j];
+            }
+        }
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                matrix[i][j] = matrix_new[i][j];
             }
         }
     }
 
-    // 解法3：反转代替旋转（先水平翻转，再对角线翻转）
+    /**
+     *【2-9】旋转图像*
+     * {LeetCode-48}
+     // 解法2：原地旋转（思路简单，实现难）
+     */
+    public void rotate_2(int[][] matrix) {
+    }
+
+    /**
+     *【2-9】旋转图像*
+     * {LeetCode-48}
+     // 解法3：反转代替旋转（先水平翻转，再对角线翻转）
+     */
+   	/*
+  	四种翻转：
+  	（1）上下翻
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = 0; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[n-1-i][j];
+                matrix[n-i-1][j] = temp;
+            }
+        }
+  	（2）左右翻
+        for (int j = 0; j < n / 2; j++) {
+            for (int i = 0; i < n; i++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][n-1-j];
+                matrix[i][n-1-j] = temp;
+            }
+        }
+  	（3）左对角翻\
+  		for (int i = 0; i < n; i++) {
+  			for (int j = 0; j < i; j++) {
+  				int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+  			}
+  		}
+  	（4）右对角翻/
+  		for (int j = 0; j < n; j++) {
+  			for (int i = 0; i < j; j++) {
+  				int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+  			}
+  		}
+  	三种旋转（顺时针）：
+  	（A） 90度  ===  （1）+（3）
+  	（B）180度  ===  （1）+（2）
+  	（C）270度  ===  （2）+（3）
+  	*/
     public void rotate_3(int[][] matrix) {
         int n = matrix.length;
         for (int i = 0; i < n / 2; i++) {
@@ -408,7 +594,12 @@ public class Solution2 {
         System.out.println("====================");
     }
 
-    // 解法1：纯按顺序遍历
+
+    /**
+     *【2-10】螺旋矩阵
+     * {LeetCode-54}
+     // 解法1：纯按顺序遍历
+     */
     public List<Integer> spiralOrder_1(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
         if (null == matrix || matrix.length == 0) return Collections.emptyList();
@@ -445,6 +636,23 @@ public class Solution2 {
         return result;
     }
 
+    /**
+     *【2-10】螺旋矩阵
+     * {LeetCode-54}
+     * 解法二：
+     */
+
+
+
+    /**
+     *【2-11】搜索二维矩阵ii
+     * {LeetCode-240}
+     * 解法一：根据王争思路，自己实现的。非常好的算法！
+     根据，行升序、列升序两个规则：
+     从右上角元素开始遍历，
+     小于目标值，淘汰该行；
+     大于目标值，淘汰该列。
+     */
     public boolean searchMatrix(int[][] matrix, int target) {
         int searchCount = 0;
         int m = matrix.length;
@@ -470,5 +678,23 @@ public class Solution2 {
         System.out.println("本次搜索共计遍历 " + searchCount + " 次");
         return false;
     }
+
+    /**
+     *【2-11】搜索二维矩阵ii
+     * {LeetCode-240}
+     // 解法2：暴力循环数组。。。
+     */
+
+    /**
+     *【2-11】搜索二维矩阵ii
+     * {LeetCode-240}
+     // 解法3：二分法搜索
+     */
+
+    /**
+     *【2-11】搜索二维矩阵ii
+     * {LeetCode-240}
+     // 解法4：递归缩减搜索空间
+     */
 
 }
