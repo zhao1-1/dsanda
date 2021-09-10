@@ -1,11 +1,151 @@
 package datastructure;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * 01-纯编程题（数组、字符串）
  */
 public class Solution1 {
+
+    /**
+     * 【1-1】IP地址解析
+     * {拼多多}
+     */
+    public Boolean checkIp(String ip) {
+        //（1）非空判断
+        if (ip == null) return false;
+        //（2）根据“.”分割
+        String[] ipSegments = ip.split("\\.");
+        //（3）分割段数判断
+        if (ipSegments.length != 4) return false;
+        //（4）每段合法性判断
+        for (int i = 0; i < 4; i++) {
+            if (!checkSegment(ipSegments[i])) return false;
+        }
+        return true;
+    }
+
+    private Boolean checkSegment(String ipSegment) {
+        int n = ipSegment.length();
+        int i = 0;
+        //（4.1）跳过前导空格【“  123”】
+        while (i < n && ipSegment.charAt(i) == ' ') {i++;}
+        if (i == n) return false;	// 判断全是空格以及空字符串的情况
+        //（4.2-A）判断前导'0'情况，此处做标记
+        int markOfFirst = i;
+        //（4.3）将字符串转化成数字
+        int digit = 0;
+        while (i < n && ipSegment.charAt(i) != ' ') {
+            char c = ipSegment.charAt(i);
+            if (c < '0' || c > '9') return false;	// 非数字字符情况
+            digit = digit * 10 + (c - '0');
+            if (digit > ((1 << 8) - 1)) return false;
+            i++;
+        }
+        //（4.2-B）判断前导'0'情况
+        if (ipSegment.charAt(markOfFirst) == '0' && digit != 0) return false;
+        //（4.4）处理后置空格【“123 ”，“12 3”】
+        while (i < n) {
+            char c = ipSegment.charAt(i);
+            if (c != ' ') return false;
+            i++;
+        }
+        return true;
+    }
+
+
+
+
+    /**
+     *【1-2】IP地址无效化
+     * {LeetCode-1108}
+      解法1：直接使用 String 类的 replace。
+     */
+    public String defangIpaddr(String address) {
+        return address.replace(".", "[.]");
+    }
+
+    // 解法2.1：StringBuilder + insert()方法。
+    public String defangIpAddr2_1(String addr) {
+        StringBuilder sb = new StringBuilder(addr);
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) == '.') {
+                sb.insert(i+1, ']');
+                sb.insert(i, '[');
+                i += 3;
+            }
+        }
+        return sb.toString();
+    }
+
+    // 解法2.2：Stringbuilder + append()方法。
+    public String defangIpAddr2_2(String addr) {
+        StringBuilder sb = new StringBuilder(addr);
+        for (int i = 0; i < addr.length(); i++) {
+            if (addr.charAt(i) == '.') {
+                sb.append("[.]");
+            }
+            sb.append(addr.charAt(i));
+        }
+        return sb.toString();
+    }
+
+    // 解法3：字符串数组（高性能）
+    private String defangIpAddr3(String addr) {
+        char[] origin = addr.toCharArray();
+        char[] result = new char[origin.length + 3 * 2];
+        int k = 0;
+        for (int i = 0; i < origin.length; i++) {
+            if ('.' != origin[i]) {
+                result[k++] = origin[i];
+            } else {
+                result[k++] = '[';
+                result[k++] = '.';
+                result[k++] = ']';
+            }
+        }
+        return String.valueOf(result);	// 此处不能用result.toString()，此方法字符串数组和StringBuilder可不一样！
+    }
+
+    // 解法4：重写String类的replace方法。（实现复杂，见JDK源码）
+    // String.replace(CharSequence target, CharSequence replacement)
+
+
+
+    /**
+     *【1-3】两数之和
+     * {LeetCode-1}
+     * 解法1：暴力枚举
+     */
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+
+    /**
+     *【1-3】两数之和
+     * {LeetCode-1}
+     * 解法2：哈希表
+     */
+    public int[] twoSum_2(int[] nums, int target) {
+        HashMap<Integer, Integer> pools = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (pools.containsKey(target - nums[i])) {
+                return new int[]{pools.get(target-nums[i]), i};
+            }
+            pools.put(nums[i], i);
+        }
+        return new int[0];
+    }
+
 
     /**
      *【1-4】反转字符串
