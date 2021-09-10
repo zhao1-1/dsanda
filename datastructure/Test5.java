@@ -8,6 +8,9 @@ public class Test5 {
     public static void main(String[] args) {
         Solution5 sl5 = new Solution5();
 
+        /**
+         *【5-1】斐波那契数列
+         */
 //        System.out.println(sl5.fib(2));
 //        System.out.println(sl5.fib(5));
 //        System.out.println(sl5.fib(44));
@@ -17,6 +20,9 @@ public class Test5 {
 //        System.out.println(sl5.fib_2(44));
 
 
+        /**
+         *【5-2】青蛙跳台阶
+         */
 //        System.out.println(sl5.climbStairs(2));
 //        System.out.println(sl5.climbStairs(3));
 //        System.out.println(sl5.climbStairs(5));
@@ -24,12 +30,16 @@ public class Test5 {
 //        System.out.println(sl5.climbStairs(45));
 
 
-//        System.out.println(sl5.callCellDivision(6));
-//        System.out.println(sl5.callCellDivision(8));
-//        System.out.println(sl5.callCellDivision(2));
-//        System.out.println(sl5.callCellDivision(50));
+        /**
+         *【5-3】三步问题
+         */
+        System.out.println(sl5.waysToStep_2(40));
+        System.out.println(sl5.waysToStep_2(10));
 
 
+        /**
+         *【5-5】反转链表
+         */
         Solution3 sl3 = new Solution3();
 //        sl5.reversePrint(sl3.buildList(new int[]{1,3,2}));
 //        sl5.reversePrint(sl3.buildList(new int[]{2}));
@@ -64,9 +74,18 @@ public class Test5 {
         /**
          *【5-8】递归乘法*
          */
-        System.out.println(sl5.multiply_3(10, 3));
-        System.out.println(sl5.multiply_3(3, 4));
-        System.out.println(sl5.multiply_3(1, 10));
+//        System.out.println(sl5.multiply_3(10, 3));
+//        System.out.println(sl5.multiply_3(3, 4));
+//        System.out.println(sl5.multiply_3(1, 10));
+
+
+        /**
+         *【5-9】细胞分裂
+         */
+//        System.out.println(sl5.callCellDivision(6));
+//        System.out.println(sl5.callCellDivision(8));
+//        System.out.println(sl5.callCellDivision(2));
+//        System.out.println(sl5.callCellDivision(50));
 
     }
 }

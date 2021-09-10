@@ -56,7 +56,7 @@ public class Solution5 {
         if (i == 1) return 1;
         if (i == 2) return 2;
         if (cache2[i] != 0) return cache2[i];
-        return (ff(i-1) + ff(i-2)) % 1000000007;
+        return (ff(i-1) + ff(i-2)) % MOD;
     }
 
 
@@ -94,15 +94,20 @@ public class Solution5 {
      * 时间复杂度：o(n)
      * 空间复杂度：o(n)，dp数组的开销
      */
-//    public int waysToStep_2(int n) {
-//        int[] dp = new int[n+1];
-//        dp[1] = 1;
-//        dp[2] = 2;
-//        dp[3] = 4;
-//        for (int i = 4; i <= n; i++) {
-//
-//        }
-//    }
+    public int waysToStep_2(int n) {
+        // 不能省略，否则会报数组越界，当n < 3，dp[3]数组越界
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        if (n == 3) return 4;
+        int[] dp = new int[n+1];
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+        for (int i = 4; i <= n; i++) {
+            dp[i] = ((dp[i-1] + dp[i-2]) % MOD + dp[i-3]) % MOD;
+        }
+        return dp[n];
+    }
 
     /**
      *【5-3】三步问题
@@ -111,9 +116,22 @@ public class Solution5 {
      * 时间复杂度：o(n)
      * 空间复杂度：o(1)
      */
-//    public int waysToStep_2(int n) {
-//
-//    }
+    public int waysToStep_3(int n) {
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+        if (n == 3) return 4;
+        int a = 1;
+        int b = 2;
+        int c = 3;
+        int temp = 6;
+        for (int i = 4; i <= n; i++) {
+            temp = ((a + b) % MOD + c) % MOD;
+            a = b;
+            b = c;
+            c = temp;
+        }
+        return temp;
+    }
 
 
 
