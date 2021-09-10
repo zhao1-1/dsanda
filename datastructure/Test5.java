@@ -36,22 +36,37 @@ public class Test5 {
 //        sl5.reversePrint(sl3.buildList(new int[]{1,2,3,4,5,6,7,8,9,10}));
 
 
-        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1,2,5}), sl3.buildList(new int[]{1,3,4})));
-        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1,3,5,7}), sl3.buildList(new int[]{2,4,6,8})));
-        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1}), sl3.buildList(new int[]{2})));
+        /**
+         * 【5-6】合并两个排序的链表*
+         */
+//        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1,2,5}), sl3.buildList(new int[]{1,3,4})));
+//        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1,3,5,7}), sl3.buildList(new int[]{2,4,6,8})));
+//        sl3.printList(sl5.mergeTwoLists(sl3.buildList(new int[]{1}), sl3.buildList(new int[]{2})));
 
-//        System.out.println(sl5.myPow_2(2.00, 5));
-//        System.out.println(sl5.myPow_2(2, 10));
-//        System.out.println(sl5.myPow_2(2, 20));
-//        System.out.println(sl5.myPow_2(2.10, 3));
-//        System.out.println(sl5.myPow_2(2.10000, 3));
-//        System.out.println(sl5.myPow_2(2.000, -2));
-//        System.out.println(sl5.myPow_2(2, -4));
+        /**
+         * 【5-7】数值的整数次方*
+         * int类型取值范围：[-2^31, 2^31-1]
+         */
+//        System.out.println(sl5.myPow_4(2.00, 5));
+//        System.out.println(sl5.myPow_4(2.00000, 10));
+//        System.out.println(sl5.myPow_4(2.10, 3));
+//        System.out.println(sl5.myPow_4(2.10000, 3));
+//        System.out.println(sl5.myPow_4(2, -4));
+//        System.out.println(sl5.myPow_4(99.99, 0));
+//        System.out.println(sl5.myPow_4(1.00000001, 2147483647));
+//        System.out.println(sl5.myPow_4(1.000000001, 2147483647));
+//        System.out.println(sl5.myPow_4(1.0000000001, 2147483647));
+//        System.out.println(sl5.myPow_4(0.99999999, -2147483648));
+//        System.out.println(sl5.myPow_4(0.999999999, -2147483648));
+//        System.out.println(sl5.myPow_4(0.9999999999, -2147483648));
 
 
-//        System.out.println(sl5.multiply_2(10, 3));
-//        System.out.println(sl5.multiply_2(3, 4));
-//        System.out.println(sl5.multiply_2(1, 10));
+        /**
+         *【5-8】递归乘法*
+         */
+        System.out.println(sl5.multiply_3(10, 3));
+        System.out.println(sl5.multiply_3(3, 4));
+        System.out.println(sl5.multiply_3(1, 10));
 
     }
 }

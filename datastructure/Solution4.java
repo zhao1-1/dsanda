@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * 04-栈和队列
+ */
 public class Solution4 {
 
     public boolean isValidSign_1(String s) {

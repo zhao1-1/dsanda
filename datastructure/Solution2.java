@@ -2,6 +2,9 @@ package datastructure;
 
 import java.util.*;
 
+/**
+ * 02-找规律题
+ */
 public class Solution2 {
 
     public int drinkBeer(int x) {
