@@ -3,8 +3,8 @@ package datastructure.stackAndQueue;
 import java.util.Stack;
 
 /**
- * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/9/1 16:15
+ *【4-4】peek最小栈*（辅助计数栈）
+ * {LeetCode-155}
  */
 
 /**

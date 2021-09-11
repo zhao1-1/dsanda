@@ -3,6 +3,8 @@ package datastructure.stackAndQueue;
 import java.util.Stack;
 
 /**
+ *【4-1】用两个栈实现队列（双杯倒水法）
+ * {剑指Offer-09}
  * 用栈实现队列
  * 入队倒腾，出队直接出
  * 适合出队频繁的

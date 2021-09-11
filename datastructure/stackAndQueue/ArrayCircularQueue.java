@@ -1,8 +1,7 @@
 package datastructure.stackAndQueue;
 
 /**
- * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/8/31 16:26
+ * 数组实现队列（循环队列）
  */
 public class ArrayCircularQueue {
     String[] items;

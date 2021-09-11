@@ -1,8 +1,8 @@
 package datastructure.stackAndQueue;
 
 /**
- * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/9/1 16:37
+ *【4-5】三合一
+ * {面金03.01}
  */
 
 /**

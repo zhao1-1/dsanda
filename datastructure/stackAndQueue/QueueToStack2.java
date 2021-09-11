@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ *【4-2】用队列实现栈（仿下蛋笔法）
+ * {LeetCode225}
+ *
  * 两个队列实现栈
  * （1）入队倒腾AB队列
  * （2）出队直接出（不用考虑队列为空的情况）

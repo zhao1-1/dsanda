@@ -1,8 +1,7 @@
 package datastructure.stackAndQueue;
 
 /**
- * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/8/31 17:35
+ * 链表实现队列（链式队列）【推荐】
  */
 public class LinkedListQueue {
     class Node {

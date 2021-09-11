@@ -3,8 +3,7 @@ package datastructure.stackAndQueue;
 import com.sun.deploy.util.StringUtils;
 
 /**
- * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/8/31 14:23
+ * 数组实现栈【推荐】
  */
 public class ArrayStack {
     int[] items;
