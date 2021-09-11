@@ -12,6 +12,10 @@ import java.util.Stack;
  */
 public class Solution4 {
 
+    /**
+     *【4-6】有效的括号
+     * {LeetCode-20}
+     */
     public boolean isValidSign_1(String s) {
         if (s == null || s.length() == 0 || s.length() % 2 != 0) return false;
 
@@ -35,107 +39,11 @@ public class Solution4 {
     }
 
 
-    /**
-     * 【辅助计数数组】
-     * @param s
-     * @return
-     */
-    public String removeXLink_1(String s) {
-
-        Stack<Character> chStack = new Stack<>();
-        Stack<Integer> countStack = new Stack<>();
-        int LINK_REMOVE_NUM = 2;
-
-        char[] chs = s.toCharArray();
-        for (int i = 0; i < chs.length; i++) {
-            if (chStack.isEmpty()) {
-                chStack.push(chs[i]);
-                countStack.push(1);
-            } else {
-                if (chStack.peek() == chs[i]) {
-                    countStack.push(countStack.pop()+1);
-                } else {
-                    chStack.push(chs[i]);
-                    countStack.push(1);
-                }
-                if (countStack.peek() == LINK_REMOVE_NUM) {
-                    chStack.pop();
-                    countStack.pop();
-                }
-            }
-        }
-
-        Stack<Character> outputStack = new Stack<>();
-        while (!countStack.isEmpty()) {
-            for (int i = 0; i < countStack.peek(); i++) {
-                outputStack.push(chStack.peek());
-            }
-            countStack.pop();
-            chStack.pop();
-        }
-        StringBuilder sb = new StringBuilder();
-        while (!outputStack.isEmpty()) {
-            sb.append(outputStack.pop());
-        }
-        return sb.toString();
-    }
 
     /**
-     * 纯数组
-     * @param s
-     * @return
+     *【4-7】计算器*（连连消）
+     * {面金-16.26}
      */
-    public String removeXLink_2(String s) {
-        return s;
-    }
-
-
-
-
-    //【暴力解法】，思路及实现简单，时间复杂度高o(n^2)
-    // 最好情况：数组正序（27，28，29，30，31），时间复杂度o(n)
-    // 最坏情况：数组倒叙（31，30，29，28，27），时间复杂度o(1/2 * n^2)
-    public int[] dailyTemperatures_1(int[] temperatures) {
-        int n = temperatures.length;
-        int[] result = new int[n];
-        for (int i = 0; i < n; i++) {
-            for (int j = i+1; j < n; j++) {
-                if (temperatures[j] > temperatures[i]) {
-                    result[i] = j - i;
-                    break;
-                }
-            }
-        }
-        System.out.println(Arrays.toString(result));
-        return result;
-    }
-
-
-    //【单调栈】，时间复杂度o(k*n)
-    // 一般的，能用单调栈解决的，暴力法都能搞定，就是时间复杂度高一点而已
-    public int[] dailyTemperatures_2(int[] temperatures) {
-        int n = temperatures.length;
-        int[] result = new int[n];
-        Stack<Integer> indexStack = new Stack<>();
-
-        for (int i = 0; i < n; i++) {
-            while (!indexStack.isEmpty() && temperatures[i] > temperatures[indexStack.peek()]) {
-                result[indexStack.peek()] = i - indexStack.peek();
-                indexStack.pop();
-            }
-            indexStack.push(i);
-        }
-
-        while (!indexStack.isEmpty()) {
-            temperatures[indexStack.pop()] = 0;
-        }
-
-        System.out.println(Arrays.toString(result));
-        return result;
-    }
-
-
-
     public int calculate(String s) {
         Stack<Integer> numStack = new Stack<>();
         Stack<Character> opStack = new Stack<>();
@@ -190,6 +98,68 @@ public class Solution4 {
 
 
 
+    /**
+     *【4-9】删除字符串中的所有相邻重复项（连连消）
+     * {LeetCode-1047}
+     * 解法一：【辅助计数数组】
+     * 通用解法，X取值随意
+     */
+    public String removeXLink_1(String s) {
+
+        Stack<Character> chStack = new Stack<>();
+        Stack<Integer> countStack = new Stack<>();
+
+        // 如果是几个连续的值删除，X就是几。
+        int LINK_REMOVE_NUM = 2;
+
+        char[] chs = s.toCharArray();
+        for (int i = 0; i < chs.length; i++) {
+            if (chStack.isEmpty()) {
+                chStack.push(chs[i]);
+                countStack.push(1);
+            } else {
+                if (chStack.peek() == chs[i]) {
+                    countStack.push(countStack.pop()+1);
+                } else {
+                    chStack.push(chs[i]);
+                    countStack.push(1);
+                }
+                if (countStack.peek() == LINK_REMOVE_NUM) {
+                    chStack.pop();
+                    countStack.pop();
+                }
+            }
+        }
+
+        Stack<Character> outputStack = new Stack<>();
+        while (!countStack.isEmpty()) {
+            for (int i = 0; i < countStack.peek(); i++) {
+                outputStack.push(chStack.peek());
+            }
+            countStack.pop();
+            chStack.pop();
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!outputStack.isEmpty()) {
+            sb.append(outputStack.pop());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 纯数组实现栈法
+     */
+    public String removeXLink_2(String s) {
+        return s;
+    }
+
+
+
+    /**
+     *【4-10】栈的压入、弹出序列*
+     * {剑指Offer-31}
+     * 解法一：自己想的
+     */
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         Stack<Integer> pushedStack = new Stack<>();
         Stack<Integer> poppedStack = new Stack<>();
@@ -198,6 +168,7 @@ public class Solution4 {
         }
         for (int i = 0; i < pushed.length; i++) {
             pushedStack.push(pushed[i]);
+            // 注意：此处比较Integer类型，必须用.equals()方法比较！！
             while (!pushedStack.isEmpty() && pushedStack.peek().equals(poppedStack.peek())) {
                 pushedStack.pop();
                 poppedStack.pop();
@@ -206,6 +177,11 @@ public class Solution4 {
         return pushedStack.isEmpty();
     }
 
+    /**
+     *【4-10】栈的压入、弹出序列*
+     * {剑指Offer-31}
+     * 解法二：思想同解法一，标准答案
+     */
     public boolean validateStackSequences_2(int[] pushed, int[] popped) {
         Stack<Integer> calStack = new Stack<>();
         int poppedIndex = 0;
@@ -221,6 +197,61 @@ public class Solution4 {
 
 
     /**
+     *【4-11】每日温度*（单调栈）
+     * {LeetCode-739}
+     * 解法一：【暴力解法】，思路及实现简单
+     * 时间复杂度高：o(n^2)
+     // 最好情况：数组正序（27，28，29，30，31），时间复杂度o(n)
+     // 最坏情况：数组倒叙（31，30，29，28，27），时间复杂度o(1/2 * n^2)
+     */
+    public int[] dailyTemperatures_1(int[] temperatures) {
+        int n = temperatures.length;
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                if (temperatures[j] > temperatures[i]) {
+                    result[i] = j - i;
+                    break;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(result));
+        return result;
+    }
+
+
+    /**
+     *【4-11】每日温度*（单调栈）
+     * {LeetCode-739}
+     * 解法二：【单调栈】
+     * 时间复杂度：o(k*n)
+     // 一般的，能用单调栈解决的，暴力法都能搞定，就是时间复杂度高一点而已
+     */
+    public int[] dailyTemperatures_2(int[] temperatures) {
+        int n = temperatures.length;
+        int[] result = new int[n];
+        Stack<Integer> indexStack = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!indexStack.isEmpty() && temperatures[i] > temperatures[indexStack.peek()]) {
+                result[indexStack.peek()] = i - indexStack.peek();
+                indexStack.pop();
+            }
+            indexStack.push(i);
+        }
+
+        while (!indexStack.isEmpty()) {
+            temperatures[indexStack.pop()] = 0;
+        }
+
+        System.out.println(Arrays.toString(result));
+        return result;
+    }
+
+
+    /**
+     *【4-12】接雨水**（单调栈）
+     * {LeetCode-42}
      * 解法一：【暴力遍历】找柱状雨量
      * 时间复杂度：o(n^2)
      * 空间复杂度：o(1)
@@ -244,6 +275,8 @@ public class Solution4 {
 
 
     /**
+     *【4-12】接雨水**（单调栈）
+     * {LeetCode-42}
      * 解法二：【前后缀统计法】，找柱状雨量
      * 时间复杂度：o(3n)，循环三次
      * 空间复杂度：o(2n)，需要两个辅助数组
@@ -274,6 +307,8 @@ public class Solution4 {
 
 
     /**
+     *【4-12】接雨水**（单调栈）
+     * {LeetCode-42}
      * 解法三：【单调栈】，找出每层的雨量
      * 本质跟“每日温度”一样，
      * 时间复杂度：o(2n)，所有的数进一次栈再出一次栈
