@@ -6,8 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author bin2.zhao (D52B48 in ZhangMen)
- * @since 2021/9/9 15:51
+ * 06-排序
  */
 public class Solution6 {
 
@@ -55,8 +54,80 @@ public class Solution6 {
         return A;
     }
 
+
+    /**
+     *【6-2】有效的字母异位词
+     * {LeetCode242}
+     * 解法一：排序数组
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+        char[] sc = s.toCharArray();
+        char[] tc = t.toCharArray();
+        Arrays.sort(sc);
+        Arrays.sort(tc);
+        for (int i = 0; i < sc.length; i++) {
+            if (sc[i] != tc[i]) return false;
+        }
+        return true;
+    }
+
+    /**
+     *【6-2】有效的字母异位词
+     * {LeetCode242}
+     * 解法二：字符标记数组
+     */
+    public boolean isAnagram_2(String s, String t) {
+        if (s.length() != t.length()) return false;
+        // 26个字母的标记位
+        int[] charPools = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            charPools[s.charAt(i)-'a']++;
+        }
+        for (int i = 0; i < t.length(); i++) {
+            charPools[t.charAt(i)-'a']--;
+        }
+        for (int i = 0; i < charPools.length; i++) {
+            if (charPools[i] != 0) return false;
+        }
+        return true;
+    }
+
+
+    /**
+     *【6-3】判断能否形成等差数列
+     * {LeetCode1502}
+     */
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        if (arr.length < 2) return false;
+        Arrays.sort(arr);
+        int n = arr.length;
+        int interval = arr[1] - arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if ((arr[i] - arr[i-1]) != interval) return false;
+        }
+        return true;
+    }
+
+
+    /**
+     *【6-4】会议室
+     * {LeetCode252}
+     */
+
+
+    /**
+     *【6-5】合并区间*
+     * {LeetCode56}
+     */
+//    public int[][] merge(int[][] intervals) {
+//
+//    }
+
+
     /**
      * 【6-6】调整数组顺序使奇数位于偶数前面
+     * {剑指Offer21}
      * 利用排序思想来解决，并非排序题
      * 解法一：利用选择排序思想
      * 非稳定的
@@ -81,6 +152,8 @@ public class Solution6 {
 
 
     /**
+     * 【6-6】调整数组顺序使奇数位于偶数前面
+     * {剑指Offer21}
      * 解法二：双指针 + 冒泡思想
      * 非稳定的
      * 时间复杂度o(n)
@@ -105,6 +178,8 @@ public class Solution6 {
 
 
     /**
+     * 【6-6】调整数组顺序使奇数位于偶数前面
+     * {剑指Offer21}
      * 解法三：辅助数组 + 双指针
      * 时间复杂度o(n)
      * 空间复杂度o(n)
@@ -124,10 +199,69 @@ public class Solution6 {
     }
 
 
+    /**
+     *【6-7】颜色分类*
+     * {LeetCode75}
+     * 解法一：直接用排序函数
+     * 时间复杂度：o(nlogn)
+     * 空间复杂度：o(1)
+     */
+    public void sortColors(int[] nums) {
+        Arrays.sort(nums);
+    }
+
+    /**
+     *【6-7】颜色分类*
+     * {LeetCode75}
+     * 解法二：借助辅助数组
+     * 时间复杂度：o(n)
+     * 空间复杂度：o(1)
+     */
+    public int[] sortColors_2(int[] nums) {
+        int[] flag = new int[3];
+        for (int i = 0; i < nums.length; i++) {
+            flag[nums[i]]++;
+        }
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            // 注意：前后都需要判断flag[j] == 0，否则{2,0}这种情况，中间没有1的过不去！
+            if (flag[j] == 0) j++;
+            if (flag[j] > 0) {
+                nums[i] = j;
+                flag[j]--;
+            }
+            if (flag[j] == 0) j++;
+        }
+        return nums;
+    }
+
+    /**
+     *【6-7】颜色分类*
+     * {LeetCode75}
+     * 解法三：
+     */
+    public int[] sortColors_3(int[] nums) {
+        return nums;
+    }
+
+
+    /**
+     *【6-8】对链表进行插入排序*
+     * {LeetCode147}
+     */
+    // 见SortUtil.insertionSort(ListNode head)
+
+
+    /**
+     *【6-9】链表归并排序*
+     * {LeetCode148}
+     */
+    // 见SortUtil.mergeSort(ListNode head)
 
 
     /**
      * 【6-10】数组中的第K个最大元素
+     * {LeetCode215}
      * 解法一：先排序，再找K
      * 时间复杂度：o(n^2)，排序算法影响了速度
      * 空间复杂度：o(1)
@@ -146,4 +280,112 @@ public class Solution6 {
 
         return nums[nums.length - k];
     }
+
+
+    /**
+     *【6-11】最小K个数*
+     * {面试题金典17.14}
+     * 解法一：直接用排序函数
+     * 时间复杂度：o(nlogn)
+     */
+    public int[] smallestK(int[] arr, int k) {
+        int[] result = new int[k];
+        Arrays.sort(arr);
+        int index = 0;
+        for (int i = 0; i < k; i++) {
+            result[i] = arr[index];
+            index++;
+        }
+        return result;
+    }
+
+    /**
+     *【6-11】最小K个数*
+     * {面试题金典17.14}
+     * 解法二：利用"快排"思想
+     * 时间复杂度：o(n)
+     */
+//    public int[] smallestK_2(int[] arr, int k) {
+//
+//    }
+
+    /**
+     *【6-11】最小K个数*
+     * {面试题金典17.14}
+     * 解法三：构建大顶堆
+     */
+//    public int[] smallestK_3(int[] arr, int k) {
+//
+//    }
+
+
+
+    /**
+     *【6-12】数组中的逆序对**
+     * {剑指Offer51}
+     * 解法一：暴力双循环
+     * 时间复杂度：o(n^2)，过不去测试用例，超时！！所以得另寻他法。
+     */
+    public int reversePairs(int[] nums) {
+        int reversePairsCount = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i+1; j < nums.length; j++) {
+                if (nums[i] > nums[j]) reversePairsCount++;
+            }
+        }
+        return reversePairsCount;
+    }
+
+
+    /**
+     *【6-12】数组中的逆序对**
+     * {剑指Offer51}
+     * 解法二：利用"归并排序"，求逆序度
+     * 时间复杂度：o(nlogn)
+     */
+    private int reversePairsCount = 0;
+    public int reversePairs_2(int[] nums) {
+        reversePairsRecursion(nums, 0, nums.length-1);
+        return reversePairsCount;
+    }
+    private void reversePairsRecursion(int[] a, int left, int right) {
+        // 千万别忘了终止条件；
+        if (left >= right) return;
+
+        int middle = left + (right - left) / 2;
+        reversePairsRecursion(a, left, middle);
+        reversePairsRecursion(a, middle+1, right);
+
+        mergeArraySortedAndCalRPCount(a, left, middle, right);
+    }
+    private void mergeArraySortedAndCalRPCount(int[] arr, int left, int middle, int right) {
+        int ln = middle - left + 1;
+        int rn = right - middle;
+        int[] leftArr = new int[ln];
+        int[] rightArr = new int[rn];
+
+        int arrOffset = left;
+        for (int i = 0; i < ln; i++) leftArr[i] = arr[arrOffset++];
+        for (int i = 0; i < rn; i++) rightArr[i] = arr[arrOffset++];
+
+        arrOffset = left;
+        int li = 0;
+        int ri = 0;
+        while (li < ln && ri < rn) {
+            if (leftArr[li] <= rightArr[ri]) {
+                arr[arrOffset] = leftArr[li];
+                li++;
+            } else {
+                arr[arrOffset] = rightArr[ri];
+                ri++;
+                // 灵魂在这里，一个语句定乾坤！
+                reversePairsCount += (ln - li);
+            }
+            arrOffset++;
+        }
+
+        while (li < ln) arr[arrOffset++] = leftArr[li++];
+        while (ri < rn) arr[arrOffset++] = rightArr[ri++];
+    }
+
 }

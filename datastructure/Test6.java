@@ -20,6 +20,7 @@ public class Test6 {
         int[] a09 = new int[]{9,7,5,3,1,0};
         int[] a10 = new int[]{0,1,3,5,7,9};
         int[] a11 = new int[]{4,3,2,1,9,8,7,6};
+        int[] a12 = new int[]{1,3,2,3,1};
 
         // 冒泡排序（数组实现）
 //        System.out.println(Arrays.toString(SortUtil.bubbleSort(a01)));
@@ -96,17 +97,42 @@ public class Test6 {
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a09)));
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a10)));
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a11)));
+//        System.out.println(Arrays.toString(sortUtil.mergeSort(a12)));
 
 
 
 
         /* ========================================================== */
+        /* ======            习 题 练 习                        ======= */
+        /* ========================================================== */
+
         Solution6 sl6 = new Solution6();
 
-        //【6-1】合并排序的数组
-        System.out.println(Arrays.toString(sl6.merge(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3)));
+        /**
+         *【6-1】合并排序的数组
+         * {面试题 10.01.}
+         */
+//        System.out.println(Arrays.toString(sl6.merge(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3)));
+//
+//        System.out.println(Arrays.toString(sl6.merge_2(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3)));
 
-        System.out.println(Arrays.toString(sl6.merge_2(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3)));
+
+        /**
+         *【6-2】有效的字母异位词
+         * {LeetCode242}
+         */
+//        System.out.println(sl6.isAnagram_2("anagram", "nagaram"));
+//        System.out.println(sl6.isAnagram_2("anagram", "nagara"));
+//        System.out.println(sl6.isAnagram_2("rat", "car"));
+
+
+        /**
+         *【6-3】判断能否形成等差数列
+         * {LeetCode1502}
+         */
+//        System.out.println(sl6.canMakeArithmeticProgression(new int[]{3,5,1}));
+//        System.out.println(sl6.canMakeArithmeticProgression(new int[]{1,2,4}));
+//        System.out.println(sl6.canMakeArithmeticProgression(new int[]{1,100}));
 
 
 
@@ -129,9 +155,39 @@ public class Test6 {
 //        System.out.println(Arrays.toString(sl6.exchange_3(a11)));
 
 
-        //【6-10】数组中的第K个最大元素
+        /**
+         *【6-7】颜色分类*
+         * {LeetCode75}
+         * 解法二：借助辅助数组
+         */
+//        int[] color1 = new int[]{2,0,2,1,1,0};
+//        int[] color2 = new int[]{2,0,1};
+//        int[] color3 = new int[]{0};
+//        int[] color4 = new int[]{1};
+//        int[] color5 = new int[]{2,0};
+//        System.out.println(Arrays.toString(sl6.sortColors_2(color1)));
+//        System.out.println(Arrays.toString(sl6.sortColors_2(color2)));
+//        System.out.println(Arrays.toString(sl6.sortColors_2(color3)));
+//        System.out.println(Arrays.toString(sl6.sortColors_2(color4)));
+//        System.out.println(Arrays.toString(sl6.sortColors_2(color5)));
+
+
+        /**
+         *【6-10】数组中的第K个最大元素
+         * {LeetCode215}
+         */
 //        System.out.println(sl6.findKthLargest(new int[]{3,2,3,1,2,4,4,5,6}, 4));
 //        System.out.println(sl6.findKthLargest(new int[]{3,2,1,5,6,4}, 2));
+
+
+
+
+        /**
+         *【6-12】数组中的逆序对**
+         * {剑指Offer51}
+         */
+        System.out.println(sl6.reversePairs_2(new int[]{7,5,6,4}));
+        System.out.println(sl6.reversePairs_2(new int[]{1,3,2,3,1}));
 
     }
 }
