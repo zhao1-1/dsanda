@@ -9,6 +9,9 @@ import java.util.Arrays;
 public class Test6 {
     public static void main(String[] args) {
 
+        Solution3 sl3 = new Solution3();
+        SortUtil sortUtil = new SortUtil();
+
         int[] a01 = new int[]{1, 2, 3, 4, 5, 6};
         int[] a02 = new int[]{6, 5, 4, 3, 2, 1};
         int[] a03 = new int[]{4, 5, 6, 3, 2, 1};
@@ -53,8 +56,6 @@ public class Test6 {
 
 
         // 插入排序（链表实现）
-//        Solution3 sl3 = new Solution3();
-//
 //        sl3.printList(SortUtil.insertionSort(sl3.buildList(a01)));
 //        sl3.printList(SortUtil.insertionSort(sl3.buildList(a02)));
 //        sl3.printList(SortUtil.insertionSort(sl3.buildList(a03)));
@@ -83,9 +84,9 @@ public class Test6 {
 //        System.out.println(Arrays.toString(SortUtil.selectSort(a11)));
 
 
-
-        // 归并排序（数组实现）
-//        SortUtil sortUtil = new SortUtil();
+        /**
+         * 归并排序（数组实现）
+         */
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a01)));
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a02)));
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a03)));
@@ -98,6 +99,41 @@ public class Test6 {
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a10)));
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a11)));
 //        System.out.println(Arrays.toString(sortUtil.mergeSort(a12)));
+
+
+        /**
+         * 归并排序（链表实现）
+         */
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a01)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a02)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a03)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a04)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a05)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a06)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a07)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a08)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a09)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a10)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a11)));
+        sl3.printList(sortUtil.mergeSort(sl3.buildList(a12)));
+
+
+
+        /**
+         * 快排（数组实现）
+         */
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a01)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a02)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a03)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a04)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a05)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a06)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a07)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a08)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a09)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a10)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a11)));
+//        System.out.println(Arrays.toString(sortUtil.quickSort(a12)));
 
 
 
@@ -180,14 +216,21 @@ public class Test6 {
 //        System.out.println(sl6.findKthLargest(new int[]{3,2,1,5,6,4}, 2));
 
 
+        /**
+         *【6-11】最小K个数*
+         * {面试题金典17.14}
+         */
+//        System.out.println(Arrays.toString(sl6.smallestK_2(new int[]{1,3,5,7,2,4,6,8}, 4)));
+//        System.out.println(Arrays.toString(sl6.smallestK_2(new int[]{1,2,3,5,7,3,8}, 4)));
+//        System.out.println(Arrays.toString(sl6.smallestK_2(new int[]{9,4,13,5,1,8,0,2,2,2}, 3)));
 
 
         /**
          *【6-12】数组中的逆序对**
          * {剑指Offer51}
          */
-        System.out.println(sl6.reversePairs_2(new int[]{7,5,6,4}));
-        System.out.println(sl6.reversePairs_2(new int[]{1,3,2,3,1}));
+//        System.out.println(sl6.reversePairs_2(new int[]{7,5,6,4}));
+//        System.out.println(sl6.reversePairs_2(new int[]{1,3,2,3,1}));
 
     }
 }

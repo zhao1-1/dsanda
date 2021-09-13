@@ -281,6 +281,42 @@ public class Solution6 {
         return nums[nums.length - k];
     }
 
+    /**
+     * 【6-10】数组中的第K个最大元素
+     * {LeetCode215}
+     * 解法二：利用“快排思想”
+       注意：这个要用快排的逆序排序（从大到小）
+     * 时间复杂度：o(n)
+     * 空间复杂度：o(logn)
+     */
+//    public int findKthLargest_2(int[] nums, int k) {
+//
+//    }
+    // 倒叙的partition函数编写
+    private int partitionReverse(int[] arr, int l, int r) {
+        int i = l;
+        int j = r - 1;
+        int beacon = arr[r];
+        while (i < j) {
+            // 这种写法就是由大到小排序，"arr[i] < beacon i++"，这种是由小到大。
+            while (i < j && arr[i] > beacon) i++;
+            while (i < j && arr[j] < beacon) j--;
+            if (i < j) {
+                swap(arr, i, j);
+                i++;
+                j--;
+            }
+        }
+        if (j >= l && arr[j] < beacon) {
+            swap(arr,j,r);
+            return j;
+        } else {
+            swap(arr,j+1,r);
+            return j+1;
+        }
+    }
+
+
 
     /**
      *【6-11】最小K个数*
@@ -302,12 +338,54 @@ public class Solution6 {
     /**
      *【6-11】最小K个数*
      * {面试题金典17.14}
-     * 解法二：利用"快排"思想
+     * 解法二：利用"快排"思想（非常不好思考）
      * 时间复杂度：o(n)
      */
-//    public int[] smallestK_2(int[] arr, int k) {
-//
-//    }
+    public int[] smallestK_2(int[] arr, int k) {
+        if (arr == null || arr.length == 0) return new int[0];
+        int[] result;
+        if (arr.length > k) {
+            result = new int[k];
+            quickSortRecursionForFindK(arr, 0, arr.length - 1, k);
+        } else {
+            result = new int[arr.length];
+        }
+        for (int i = 0; i < result.length; i++) result[i] = arr[i];
+        return result;
+    }
+    private void quickSortRecursionForFindK(int[] arr, int l, int r, int k) {
+        if (l >= r) return;
+
+        int m = partition(arr, l, r);
+        if (m - l + 1 == k)
+            return;
+        else if (m - l + 1 > k)
+            quickSortRecursionForFindK(arr, l, m - 1, k);
+        else
+            quickSortRecursionForFindK(arr, m + 1, r , k - (m - l + 1));
+
+    }
+    private int partition(int[] arr, int l, int r) {
+        int beacon = arr[r];
+
+        int minSign = l - 1;
+        int maxSign = l;
+
+        for (; maxSign <= r - 1; maxSign++) {
+            if (arr[maxSign] < beacon) {
+                swap(arr, minSign + 1, maxSign);
+                minSign++;
+            }
+        }
+        swap(arr, minSign + 1, r);
+
+        return minSign + 1;
+    }
+    private void swap(int[] x, int i, int j) {
+        int temp = x[i];
+        x[i] = x[j];
+        x[j] = temp;
+    }
 
     /**
      *【6-11】最小K个数*
