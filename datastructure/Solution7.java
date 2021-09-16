@@ -145,6 +145,11 @@ public class Solution7 {
     }
 
 
+    /**
+     *【7-0.3】查找第一个大于target的元素
+     */
+    // 见【7-2】
+
 
 
     /**
@@ -192,11 +197,86 @@ public class Solution7 {
 
 
 
+    /**
+     *【7-0.6】循环有序数组中查找最小的元素x所在位置（没有重复数据）
+     */
+    public int searchMinEleInCSA(int[] cs_nums) {
+        int low = 0;
+        int high = cs_nums.length - 1;
+        int middle;
+        while (low <= high) {
+            middle = low + (high - low) / 2;
+            if (low == high) return middle;
+
+            if ((middle != 0 && cs_nums[middle - 1] > cs_nums[middle]) || middle == 0 && cs_nums[middle] < cs_nums[high])
+                return middle;
+            else if (cs_nums[middle] > cs_nums[high])
+                low = middle + 1;
+            else
+                high = middle - 1;
+        }
+        // 永远抵达不了此处
+        return -1;
+    }
 
 
     /**
-     *【7-2】猜数字大小
+     *【7-0.7】循环有序数组中查找最大的元素x所在位置（没有重复数据）
+     */
+    public int searchMaxEleInCSA(int[] cs_nums) {
+        int low = 0;
+        int high = cs_nums.length - 1;
+        int middle;
+        while (low <= high) {
+            middle = low + (high - low) / 2;
+            if (low == high) return middle;
+
+            if ((middle != cs_nums.length - 1 && cs_nums[middle + 1] < cs_nums[middle]) || (middle == cs_nums.length - 1 && cs_nums[middle] > cs_nums[low]))
+                return middle;
+            else if (cs_nums[middle] < cs_nums[low])
+                high = middle - 1;
+            else
+                low = middle + 1;
+        }
+        // 异常
+        return -1;
+    }
+
+
+
+
+    /**
+     *【7-0.8】山峰数组中查找峰值元素所在位置
+     * {LeetCode-852} {剑指OfferII-069}
+     */
+    public int peakIndexInMountainArray(int[] nums) {
+       int low = 0;
+       int high = nums.length - 1;
+       int middle;
+       while (low <= high) {
+           middle = low + (high - low) / 2;
+           if (middle == 0)
+               low = middle + 1;
+           else if (middle == nums.length - 1)
+               high = middle - 1;
+           else if ((nums[middle] > nums[middle + 1]) && (nums[middle] > nums[middle - 1]))
+               return middle;
+           else if (nums[middle] < nums[middle + 1])
+               low = middle + 1;
+           else
+               high = middle - 1;
+       }
+       // 异常
+       return -1;
+    }
+
+
+
+
+    /**
+     *【7-1】猜数字大小
      * {LeetCode-374}
+     * 母题：【7-0.0】
      */
     public int guessNumber(int n) {
         int num = n;
@@ -235,5 +315,68 @@ public class Solution7 {
         else
             return -1;
     }
+
+
+
+
+    /**
+     *【7-2】寻找比目标字母大的最小字母
+     * {LeetCode744}
+     * 母题：【7-0.3】
+     */
+    public char nextGreatestLetter(char[] letters, char target) {
+        int low = 0;
+        int high = letters.length - 1;
+        int middle;
+        while (low <= high) {
+            middle = low + (high - low) / 2;
+            if (letters[middle] <= target) {
+                // 如果不存在，则返回队首元素
+//                if (middle == letters.length - 1) return letters[0];
+                if (middle != letters.length - 1 && letters[middle + 1] > target) return letters[middle + 1];
+                low = middle + 1;
+            } else {
+                if (middle == 0 || letters[middle - 1] < target) return letters[middle];
+                else high = middle - 1;
+            }
+        }
+        return '*';
+    }
+
+
+    /**
+     *【7-3】搜索插入位置
+     * {LeetCode-35}
+     * 母题：【7-0.3】
+     */
+    public int searchInsert(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        int middle;
+        while (low <= high) {
+            middle = low + (high -low) / 2;
+            if (nums[middle] == target) {
+                return middle;
+            } else if (nums[middle] > target) {
+                if (middle != 0 && nums[middle - 1] < target) return middle;
+                if (middle == 0) return middle;
+                high = middle - 1;
+            } else {
+                if (middle == nums.length - 1) return middle + 1;
+                low = middle + 1;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     *【7-4】在排序数组中查找元素的第一个和最后一个位置
+     * {LeetCode-34}
+     * 母题：【7-0.1】【7-0.2】
+     */
+//    public int[] searchRange(int[] nums, int target) {
+//
+//    }
 
 }
