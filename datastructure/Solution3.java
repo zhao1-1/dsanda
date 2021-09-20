@@ -122,7 +122,7 @@ public class Solution3 {
 
     /**
      *【3-2】删除排序链表中的重复元素
-     * {LeetCode-87}
+     * {LeetCode-83}
      * 解法1：【穿针法】
      * （p.next = p.next.next） ---- 自己想的，像缝针一样
      */

@@ -294,6 +294,7 @@ public class Solution7 {
        int middle;
        while (low <= high) {
            middle = low + (high - low) / 2;
+           // 数组的两头必须单独考虑，否则[middle-1]、[middle+1]会越界！
            if (middle == 0)
                low = middle + 1;
            else if (middle == nums.length - 1)
@@ -313,6 +314,8 @@ public class Solution7 {
     /**
      *【7-0.6】二分答案（x的平方根）
      */
+
+
 
 
 
@@ -524,9 +527,24 @@ public class Solution7 {
      *【7-5】稀疏数组搜索
      * {面金-10.05.}
      */
-//    public int findString(String[] words, String s) {
-//
-//    }
+    public int findString(String[] words, String s) {
+        int low = 0;
+        int high = words.length - 1;
+        int middle;
+        while (low <= high) {
+            middle = low + (high - low) / 2;
+            if (words[middle].equals(s))
+                return middle;
+            else if (words[middle].equals("")) {
+                if (words[low].equals(s)) return low;
+                low++;
+            } else if (words[middle].compareTo(s) > 0)
+                high = middle - 1;
+            else
+                low = middle + 1;
+        }
+        return -1;
+    }
 
 
     /**
@@ -563,19 +581,72 @@ public class Solution7 {
 //    }
 
 
+
+
     /**
      *【7-10】有效的完全平方数
      * {LeetCode-367}
      * 母题：【7-0.6】二分答案（x的平方根）
      */
+    public boolean isPerfectSquare(int num) {
+        int low = 0;
+        int high = num;
+        int middle;
+        while (low <= high) {
+            middle = low + (high - low) / 2;
+            long r = (long) middle * middle;
+            long r1 = (long) (middle + 1) * (middle + 1);
+            if (r == num) return true;
+            else if (r < num) {
+                if (r1 > num) return false;
+                low = middle + 1;
+            } else
+                high = middle - 1;
+        }
+        return false;
+    }
+
+
 
 
     /**
-     *【7-11】x的平方根
+     *【7-11】x的整数平方根
      * {LeetCode-69}
      * 母题：【7-0.6】二分答案（x的平方根）
      */
     // 比母题简单
+    public int mySqrt(int x) {
+        int low = 0;
+        int high = x;
+        int middle;
+        int count = 0;
+        while (low <= high) {
+            count++;
+            middle = low + (high - low) / 2;
+
+            /*
+            防止int越界
+             int类型范围：-2^31 ~ 2^31-1
+            long类型范围：-2^63 ~ 2^63-1
+             */
+            long r = (long) middle * middle;
+            long r1 = (long) (middle + 1) * (middle + 1);
+
+            if (r == x) {
+                System.out.println("循环了：" + count + "次！");
+                return middle;
+            }
+            else if (r < x) {
+                if (r1 > x) {
+                    System.out.println("循环了：" + count + "次！");
+                    return middle;
+                }
+                low = middle + 1;
+            } else
+                high = middle - 1;
+        }
+        return -1;
+    }
 
 
 

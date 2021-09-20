@@ -57,7 +57,7 @@ public class Solution6 {
 
     /**
      *【6-2】有效的字母异位词
-     * {LeetCode242}
+     * {LeetCode-242}
      * 解法一：排序数组
      */
     public boolean isAnagram(String s, String t) {
@@ -74,7 +74,7 @@ public class Solution6 {
 
     /**
      *【6-2】有效的字母异位词
-     * {LeetCode242}
+     * {LeetCode-242}
      * 解法二：字符标记数组
      */
     public boolean isAnagram_2(String s, String t) {
@@ -92,6 +92,13 @@ public class Solution6 {
         }
         return true;
     }
+
+    /**
+     *【6-2】有效的字母异位词
+     * {LeetCode-242}
+     * 解法三：哈希表
+     */
+
 
 
     /**

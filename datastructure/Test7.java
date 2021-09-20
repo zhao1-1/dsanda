@@ -159,6 +159,8 @@ public class Test7 {
          *【7-5】稀疏数组搜索
          * {面金-10.05.}
          */
+//        System.out.println(sl7.findString(new String[]{"at", "", "", "", "ball", "", "", "car", "", "","dad", "", ""},"ta"));
+//        System.out.println(sl7.findString(new String[]{"at", "", "", "", "ball", "", "", "car", "", "","dad", "", ""},"ball"));
 
 
         /**
@@ -197,6 +199,11 @@ public class Test7 {
          * {LeetCode-367}
          * 母题：【7-0.6】二分答案（x的平方根）
          */
+//        System.out.println(sl7.isPerfectSquare(16));
+//        System.out.println(sl7.isPerfectSquare(8));
+//        System.out.println(sl7.isPerfectSquare(1));
+//        System.out.println(sl7.isPerfectSquare(0));
+//        System.out.println(sl7.isPerfectSquare(2147395599));
 
 
         /**
@@ -204,7 +211,11 @@ public class Test7 {
          * {LeetCode-69}
          * 母题：【7-0.6】二分答案（x的平方根）
          */
-        // 比母题简单
+//        System.out.println(sl7.mySqrt(16));
+//        System.out.println(sl7.mySqrt(8));
+//        System.out.println(sl7.mySqrt(1));
+//        System.out.println(sl7.mySqrt(0));
+//        System.out.println(sl7.mySqrt(2147395599));
 
 
         /**
