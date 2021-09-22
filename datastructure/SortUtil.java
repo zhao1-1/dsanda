@@ -298,11 +298,13 @@ public class SortUtil {
         else
             use quickSort();
     } else {
-        if (!arr.isStruck)
+        if (!arr.isStructure)
             use quickSort();
         else
             use mergeSort();
     }
 
      */
+
+
 }
