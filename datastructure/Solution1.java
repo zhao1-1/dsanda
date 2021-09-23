@@ -59,7 +59,7 @@ public class Solution1 {
 
     /**
      *【1-2】IP地址无效化
-     * {LeetCode-1108}
+     * {力扣-1108}
       解法1：直接使用 String 类的 replace。
      */
     public String defangIpaddr(String address) {
@@ -115,7 +115,7 @@ public class Solution1 {
 
     /**
      *【1-3】两数之和
-     * {LeetCode-1}
+     * {力扣-1}
      * 解法1：暴力枚举
      */
     public int[] twoSum(int[] nums, int target) {
@@ -132,7 +132,7 @@ public class Solution1 {
 
     /**
      *【1-3】两数之和
-     * {LeetCode-1}
+     * {力扣-1}
      * 解法2：哈希表
      */
     public int[] twoSum_2(int[] nums, int target) {
@@ -228,7 +228,7 @@ public class Solution1 {
 
     /**
      *【1-7】验证回文数
-     * {LeetCode-9}
+     * {力扣-9}
      */
     public Boolean isPalindromeNum(int x) {
         if (x < 0) return false;
@@ -244,7 +244,7 @@ public class Solution1 {
 
     /**
      *【1-8】最后一个单词的长度
-     * {LeetCode-58}
+     * {力扣-58}
      * 解法二：自己的思路，性能差
      */
     public int lengthOfLastWord(String s) {
@@ -261,7 +261,7 @@ public class Solution1 {
 
     /**
      *【1-8】最后一个单词的长度
-     * {LeetCode-58}
+     * {力扣-58}
      * 解法二：官方答案
      */
     public int lengthOfLastWord_2(String s) {
@@ -339,7 +339,7 @@ public class Solution1 {
 
     /**
      *【1-11】删除有序数组中的重复项
-     * {LeetCode-26}
+     * {力扣-26}
      * 解法一：自己实现
      */
     public int removeDuplicates(int[] nums) {
@@ -360,7 +360,7 @@ public class Solution1 {
 
     /**
      *【1-11】删除有序数组中的重复项
-     * {LeetCode-26}
+     * {力扣-26}
      * 解法二：推荐
      */
     public int removeDuplicates_2(int[] nums) {
@@ -383,7 +383,7 @@ public class Solution1 {
 
     /**
      *【1-12】atoi*
-     * {剑指Offer-67} {LeetCode-8}
+     * {剑指Offer-67} {力扣-8}
      * 解法一：比较Integer.MAX_VALUE / 10
      */
     public int strToInt(String str) {
@@ -421,7 +421,7 @@ public class Solution1 {
 
     /**
      *【1-12】atoi*
-     * {剑指Offer-67} {LeetCode-8}
+     * {剑指Offer-67} {力扣-8}
      * 解法二：中间状态用long表示
      * 这种也不行，如果长度大于long类型呢？（比如："9223372036854775808"）
      */
@@ -449,7 +449,7 @@ public class Solution1 {
 
     /**
      *【1-12】atoi*
-     * {剑指Offer-67} {LeetCode-8}
+     * {剑指Offer-67} {力扣-8}
      * 不可以用这种方法！
      */
     public int strToInt_3(String str) {

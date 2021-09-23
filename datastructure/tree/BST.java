@@ -1,7 +1,9 @@
 package datastructure.tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BST {
 
@@ -149,7 +151,7 @@ public class BST {
 
     /**
      * 前序遍历
-     * {LeetCode-144}
+     * {力扣-144}
      * 时间复杂度：o(n)
      * 空间复杂度：o(1)
      */
@@ -170,7 +172,7 @@ public class BST {
 
     /**
      * 中序遍历
-     * {LeetCode-94}
+     * {力扣-94}
      */
     public List inorderTraversalR() {
         List allTree = new ArrayList();
@@ -188,7 +190,7 @@ public class BST {
 
     /**
      * 后序遍历
-     * {LeetCode-145}
+     * {力扣-145}
      */
     public List postorderTraversalR() {
         List allTree = new ArrayList();
@@ -206,11 +208,24 @@ public class BST {
 
     /**
      * 层序遍历（按层遍历）
-     * {剑指Offer-32-I} {LeetCode-102}
+     * {剑指Offer-32-I} {力扣-102}
+     * 解法一：队列
      */
-//    public List levelOrder() {
-//        List<Integer> allTree = new ArrayList<>();
-//
-//    }
+    public List<Integer> levelOrder() {
+        List<Integer> result = new ArrayList<>();
+        if (this.root == null) return result;
+
+        Queue<Node> queueStore = new LinkedList<>();
+        queueStore.add(this.root);
+        while (!queueStore.isEmpty()) {
+            Node pollNode = queueStore.poll();
+            result.add(pollNode.data);
+            if (pollNode.left != null) queueStore.offer(pollNode.left);
+            if (pollNode.right != null) queueStore.offer(pollNode.right);
+        }
+
+        return result;
+    }
+
 
 }

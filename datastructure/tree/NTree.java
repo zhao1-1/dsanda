@@ -1,14 +1,23 @@
 package datastructure.tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class NTree {
 
     NNode root;
 
+//    public void insertOnLevel(int target) {
+//
+//    }
+
     /**
      * N叉树前序遍历
+     * 解法一：套壳子遍历
+     * 时间复杂度：o(n)
+     * 空间复杂度：o(H)
      */
     public List<Integer> preorder() {
         List allTree = new ArrayList();
@@ -21,6 +30,25 @@ public class NTree {
         for (NNode child : root.children) {
             preorderR(child, allTree);
         }
+    }
+
+
+    /**
+     * N叉树前序遍历
+     * 解法二：直接遍历
+     * 时间复杂度：o(n * log n)
+     * 空间复杂度：o(H)
+     */
+    public List<Integer> preorder2(NNode root) {
+        if (root == null) return new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+        result.add(root.data);
+        for (NNode child : root.children) {
+            List<Integer> subResult = preorder2(child);
+            //在归的过程，此处addAll，每次都需要循环k次，时间复杂度提高
+            result.addAll(subResult);
+        }
+        return result;
     }
 
 
@@ -56,17 +84,36 @@ public class NTree {
 //    }
 
 
+//    public List<Integer> levelOrder() {
+//        List<Integer> allTree = new ArrayList<>();
+//        levelOrderR(this.root, allTree);
+//        return allTree;
+//    }
+//    private void levelOrderR(NNode root, List<Integer> allTree) {
+//        if (root.children == null || root.children.size() == 0) return;
+//        for (NNode child : root.children) {
+//            allTree.add(child.data);
+//            levelOrderR(child, allTree);
+//        }
+//    }
+
+    /**
+     * N叉树层序遍历（循环遍历 + 仓储队列）
+     */
     public List<Integer> levelOrder() {
-        List<Integer> allTree = new ArrayList<>();
-        levelOrderR(this.root, allTree);
-        return allTree;
-    }
-    private void levelOrderR(NNode root, List<Integer> allTree) {
-        if (root.children == null || root.children.size() == 0) return;
-        for (NNode child : root.children) {
-            allTree.add(child.data);
-            levelOrderR(child, allTree);
+        List<Integer> result = new ArrayList<>();
+        if (this.root == null) return result;
+
+        Queue<NNode> storeQueue = new LinkedList<>();
+        storeQueue.add(this.root);
+        while (!storeQueue.isEmpty()) {
+            NNode pollNode = storeQueue.poll();
+            result.add(pollNode.data);
+            for (NNode child : pollNode.children) {
+                if (child != null) storeQueue.offer(child);
+            }
         }
+        return result;
     }
 
 }

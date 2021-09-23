@@ -33,7 +33,7 @@ public class Solution3 {
 
     /**
      *【3-1】移除链表元素
-     * {LeetCode-203}
+     * {力扣-203}
      * 解法1：虚拟头节点
      */
     public ListNode removeElements(ListNode head, int val) {
@@ -53,7 +53,7 @@ public class Solution3 {
 
     /**
      *【3-1】移除链表元素
-     * {LeetCode-203}
+     * {力扣-203}
      * 解法2：【穿针法】（土办法，需要考虑特殊情况）
      */
     public ListNode removeElements_2(ListNode head, int val) {
@@ -74,7 +74,7 @@ public class Solution3 {
 
     /**
      *【3-1】移除链表元素
-     * {LeetCode-203}
+     * {力扣-203}
      * 解法3：【辅助链表】（空间复杂度并没有提高，因为并没有新创建空间）
      *
      * == 改变链表的万能写法 ==
@@ -98,7 +98,7 @@ public class Solution3 {
 
     /**
      *【3-1】移除链表元素
-     * {LeetCode-203}
+     * {力扣-203}
      * 解法3.2：【辅助链表升级（推荐）】，无需临时结点！
      */
     public ListNode removeElements_3_2(ListNode head, int val) {
@@ -122,7 +122,7 @@ public class Solution3 {
 
     /**
      *【3-2】删除排序链表中的重复元素
-     * {LeetCode-83}
+     * {力扣-83}
      * 解法1：【穿针法】
      * （p.next = p.next.next） ---- 自己想的，像缝针一样
      */
@@ -142,7 +142,7 @@ public class Solution3 {
 
     /**
      *【3-2】删除排序链表中的重复元素
-     * {LeetCode-87}
+     * {力扣-87}
      * 解法2：【辅助链表（万能推荐）】
      */
     public ListNode deleteDuplicates_2(ListNode head) {
@@ -201,7 +201,7 @@ public class Solution3 {
 
     /**
      *【3-4】两数相加/大数加法*
-     * {LeetCode-2} {Tencent}
+     * {力扣-2} {Tencent}
      * 解法1：直接按位相加
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -241,7 +241,7 @@ public class Solution3 {
 
     /**
      *【3-4】两数相加/大数加法*
-     * {LeetCode-2} {Tencent}
+     * {力扣-2} {Tencent}
      // 不能用这个思路，会出现溢出
         注意：不能考虑用int、long接收，因为会越界！！
      */
@@ -277,7 +277,7 @@ public class Solution3 {
 
     /**
      *【3-5】链表的中间节点
-     * {LeetCode-876}
+     * {力扣-876}
      * 解法1：【快慢指针】
      */
     /*
@@ -301,7 +301,7 @@ public class Solution3 {
 
     /**
      *【3-5】链表的中间节点
-     * {LeetCode-876}
+     * {力扣-876}
      * 解法2：先遍历找到中间的计数，再输出。（思路简单，实现复杂）
      */
     public ListNode middleNode_2(ListNode head) {
@@ -364,7 +364,7 @@ public class Solution3 {
 
     /**
      *【3-7】删除链表倒数第N个结点
-     * {LeetCode-19}
+     * {力扣-19}
      * 解法1：【前后双指针 + 特殊情况特殊处理】  --- 自己想出来的
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -399,7 +399,7 @@ public class Solution3 {
 
     /**
      *【3-7】删除链表倒数第N个结点
-     * {LeetCode-19}
+     * {力扣-19}
      * 解法2：【前后双指针 + prev前驱标记节点】
      */
 
@@ -407,7 +407,7 @@ public class Solution3 {
 
     /**
      *【3-8】反转链表
-     * {LeetCode-206} {Alibaba}
+     * {力扣-206} {Alibaba}
      * 解法1：【辅助三指针法】（原地反转）---自己想出来的，但是不通用，而且说不定下次再做就想不出来了。
      */
     public ListNode reverseList(ListNode head) {
@@ -432,7 +432,7 @@ public class Solution3 {
 
     /**
      *【3-8】反转链表
-     * {LeetCode-206} {Alibaba}
+     * {力扣-206} {Alibaba}
      * 解法2：【头插法】（原地反转）--- 自己实现，不咋完美，很啰嗦，很容易出bug
      */
     public ListNode reverseList_2(ListNode head) {
@@ -454,7 +454,7 @@ public class Solution3 {
 
     /**
      *【3-8】反转链表
-     * {LeetCode-206} {Alibaba}
+     * {力扣-206} {Alibaba}
      * 解法3：【头插法】（原地反转）---标准答案
      */
     public ListNode reverseList_3(ListNode head) {
@@ -473,7 +473,7 @@ public class Solution3 {
 
     /**
      *【3-9】回文链表*
-     * {LeetCode-234} {蚂蚁金服}
+     * {力扣-234} {蚂蚁金服}
      * 解法1：辅助数组
      * 空间复杂度：o(n)
      * 优点：就是思路清晰
@@ -518,7 +518,7 @@ public class Solution3 {
 
     /**
      *【3-9】回文链表*
-     * {LeetCode-234} {蚂蚁金服}
+     * {力扣-234} {蚂蚁金服}
      * 解法2：利用反转链表
      * 空间复杂度：o(n)
      */
@@ -532,7 +532,7 @@ public class Solution3 {
 
     /**
      *【3-9】回文链表*
-     * {LeetCode-234} {蚂蚁金服}
+     * {力扣-234} {蚂蚁金服}
      * 解法3：反转中间往后的链表
      * 空间复杂度：o(1)（原地判断）
      */
@@ -559,7 +559,7 @@ public class Solution3 {
 
     /**
      *【3-9】回文链表*
-     * {LeetCode-234} {蚂蚁金服}
+     * {力扣-234} {蚂蚁金服}
      * 解法3-2：反转中间往前的链表
      * "反转前半部分链表 然后从中间向两边扩散遍历对比"
      */
@@ -567,7 +567,7 @@ public class Solution3 {
 
     /**
      *【3-9】回文链表*
-     * {LeetCode-234} {蚂蚁金服}
+     * {力扣-234} {蚂蚁金服}
      * 解法4：利用回文数的判定方法
      */
     public boolean isPalindrome_4(ListNode head) {
@@ -589,7 +589,7 @@ public class Solution3 {
 
     /**
      *【3-10】奇偶链表*
-     * {LeetCode-328} {Tencent}
+     * {力扣-328} {Tencent}
      // 第一次想出来的方法各种p1，2，3的很容易p懵逼
      */
     public ListNode oddEvenList(ListNode head) {
@@ -620,7 +620,7 @@ public class Solution3 {
 
     /**
      *【3-10】奇偶链表*
-     * {LeetCode-328} {Tencent}
+     * {力扣-328} {Tencent}
      * 解法2：【穿针法】---自己第二次想出来的
      */
     public ListNode oddEvenList_2(ListNode head) {
@@ -652,7 +652,7 @@ public class Solution3 {
 
     /**
      *【3-10】奇偶链表*
-     * {LeetCode-328} {Tencent}
+     * {力扣-328} {Tencent}
      * 解法3:【两个辅助链表尾插法】
      * 时间、空间复杂度也没比原地的差，而且思路简单，实现逻辑清晰！
      * 非常推荐！！
@@ -694,7 +694,7 @@ public class Solution3 {
 
     /**
      *【3-12】环形链表
-     * {LeetCode-141}
+     * {力扣-141}
      // 解法1：【快慢针扣圈法】，不是环乌龟永远在兔子后面，是环的话，俩兽早晚相遇（扣圈）。
      * 空间复杂度：o(1)
      */
@@ -716,7 +716,7 @@ public class Solution3 {
 
     /**
      *【3-12】环形链表
-     * {LeetCode-141}
+     * {力扣-141}
      * 解法1-2：【快慢针扣圈法】（仅仅是写法高级一点，本质一样）
      */
 //    public boolean hasCycle_1_2(ListNode head) {
@@ -731,7 +731,7 @@ public class Solution3 {
 
     /**
      *【3-12】环形链表
-     * {LeetCode-141}
+     * {力扣-141}
      // 解法2：【哈希表记录】
      * 空间复杂度：o(n)
      */
@@ -750,7 +750,7 @@ public class Solution3 {
 
     /**
      *【3-13】相交链表
-     * {LeetCode-160}
+     * {力扣-160}
      // 解法1：【双指针循环遍历】（官方）
      // 解析过程见Leecode官方图解！
      */
@@ -767,7 +767,7 @@ public class Solution3 {
 
     /**
      *【3-13】相交链表
-     * {LeetCode-160}
+     * {力扣-160}
      // 解法2：【哈希表记录】
      */
     public ListNode getIntersectionNode_2(ListNode headA, ListNode headB) {
@@ -788,7 +788,7 @@ public class Solution3 {
 
     /**
      *【3-13】相交链表
-     * {LeetCode-160}
+     * {力扣-160}
      // 解法3：【循环计数】
      * 时间复杂度同官方解法1，都是两个链表需要循环两遍
      */

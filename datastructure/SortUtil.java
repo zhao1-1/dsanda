@@ -196,7 +196,7 @@ public class SortUtil {
         ListNode rightHead = mergeSort(rightNode);
         return mergeTwoLists(leftHead, rightHead);
     }
-    // 这个middle必须找到middle前面的那个结点，和LeetCode876【3-5】那个题不一样（那个题如果ListNode是双数返回的middle是后一个）
+    // 这个middle必须找到middle前面的那个结点，和力扣876【3-5】那个题不一样（那个题如果ListNode是双数返回的middle是后一个）
     private ListNode findMiddleNode(ListNode head) {
         ListNode fast = head;
         ListNode slow = head;

@@ -30,7 +30,7 @@ public class Solution7 {
 
     /**
      *【7-0.0】标准二分查找
-     * {LeetCode-704}
+     * {力扣-704}
      * 解法一：循环折半
      */
     public int search(int[] nums, int target) {
@@ -55,7 +55,7 @@ public class Solution7 {
 
     /**
      *【7-0.0】标准二分查找
-     * {LeetCode-704}
+     * {力扣-704}
      * 解法二：递归
      */
     public int search_2(int[] nums, int target) {
@@ -321,7 +321,7 @@ public class Solution7 {
 
     /**
      *【7-1】猜数字大小
-     * {LeetCode-374}
+     * {力扣-374}
      * 母题：【7-0.0】
      */
     // 别搞复杂了，注意n给的是数的范围，这就是一个最简单的二分查找，主要是读懂题！
@@ -355,7 +355,7 @@ public class Solution7 {
 
     /**
      *【7-2】寻找比目标字母大的最小字母
-     * {LeetCode744}
+     * {力扣744}
      * 母题：【7-0.2-2】查找第一个大于target的元素
      */
     public char nextGreatestLetter(char[] letters, char target) {
@@ -381,7 +381,7 @@ public class Solution7 {
 
     /**
      *【7-3】搜索插入位置
-     * {LeetCode-35}
+     * {力扣-35}
      * 母题：【7-0.2-1】查找第一个大于等于target的元素
      * 解法一：套路
      */
@@ -407,7 +407,7 @@ public class Solution7 {
 
     /**
      *【7-3】搜索插入位置
-     * {LeetCode-35}
+     * {力扣-35}
      * 母题：【7-0.2-1】查找第一个大于等于target的元素
      * 解法二：自己实现
      */
@@ -435,7 +435,7 @@ public class Solution7 {
 
     /**
      *【7-4】在排序数组中查找元素的第一个和最后一个位置
-     * {LeetCode-34}
+     * {力扣-34}
      * 母题：【7-0.1-1】【7-0.1-2】
      * 解法一：直接二分查找两次
      * 时间复杂度：o(2 * log n)
@@ -484,7 +484,7 @@ public class Solution7 {
 
     /**
      *【7-4】在排序数组中查找元素的第一个和最后一个位置
-     * {LeetCode-34}
+     * {力扣-34}
      * 解法二：左右小碎步探测法
      * 时间复杂度：o(logn)
        + 最坏时间复杂度退化为o(n)，比如[3,7,7,7,7,7,7,9]，target=7
@@ -549,7 +549,7 @@ public class Solution7 {
 
     /**
      *【7-6】搜索旋转排序数组
-     * {LeetCode-33}
+     * {力扣-33}
      * 母题：【7-0.4-1】循环有序数组中查找元素x（没有重复数据）
      */
     // 直接看母题即可，原题。
@@ -557,7 +557,7 @@ public class Solution7 {
 
     /**
      *【7-7】寻找旋转排序数组的最小值
-     * {LeetCode-153}
+     * {力扣-153}
      * 母题：【7-0.4-2】循环有序数组中查找最小的元素x所在位置（没有重复数据）
      */
     // 直接看母题即可，原题。
@@ -565,7 +565,7 @@ public class Solution7 {
 
     /**
      *【7-8】山脉数组的峰顶索引
-     * {LeetCode-852} {剑指OfferII-069}
+     * {力扣-852} {剑指OfferII-069}
      * 母题：【7-0.5】山峰数组中查找峰值元素所在位置
      */
     // 直接看母题即可，原题。
@@ -574,7 +574,7 @@ public class Solution7 {
 
     /**
      *【7-9】寻找峰值*
-     * {LeetCode-162}
+     * {力扣-162}
      */
 //    public int findPeakElement(int[] nums) {
 //
@@ -585,7 +585,7 @@ public class Solution7 {
 
     /**
      *【7-10】有效的完全平方数
-     * {LeetCode-367}
+     * {力扣-367}
      * 母题：【7-0.6】二分答案（x的平方根）
      */
     public boolean isPerfectSquare(int num) {
@@ -611,7 +611,7 @@ public class Solution7 {
 
     /**
      *【7-11】x的整数平方根
-     * {LeetCode-69}
+     * {力扣-69}
      * 母题：【7-0.6】二分答案（x的平方根）
      */
     // 比母题简单
@@ -652,7 +652,7 @@ public class Solution7 {
 
     /**
      *【7-12】搜索二维矩阵
-     * {LeetCode-74}
+     * {力扣-74}
      * 解法一：
      * 时间复杂度：o(log(m*n)) = o(log m + log n)
      * 空间复杂度：o(1)
@@ -686,7 +686,7 @@ public class Solution7 {
 
     /**
      *【7-12】搜索二维矩阵
-     * {LeetCode-74}
+     * {力扣-74}
      * 解法二：
      * （1）先二分查找第一列，找到最后一个小于等于target值的元素；【7-0.4】
      * （2）再二分查找该元素所在行。
@@ -738,7 +738,7 @@ public class Solution7 {
 
     /**
      *【7-12】搜索二维矩阵
-     * {LeetCode-74}
+     * {力扣-74}
      * 解法三：
      * （1）把二维数组全部扫描存到一个一维数组里；（性能损耗大头！）
      * （2）再对该一维数组进行二分查找；

@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  *【4-4】peek最小栈*（辅助计数栈）
- * {LeetCode-155}
+ * {力扣-155}
  */
 
 /**

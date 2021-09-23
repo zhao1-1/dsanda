@@ -426,7 +426,7 @@ public class Solution2 {
 
     /**
      *【2-8】跳跃游戏
-     * {LeetCode-55}
+     * {力扣-55}
      // 错误思路，注意是最大跳跃长度，即你可以跳比这个数小的步数。
      */
     public boolean canJump_x(int[] nums) {
@@ -441,7 +441,7 @@ public class Solution2 {
 
     /**
      *【2-8】跳跃游戏
-     * {LeetCode-55}
+     * {力扣-55}
      * 解法1：自己的思路（很不容易，完全正确！）
      */
     public boolean canJump(int[] nums) {
@@ -492,7 +492,7 @@ public class Solution2 {
 
     /**
      *【2-9】旋转图像*
-     * {LeetCode-48}
+     * {力扣-48}
      // 解法1：使用辅助数组（思路和实现都简单，但是不符合题意）
      * 注意：三种解法都需要掌握！
      */
@@ -522,7 +522,7 @@ public class Solution2 {
 
     /**
      *【2-9】旋转图像*
-     * {LeetCode-48}
+     * {力扣-48}
      // 解法2：原地旋转（思路简单，实现难）
      */
     public void rotate_2(int[][] matrix) {
@@ -530,7 +530,7 @@ public class Solution2 {
 
     /**
      *【2-9】旋转图像*
-     * {LeetCode-48}
+     * {力扣-48}
      // 解法3：反转代替旋转（先水平翻转，再对角线翻转）
      */
    	/*
@@ -597,7 +597,7 @@ public class Solution2 {
 
     /**
      *【2-10】螺旋矩阵
-     * {LeetCode-54}
+     * {力扣-54}
      // 解法1：纯按顺序遍历
      */
     public List<Integer> spiralOrder_1(int[][] matrix) {
@@ -638,7 +638,7 @@ public class Solution2 {
 
     /**
      *【2-10】螺旋矩阵
-     * {LeetCode-54}
+     * {力扣-54}
      * 解法二：
      */
 
@@ -646,7 +646,7 @@ public class Solution2 {
 
     /**
      *【2-11】搜索二维矩阵ii
-     * {LeetCode-240}
+     * {力扣-240}
      * 解法一：根据王争思路，自己实现的。非常好的算法！
      根据，行升序、列升序两个规则：
      从右上角元素开始遍历，
@@ -681,19 +681,19 @@ public class Solution2 {
 
     /**
      *【2-11】搜索二维矩阵ii
-     * {LeetCode-240}
+     * {力扣-240}
      // 解法2：暴力循环数组。。。
      */
 
     /**
      *【2-11】搜索二维矩阵ii
-     * {LeetCode-240}
+     * {力扣-240}
      // 解法3：二分法搜索
      */
 
     /**
      *【2-11】搜索二维矩阵ii
-     * {LeetCode-240}
+     * {力扣-240}
      // 解法4：递归缩减搜索空间
      */
 

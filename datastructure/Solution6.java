@@ -57,7 +57,7 @@ public class Solution6 {
 
     /**
      *【6-2】有效的字母异位词
-     * {LeetCode-242}
+     * {力扣-242}
      * 解法一：排序数组
      */
     public boolean isAnagram(String s, String t) {
@@ -74,7 +74,7 @@ public class Solution6 {
 
     /**
      *【6-2】有效的字母异位词
-     * {LeetCode-242}
+     * {力扣-242}
      * 解法二：字符标记数组
      */
     public boolean isAnagram_2(String s, String t) {
@@ -95,7 +95,7 @@ public class Solution6 {
 
     /**
      *【6-2】有效的字母异位词
-     * {LeetCode-242}
+     * {力扣-242}
      * 解法三：哈希表
      */
 
@@ -103,7 +103,7 @@ public class Solution6 {
 
     /**
      *【6-3】判断能否形成等差数列
-     * {LeetCode1502}
+     * {力扣1502}
      */
     public boolean canMakeArithmeticProgression(int[] arr) {
         if (arr.length < 2) return false;
@@ -119,13 +119,13 @@ public class Solution6 {
 
     /**
      *【6-4】会议室
-     * {LeetCode252}
+     * {力扣252}
      */
 
 
     /**
      *【6-5】合并区间*
-     * {LeetCode56}
+     * {力扣56}
      */
 //    public int[][] merge(int[][] intervals) {
 //
@@ -208,7 +208,7 @@ public class Solution6 {
 
     /**
      *【6-7】颜色分类*
-     * {LeetCode75}
+     * {力扣75}
      * 解法一：直接用排序函数
      * 时间复杂度：o(nlogn)
      * 空间复杂度：o(1)
@@ -219,7 +219,7 @@ public class Solution6 {
 
     /**
      *【6-7】颜色分类*
-     * {LeetCode75}
+     * {力扣75}
      * 解法二：借助辅助数组
      * 时间复杂度：o(n)
      * 空间复杂度：o(1)
@@ -244,7 +244,7 @@ public class Solution6 {
 
     /**
      *【6-7】颜色分类*
-     * {LeetCode75}
+     * {力扣75}
      * 解法三：
      */
     public int[] sortColors_3(int[] nums) {
@@ -254,21 +254,21 @@ public class Solution6 {
 
     /**
      *【6-8】对链表进行插入排序*
-     * {LeetCode147}
+     * {力扣147}
      */
     // 见SortUtil.insertionSort(ListNode head)
 
 
     /**
      *【6-9】链表归并排序*
-     * {LeetCode148}
+     * {力扣148}
      */
     // 见SortUtil.mergeSort(ListNode head)
 
 
     /**
      * 【6-10】数组中的第K个最大元素
-     * {LeetCode215}
+     * {力扣215}
      * 解法一：先排序，再找K
      * 时间复杂度：o(n^2)，排序算法影响了速度
      * 空间复杂度：o(1)
@@ -290,7 +290,7 @@ public class Solution6 {
 
     /**
      * 【6-10】数组中的第K个最大元素
-     * {LeetCode215}
+     * {力扣215}
      * 解法二：利用“快排思想”
        注意：这个要用快排的逆序排序（从大到小）
      * 时间复杂度：o(n)

@@ -45,7 +45,7 @@ public class Solution5 {
 
     /**
      * 【5-2】青蛙跳台阶
-     * {剑指Offer10-II} {LeetCode70}
+     * {剑指Offer10-II} {力扣70}
      */
     private int[] cache2;
     public int climbStairs(int n) {
@@ -180,7 +180,7 @@ public class Solution5 {
 
     /**
      * 【5-6】合并两个排序的链表*
-     * {剑指Offer25} {LeetCode21}
+     * {剑指Offer25} {力扣21}
      * 解法一：见【3-3】
      * 解法二：递归法
      * 时间复杂度：o(n)

@@ -29,27 +29,27 @@ public class Solution8 {
 
     /**
      *【8-1】两数之和
-     * {LeetCode-1}
+     * {力扣-1}
      */
     // 见【1-3】解法二
 
 
     /**
      *【8-2】三数之和
-     * {LeetCode-15}
+     * {力扣-15}
      */
 
 
     /**
      *【8-3】相交链表
-     * {LeetCode-160}
+     * {力扣-160}
      */
     // 见【3-13】解法二
 
 
     /**
      *【8-4】环形链表
-     * {LeetCodee-141}
+     * {力扣e-141}
      */
     // 见【3-12】解法二
 
@@ -133,14 +133,14 @@ public class Solution8 {
 
     /**
      *【8-9】有效的字母异位词
-     * {LeetCode-242}
+     * {力扣-242}
      */
     // 见【6-2】
 
 
     /**
      *【8-10】字母异位词分组*
-     * {LeetCode-49}
+     * {力扣-49}
      * 解法一：排序 + 哈希表
      */
     public List<List<String>> groupAnagrams(String[] strs) {
@@ -162,19 +162,19 @@ public class Solution8 {
 
     /**
      *【8-11】只出现一次的数字
-     * {LeetCode-136}
+     * {力扣-136}
      */
 
 
     /**
      *【8-12】两个数组的交集
-     * {LeetCode-349}
+     * {力扣-349}
      */
 
 
     /**
      *【8-13】数组的相对排序*
-     * {LeetCode-1122}
+     * {力扣-1122}
      * "自己一把梭"：hash + sort
      */
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
@@ -221,14 +221,14 @@ public class Solution8 {
 
     /**
      *【8-14】设计哈希映射（自己实现HashMap）
-     * {LeetCode-706}
+     * {力扣-706}
      */
     // 见【8-0.1】
 
 
     /**
      *【8-15】LRU缓存机制
-     * {LeetCode-146}
+     * {力扣-146}
      */
     // 见【8-0.4】
 
