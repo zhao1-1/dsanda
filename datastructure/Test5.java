@@ -17,7 +17,14 @@ public class Test5 {
 
 //        System.out.println(sl5.fib_2(2));
 //        System.out.println(sl5.fib_2(5));
+//        System.out.println(sl5.fib_2(10));
 //        System.out.println(sl5.fib_2(44));
+
+//        System.out.println(sl5.fib_3(2));
+//        System.out.println(sl5.fib_3(5));
+//        System.out.println(sl5.fib_3(10));
+//        System.out.println(sl5.fib_3(44));
+
 
 
         /**
@@ -33,8 +40,8 @@ public class Test5 {
         /**
          *【5-3】三步问题
          */
-        System.out.println(sl5.waysToStep_2(40));
-        System.out.println(sl5.waysToStep_2(10));
+//        System.out.println(sl5.waysToStep_2(40));
+//        System.out.println(sl5.waysToStep_2(10));
 
 
         /**

@@ -1,9 +1,6 @@
 package datastructure.tree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class NTree {
 
@@ -98,9 +95,10 @@ public class NTree {
 //    }
 
     /**
-     * N叉树层序遍历（循环遍历 + 仓储队列）
+     * N叉树层序遍历（从左至右）（连续输出）
+     * 解法：循环遍历 + 仓储队列
      */
-    public List<Integer> levelOrder() {
+    public List<Integer> levelOrderLR() {
         List<Integer> result = new ArrayList<>();
         if (this.root == null) return result;
 
@@ -113,6 +111,64 @@ public class NTree {
                 if (child != null) storeQueue.offer(child);
             }
         }
+        return result;
+    }
+
+
+    /**
+     * N叉树层序遍历（从左至右）（按层分组输出）
+     */
+    public List<List<Integer>> levelOrderLR2() {
+        List<List<Integer>> result = new ArrayList<>();
+        if (this.root == null) return result;
+
+        Queue<NNode> storeQueue = new LinkedList<>();
+        storeQueue.offer(this.root);
+        while (!storeQueue.isEmpty()) {
+            List<Integer> currLevelResult = new ArrayList<>();
+            int currLevelSize = storeQueue.size();
+            for (int i = 0; i < currLevelSize; i++) {
+                NNode pollNode = storeQueue.poll();
+                currLevelResult.add(pollNode.data);
+                for (NNode child : pollNode.children) {
+                    if (child != null) storeQueue.offer(child);
+                }
+            }
+            result.add(currLevelResult);
+        }
+
+        return result;
+    }
+
+
+    /**
+     * N叉树层序遍历（Z字蛇形）（按层分组输出）
+     */
+    public List<List<Integer>> levelOrderZ2() {
+        List<List<Integer>> result = new ArrayList<>();
+        if (this.root == null) return result;
+
+        int turn = 0;
+        Stack<NNode>[] storeStacks = new Stack[]{new Stack<NNode>(), new Stack<NNode>()};
+        storeStacks[turn].push(this.root);
+        while (!storeStacks[turn].isEmpty()) {
+            List<Integer> currLevelResult = new ArrayList<>();
+            int currLevelSize = storeStacks[turn].size();
+            for (int i = 0; i < currLevelSize; i++) {
+                NNode popNode = storeStacks[turn].pop();
+                currLevelResult.add(popNode.data);
+                if (turn == 0) {
+                    for (int j = 0; j < popNode.children.size(); j++)
+                        storeStacks[1].push(popNode.children.get(j));
+                } else {
+                    for (int j = popNode.children.size() - 1; j >= 0; j--)
+                        storeStacks[0].push(popNode.children.get(j));
+                }
+            }
+            turn = (turn + 1) % 2;
+            result.add(currLevelResult);
+        }
+
         return result;
     }
 
