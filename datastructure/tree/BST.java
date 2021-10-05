@@ -1,7 +1,5 @@
 package datastructure.tree;
 
-import java.util.*;
-
 public class BST {
 
     private BNode root;
@@ -148,6 +146,10 @@ public class BST {
     }
 
 
+    // ====================================================
+    // == BST的操作一般利用："中序遍历即从小到大顺序输出" 这一特性 ==
+    // ====================================================
+
     /**
      * 获取BST第K大节点
      * 解法：中序遍历（右中左）
@@ -192,6 +194,7 @@ public class BST {
     }
 
 
+
     /**
      * 获取BST中指定节点的中序后继节点
      */
@@ -211,6 +214,88 @@ public class BST {
         }
         if (p == root) coming = true;
         inorderSuccessorR(root.right, p);
+    }
+
+
+    /**
+     * BST中指定两个节点的最近公共祖先（BST-LCA）
+     */
+    private BNode lcaBST;
+    private void inorderForLCA(BNode root, int p, int q) {
+        if (root == null) return;
+        if (lcaBST != null) return;
+        inorderForLCA(root.left, p, q);
+        if ((root.data >= p && root.data <= q) || (root.data <= p && root.data >= q))
+            lcaBST = root;
+        if (lcaBST != null) return;
+        inorderForLCA(root.right, p, q);
+    }
+    public BNode lowestCommonAncestor(int p, int q) {
+        lcaBST = null;
+        inorderForLCA(this.root, p, q);
+        return lcaBST;
+    }
+
+
+    /**
+     * 将BST展开为单链表（原地转换）
+       ⚠️：返回新链表的头节点并非root节点！
+     * 解法一：原地中序遍历处理
+     */
+    private BNode dummyHead = new BNode();
+    private BNode tail = dummyHead;
+
+    private void inorderForC2L(BNode root) {
+        if (root == null) return;
+
+        BNode left = root.left;
+        BNode right = root.right;
+
+        inorderForC2L(left);
+
+        tail.right = root;
+        tail = root;
+        tail.left = null;
+
+        inorderForC2L(right);
+    }
+    public BNode convert2List() {
+        inorderForC2L(this.root);
+        return dummyHead.right;
+    }
+
+
+    /**
+     * 将BST转换为双向循环链表（原地转换）
+     */
+    private BNode inorderForC2DL(BNode root) {
+        BNode leftHead = root.left;
+        BNode rightHead = root.right;
+
+        if (leftHead == null) {
+            if (dummyHead != null) dummyHead = root;
+            return root;
+        }
+
+        tail = inorderForC2DL(leftHead);
+
+        tail.right = root;
+        tail.left = null;
+        tail = root;
+
+        if (rightHead != null) {
+            tail.right = rightHead;
+            tail.left = null;
+            tail = inorderForC2DL(rightHead);
+        }
+        return tail;
+    }
+    public BNode convert2DoublyList() {
+        if (root == null) return null;
+        tail = inorderForC2DL(this.root);
+        tail.right = dummyHead.right;
+        dummyHead.right.left = tail;
+        return dummyHead.right;
     }
 
 }

@@ -1,8 +1,10 @@
 package datastructure;
 
 public class ListNode {
-    int val;
-    ListNode next;
+    // 为了方便各个包都能取到值，用public
+    public int val;
+    public ListNode next;
+
     public ListNode() {};
     public ListNode(int val) {
         this.val = val;

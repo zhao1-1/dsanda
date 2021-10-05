@@ -1,5 +1,7 @@
 package datastructure.tree;
 
+import datastructure.ListNode;
+
 import java.util.*;
 
 public class BTUtils {
@@ -573,6 +575,136 @@ public class BTUtils {
         sum += root.data;
         root.data = sum;
         inorderForSum(root.left);
+    }
+
+
+    /**
+     * 二叉树的最近公共祖先（LCA）
+     * 解法一（王争）：求各分支包含p,q个数
+     */
+    private BNode lca;
+    public BNode lowestCommonAncestor(BNode root, BNode p, BNode q) {
+        lca = null;
+//        dfsForLCA(root, p, q);
+        dfsForLCA2(root, p, q);
+        return lca;
+    }
+    private int dfsForLCA(BNode root, BNode p, BNode q) {
+        if (root == null) return 0;
+
+        int leftContains = dfsForLCA(root.left, p, q);
+        if (lca != null) return 2;  // 提前退出
+
+        int rightContains = dfsForLCA(root.right, p ,q);
+        if (lca != null) return 2;  // 提前退出
+
+        int rootContains = (root == p || root == q) ? 1 : 0;
+
+        if (rootContains == 0 && (leftContains == 1 && rightContains == 1)) lca = root;
+        if (rootContains == 1 && (leftContains == 1 || rightContains == 1)) lca = root;
+
+        return leftContains + rightContains + rootContains;
+    }
+
+    /**
+     * 二叉树的最近公共祖先（LCA）
+     * 解法二（官方）：递归求各分支是否包含p，q
+     （推荐）
+     * ⚠️：加上三个提前退出条件，剪枝效率大幅度提高，力扣打破100%。
+     */
+    private boolean dfsForLCA2(BNode root, BNode p, BNode q) {
+        if (root == null) return false;
+        if (lca != null) return false;  // 提前退出（1）
+
+        boolean leftContains = dfsForLCA2(root.left, p, q);
+        if (lca != null) return false;  // 提前退出（2）
+
+        boolean rightContains = dfsForLCA2(root.right, p, q);
+        if (lca != null) return false;  // 提前退出（3）
+
+        boolean rootContains = (root == p || root == q);
+
+        if (leftContains && rightContains) lca = root;
+        if ((leftContains || rightContains) && rootContains) lca = root;
+
+        return leftContains || rightContains || rootContains;
+    }
+
+
+    /**
+     * 将二叉树展开为链表（原地展开）（新链表的头节点即root节点）
+     * 解法一：王争
+     */
+    private BNode tail = new BNode();
+    private void preorderForFlatten(BNode root) {
+        if (root == null) return;
+
+        BNode left = root.left;
+        BNode right = root.right;
+
+        tail.right = root;
+        tail = root;
+        tail.left = null;
+
+
+        preorderForFlatten(left);
+        preorderForFlatten(right);
+    }
+    public void flatten(BNode root) {
+        preorderForFlatten(root);
+    }
+
+    /**
+     * 将二叉树展开为链表（原地展开）
+     * 解法二：自己想出来的，返回尾节点
+     */
+    private BNode preorderForFlatten2(BNode root) {
+        BNode leftHead = root.left;
+        BNode rightHead = root.right;
+
+        if (leftHead == null && rightHead == null) return root;
+
+        BNode tail = root;
+        if (leftHead != null) {
+            root.right = leftHead;
+            root.left = null;
+            tail = preorderForFlatten2(leftHead);
+        }
+        if (rightHead != null) {
+            tail.right = rightHead;
+            tail.left = null;
+            tail = preorderForFlatten2(rightHead);
+        }
+        return tail;
+    }
+    public void flatten2(BNode root) {
+        if (root == null) return;
+        flatten2(root);
+    }
+
+
+    /**
+     * 特定深度节点链表（层序遍历）（非原地，新创建链表结构）
+     */
+    public ListNode[] listOfDepth(BNode root) {
+        List<ListNode> result = new ArrayList<>();
+
+        Queue<BNode> storeQueue = new LinkedList<>();
+        storeQueue.offer(root);
+        while (!storeQueue.isEmpty()) {
+            ListNode head = new ListNode();
+            ListNode curr = head;
+            int currLevelSize = storeQueue.size();
+            for (int i = 0; i < currLevelSize; i++) {
+                BNode pollNode = storeQueue.poll();
+                curr.next = new ListNode(pollNode.data);
+                curr = curr.next;
+                if (pollNode.left != null) storeQueue.offer(pollNode.left);
+                if (pollNode.right != null) storeQueue.offer(pollNode.right);
+            }
+            result.add(head.next);
+        }
+        return result.toArray(new ListNode[result.size()]);
     }
 
 }

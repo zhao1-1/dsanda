@@ -6,6 +6,8 @@ public class BNode {
     public BNode left;
     public BNode right;
 
+    public BNode() {}
+
     public BNode(int data) {
         this.data = data;
     }

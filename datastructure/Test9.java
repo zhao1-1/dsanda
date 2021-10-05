@@ -102,5 +102,13 @@ public class Test9 {
 //        System.out.println(bst.kthLargest(8).data);
 //        System.out.println(bst.kthLargest(9));
 
+        /**
+         * 9-5.2 BST的最近公共祖先 {剑指Offer 68-I}
+         */
+//        System.out.println(bst.lowestCommonAncestor(3,6).data);
+//        System.out.println(bst.lowestCommonAncestor(7,13).data);
+//        System.out.println(bst.lowestCommonAncestor(10,13).data);
+//        System.out.println(bst.lowestCommonAncestor(10,26).data);
+
     }
 }

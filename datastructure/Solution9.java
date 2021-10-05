@@ -140,7 +140,7 @@ public class Solution9 {
 
     // 9-4.3 后继者 {面试题金典-04.06}
     /*
-        见
+        见 BST.inorderSuccessor
      */
 
 
@@ -151,9 +151,15 @@ public class Solution9 {
      */
 
     // 9-5.1 二叉树的最近公共祖先 {力扣-236}
+    /*
+        见 BTUtils.lowestCommonAncestor
+     */
 
 
     // 9-5.2 BST的最近公共祖先 {剑指Offer 68-I}
+    /*
+        见 BST.lowestCommonAncestor
+     */
 
 
 
@@ -163,15 +169,25 @@ public class Solution9 {
      */
 
     // 9-6.1 二叉树展开为链表 {力扣-114}
+    /*
+        方法一：BTUtils.flatten
+        方法二：BTUtils.flatten2
+     */
 
 
     // 9-6.2 BiNode {面试题金典 7.12.}
+    /*
+        见：BST.
+     */
 
 
     // 9-6.3 二叉搜索树与双向链表 {剑指Offer 36}
 
 
     // 9-6.4 特定深度节点链表 {面试题金典 04.03.}
+    /*
+        见 BTUtils.listOfDepth
+     */
 
 
 
