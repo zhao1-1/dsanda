@@ -1,0 +1,13 @@
+/*
+
+    M  ->  Adjacency Matrix  ->  邻接矩阵  -> 空间复杂度差、时间复杂度好
+    L  ->  Adjacency Linked  ->  邻接表    -> 空间复杂度好、时间复杂度差
+
+    V  ->  Vector  ->  矢量（方向）
+    W  ->  Weight  ->  权重
+    VW ->  有向有权
+
+    E  ->  Edge    ->  边
+    V  ->  Vertex  ->  顶点
+
+ */
