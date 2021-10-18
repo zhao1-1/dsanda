@@ -8,21 +8,23 @@ import java.util.Queue;
  */
 public class LGraphV {
 
-    private int v;                          // 图节点个数
+    private int vertexCount;                // 图节点个数
     private LinkedList<Integer> adj[];      // 邻接表
 
-    public LGraphV(int v) {
-        this.v = v;
-        adj = new LinkedList[v];
-        for (int i = 0; i < v; i++) {
+    public LGraphV(int vertexCount) {
+        this.vertexCount = vertexCount;
+        adj = new LinkedList[vertexCount];
+        for (int i = 0; i < vertexCount; i++) {
             adj[i] = new LinkedList<>();
         }
     }
 
+    public int getVertexCount() { return this.vertexCount; }
+    public LinkedList<Integer>[] getAdj() { return this.adj; }
+
     public void addEdge(int s, int t) {
         adj[s].add(t);
     }
-
 
     /**
      * BFS (Breadth-First-Search) 广度优先搜索
@@ -30,7 +32,7 @@ public class LGraphV {
      * 空间复杂度：o(V)
      */
     public boolean bfs(int s, int t) {
-        boolean[] visited = new boolean[this.v];    //「访问记录条」
+        boolean[] visited = new boolean[this.vertexCount];    //「访问记录条」
         Queue<Integer> storeQueue = new LinkedList<>();
         storeQueue.add(s);
         visited[s] = true;
@@ -53,7 +55,7 @@ public class LGraphV {
      * BFP (Breadth-First-Print) 广度优先遍历「输出s->t路径」
      */
     public void bfp(int s, int t) {
-        boolean[] visited = new boolean[this.v];
+        boolean[] visited = new boolean[this.vertexCount];
         Queue<Integer> storeQueue = new LinkedList<>();
         storeQueue.add(s);
         visited[s] = true;
@@ -64,7 +66,7 @@ public class LGraphV {
            value: -1   0  -1   1  -1  -1   3
            index:  0   1   2   3   4   5   6
          */
-        int[] pathTrack = new int[this.v];
+        int[] pathTrack = new int[this.vertexCount];
         for (int i = 0; i < pathTrack.length; i++) {
             pathTrack[i] = -1;
         }

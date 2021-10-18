@@ -5,13 +5,15 @@ package datastructure.graph;
  */
 public class MGraph {
 
-    private int v;
+    private int vertexCount;
     private boolean matrix[][];
 
-    public MGraph(int v) {
-        this.v = v;
-        matrix = new boolean[v][v];
+    public MGraph(int vertexCount) {
+        this.vertexCount = vertexCount;
+        matrix = new boolean[vertexCount][vertexCount];
     }
+
+    public int getVertexCount() {return this.vertexCount;}
 
     public void addEdge(int s, int t) {
         matrix[s][t] = true;

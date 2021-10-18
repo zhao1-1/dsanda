@@ -5,13 +5,16 @@ package datastructure.graph;
  */
 public class MGraphV {
 
-    private int v;                      // 图顶点个数
-    private boolean matrix[][];         // 邻接矩阵
+    private int vertexCount;                                // 图顶点个数
+    private boolean matrix[][];                             // 邻接矩阵
 
-    public MGraphV(int v) {
-        this.v = v;
-        matrix = new boolean[v][v];     // 初始都为false
+    public MGraphV(int vertexCount) {
+        this.vertexCount = vertexCount;
+        matrix = new boolean[vertexCount][vertexCount];     // 初始都为false
     }
+
+    public int getVertexCount() {return this.vertexCount;}
+    public boolean[][] getMatrix() {return this.matrix;}
 
     public void addEdge(int s, int t) {
         matrix[s][t] = true;
