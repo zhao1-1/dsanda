@@ -1,0 +1,801 @@
+package datastructure;
+
+import java.util.Arrays;
+import java.util.List;
+
+
+/*
+
+DP解题步骤：
+
+（1）可用回溯解决：需要穷举搜索才能得到结果的问题（最值、可行、计数等）
+
+（2）构建多阶段决策模型：看是否能将问题求解多过程分为多个阶段；
+
+（3）查看是否存在重复子问题：是否有多个路径到达同一个状态；
+
+（4）* 定义状态：也就是如何记录每一阶段多不重复状态；
+
+（5）* 定义状态转移方程：找到如何通过上一阶段的状态推导下一个阶段的状态；
+
+（6）画状态转移表：辅助理解，验证正确性，确定状态转移的初始值；
+
+（7）编写动态规划代码。
+
+ */
+
+
+
+
+/*
+经典模型：
+
+1. 背包模型：
+
+    1.1.【0-1背包问题（每个物品只有一个）】「每个物品只有0，1两种状态」
+    （a）背包可装物品总重量的最大值是多少？（最值）
+        「dp[i][j] = dp[i-1][j] || dp[i-1][j-weight[i]];」
+    （b）是否能装满整个背包？（可行）
+    （c）正好装满背包最少需要多少物品？（最值）
+        「dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-weight[i]]+1);」
+    （d）装满背包有多少种装法？（计数）
+        「dp[i][j] = dp[i-1][j] + dp[i-1][j-weight[i]];」
+
+
+    1.2.【完全背包问题（每个物品无限多个）】「每个物品有0，1，2...k种状态」「k = j / weight[i];」
+    （a）背包可装物品总重量的最大值是多少？（最值）
+    （b）是否能装满整个背包？（可行）
+    （c）正好装满背包最少需要多少物品？（最值）
+        「dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-1*weight[i]]+1, dp[i-1][j-2*weight[i]]+2,...,dp[i-1][j-k*weight[i]+k);」
+    （d）装满背包有多少种装法？（计数）
+        「for (int c = 0; c <= k; c++) { dp[i][j] += dp[i-1][j-c*coins[i]]; }」
+
+
+    1.3.【多重背包问题（每个物品有有限多个）】「k = Math.min(j/weight[i], count[i]);」
+    （a）
+    （b）
+    （c）
+    （d）
+
+
+    1.4.【二维费用】
+
+
+2. 路径模型：
+（a）总共有多少种走法？（计数）
+（b）最长/最短路径为多少？（最值）
+
+3. 打家劫舍&股票买卖
+
+4. 爬楼梯问题
+
+5. 匹配问题（LCS、编辑距离）
+
+6. 其他（LIS）
+
+ */
+
+
+
+
+public class Solution14 {
+
+    /*
+    === 背包模型
+     */
+
+    /**
+     *【例A】背包模型 - 0-1背包问题（a）
+     * 解法一：回溯（使用备忘录解决重复子问题）
+     */
+
+
+    /**
+     *【例A】背包模型 - 0-1背包问题（a）
+     * 有n个物品，选择其中一些物品装入背包，在不超过背包最大重量限制的前提下，
+       背包中可装物品总重量的最大值是多少？
+     * 解法二：动态规划
+     */
+    public int knapsackA4dp(int[] weight, int target) {
+
+        /*
+        weight = [2, 2, 4, 6, 3]
+        target = 9
+
+                      |  0  1  2  3  4  5  6  7  8  9  ->  target
+                      |-------------------------------
+        weight[0] = 2 |  T  x  T  x  x  x  x  x  x  x
+        weight[1] = 2 |  T  x  T  x  T  x  x  x  x  x
+        weight[2] = 4 |  T  x  T  x  T  x  T  x  T  x
+        weight[3] = 6 |  T  x  T  x  T  x  T  x  T  x
+        weight[4] = 3 |  T  x  T  T  T  T  T  T  T  T
+
+         */
+
+        // 1. 定义DP动态规划表（二维数组）
+        int optionCount = weight.length;
+        int targetCount = target + 1;
+        boolean[][] dp = new boolean[optionCount][targetCount];
+
+        // 2. 构建DP动态规划表
+
+        // 2.1 初始状态
+        dp[0][0] = true;                                // (a) 第0个物品 不装进背包
+        if (weight[0] < target)
+            dp[0][weight[0]] = true;                    // (b) 第0个物品 装进背包
+
+        // 2.2 状态转移
+        for (int i = 1; i < optionCount; i++) {
+            for (int j = 0; j < targetCount; j++) {
+                // 当第i-1个物品的第j个状态可达时 ->
+                if (dp[i-1][j]) {
+                    dp[i][j] = true;                    // (a) 第i个物品 不装进背包
+                    if (weight[i] + j <= target)
+                        dp[i][weight[i] + j] = true;    // (b) 第i个物品 装进背包
+                }
+            }
+        }
+
+        // 3. 选取最后一段，从后向前依次找
+        for (int j = targetCount - 1; j >= 0; j--) {
+            if (dp[optionCount-1][j]) return j;
+        }
+
+        return -1;
+    }
+
+
+    /**
+     *【例B】背包模型 - 0-1背包问题（b）
+     * 有n个物品，选择其中一些物品装入背包，能不能正好装满背包？
+     */
+    public boolean knapsackB(int[] weight, int target) {
+        int optionN = weight.length;
+        int resultN = target + 1;
+        boolean[][] dp = new boolean[optionN][resultN];
+
+        dp[0][0] = true;
+        if (weight[0] <= target)
+            dp[0][weight[0]] = true;
+
+        for (int i = 1; i < optionN; i++) {
+            for (int j = 0; j < resultN; j++) {
+                if (dp[i-1][j]) {
+                    dp[i][j] = true;
+                    if (j + weight[i] <= target)
+                        dp[i][j + weight[i]] = true;
+                }
+            }
+        }
+
+        return dp[optionN-1][resultN-1];
+    }
+
+
+    /**
+     *【例C】背包模型 - 0-1背包问题（c）
+     * 有n个物品，选择其中一些物品装入背包，
+       正好装满背包所需物品最少个数（如果装不满返回-1）？
+     */
+    public int knapsackC(int[] weight, int target) {
+
+        /*
+        weight = [2, 2, 4, 6, 3] 【KG】
+        target = 9               【KG】
+
+                      |  0   1   2   3   4   5   6   7   8   9  ->  target
+                      |----------------------------------------
+        weight[x] = 2 |  0   x   1   x   x   x   x   x   x   x
+        weight[1] = 2 |  0   x   1   x   2   x   x   x   x   x
+        weight[2] = 4 |  0   x   1   x   1   x   2   x   3   x
+        weight[3] = 6 |  0   x   1   x   1   x   1   x   2   x
+        weight[4] = 3 |  0   x   1   1   1   2   1   2   2   2
+         */
+
+        int optionN = weight.length;
+        int resultN = target + 1;
+        int[][] dp = new int[optionN][resultN];
+        for (int i = 0; i < optionN; i++) {
+            for (int j = 0; j < resultN; j++) {
+                dp[i][j] = Integer.MAX_VALUE - 1;
+            }
+        }
+
+        dp[0][0] = 0;
+        if (weight[0] <= target)
+            dp[0][weight[0]] = 1;
+
+        for (int i = 1; i < optionN; i++) {
+            for (int j = 0; j < resultN; j++) {
+                if (j - weight[i] < 0)
+                    dp[i][j] = dp[i-1][j];
+                else
+                    dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-weight[i]] + 1);
+            }
+        }
+
+        for (int i = 0; i < optionN; i++) {
+            System.out.println(Arrays.toString(dp[i]));
+        }
+
+        return (dp[optionN-1][resultN-1] != Integer.MAX_VALUE) && (dp[optionN-1][resultN-1] != Integer.MAX_VALUE - 1) ? dp[optionN-1][resultN-1] : -1;
+    }
+
+
+    /**
+     *【例D】背包模型 - 0-1背包问题（d）
+     * 有n个物品，选择其中一些物品装入背包，装满背包有多少种不同的装法？
+     */
+    public int knapsackD(int[] weight, int target) {
+        int optionN = weight.length;
+        int resultN = target + 1;
+        int[][] dp = new int[optionN][resultN];
+
+        dp[0][0] = 1;
+        if (weight[0] <= target)
+            dp[0][weight[0]] = 1;
+
+        for (int i = 1; i < optionN; i++) {
+            for (int j = 0; j < resultN; j++) {
+                if (j - weight[i] >= 0)
+                    dp[i][j] = dp[i-1][j] + dp[i-1][j-weight[i]];
+                else
+                    dp[i][j] = dp[i-1][j];
+            }
+        }
+        return dp[optionN-1][resultN-1];
+    }
+
+
+    /**
+     *【例E】背包模型 - 二维费用问题
+     * 解法：最好用DP，回溯无法用备忘录解决重复子问题
+     */
+    public int maxValueKnapsack(int[] weight, int[] value, int target) {
+
+        /*
+        weight = [2, 2, 4, 6, 3] 【KG】
+        value  = [3, 4, 8, 9, 6] 【Yuan】
+        target = 9               【KG】
+
+                      |  0   1   2   3   4   5   6   7   8   9  ->  target
+                      |----------------------------------------
+        weight[x] = 2 |  0   x   3   x   x   x   x   x   x   x
+        weight[1] = 2 |  0   x   4   x   7   x   x   x   x   x
+        weight[2] = 4 |  0   x   4   x   8   x  12   x  15   x
+        weight[3] = 6 |  0   x   4   x   8   x  12   x  15   x
+        weight[4] = 3 |  0   x   4   6   8  10  12  14  15  18
+
+         */
+
+        int optionCount = weight.length;
+        int targetCount = target + 1;
+        int[][] dpValue = new int[optionCount][targetCount];
+        for (int i = 0; i < optionCount; i++) {
+            for (int j = 0; j < targetCount; j++) {
+                dpValue[i][j] = -1;
+            }
+        }
+
+        dpValue[0][0] = 0;
+        if (weight[0] <= target)
+            dpValue[0][weight[0]] = value[0];
+
+        for (int i = 1; i < optionCount; i++) {
+            for (int j = 0; j < targetCount; j++) {
+                if (dpValue[i-1][j] >= 0) {
+                    dpValue[i][j] = Math.max(dpValue[i][j], dpValue[i-1][j]);
+                    if (j + weight[i] <= target)
+                        dpValue[i-1][j + weight[i]] = Math.max(dpValue[i][j+weight[i]], dpValue[i-1][j] + value[i]);
+                }
+            }
+        }
+
+        Arrays.sort(dpValue[optionCount-1]);
+        return dpValue[optionCount-1][targetCount-1];
+    }
+
+
+    /**
+     *【14-1-1】分割等和子集
+     * 「力扣-416」
+     */
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        if (sum % 2 == 1) return false;
+        sum /= 2;
+
+        int rows = nums.length;
+        int cols = sum + 1;
+        boolean[][] dp = new boolean[rows][cols];
+
+        dp[0][0] = true;
+        if (nums[0] < sum)
+            dp[0][nums[0]] = true;
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (j - nums[i] >= 0)
+                    dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i]];
+                else
+                    dp[i][j] = dp[i-1][j];
+            }
+        }
+
+        return dp[rows-1][cols-1];
+    }
+
+
+    /**
+     *【14-1-2】目标和
+     * 「力扣-494」
+     */
+    public int findTargetSumWays(int[] nums, int target) {
+        /*
+nums = [1,1,1,1,1]
+target = 3
+[0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]
+[0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0]
+[0, 0, 1, 0, 3, 0, 3, 0, 1, 0, 0]
+[0, 1, 0, 4, 0, 6, 0, 4, 0, 1, 0]
+[1, 0, 5, 0,10, 0,10, 0, 5, 0, 1]
+         */
+        // 前期数据处理
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        if (Math.abs(sum) < Math.abs(target)) return 0;
+
+        int optionN = nums.length;
+        int resultN = sum * 2 + 1;      // - 0 +
+        int[][] dp = new int[optionN][resultN];
+
+        // 0 这种情况必须考虑，+0，-0，属于两种方式，初始值为2
+        if (nums[0] == 0) {
+            dp[0][sum] = 2;
+        } else {
+            dp[0][sum + nums[0]] = 1;
+            dp[0][sum - nums[0]] = 1;
+        }
+
+        for (int i = 1; i < optionN; i++) {
+            for (int j = 0; j < resultN; j++) {
+                // 力扣定义的状态转移方程
+//                int l = (j - nums[i]) >= 0 ? j - nums[i] : 0;
+//                int r = (j + nums[i]) < resultN ? j + nums[i] : 0;
+//                dp[i][j] = dp[i-1][l] + dp[i-1][r];
+                // 我自己想的状态转移方程
+                if (j - nums[i] >= 0)
+                    dp[i][j - nums[i]] += dp[i-1][j];
+                if (j + nums[i] < resultN)
+                    dp[i][j + nums[i]] += dp[i-1][j];
+            }
+        }
+
+        for (int i = 0; i < optionN; i++) {
+            System.out.println(Arrays.toString(dp[i]));
+        }
+        return dp[optionN-1][sum + target];
+    }
+
+
+    /**
+     *【14-1-3】零钱兑换
+     * 【背包模型 - 完全背包问题（c）】
+     * 「力扣-322」
+     */
+    public int coinChange(int[] coins, int amount) {
+
+        /*
+            0   1   2   3   4   5   6   7   8   9  10  11
+        1   0   1   2   3   4   5   6   7   8   9  10  11
+        2   0   1   1   2   2   3   3   4   4   5   5   6
+        5   0   1   1   2   2   1   2   2   3   3   2   3
+         */
+
+        if (amount == 0) return 0;
+
+        int rows = coins.length;
+        int cols = amount + 1;
+        int[][] dp = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+            }
+        }
+        for (int c = 0; c <= amount / coins[0]; c++) {
+            dp[0][c*coins[0]] = c;
+        }
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                // 等价于：dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-1*weight[i]]+1, dp[i-1][j-2*weight[i]]+2,...,dp[i-1][j-k*weight[i]+k);
+                int k = j / coins[i];
+                for (int c = 0; c <= k; c++) {
+                    if (dp[i-1][j-c*coins[i]] != Integer.MAX_VALUE)
+                        dp[i][j] = Math.min(dp[i-1][j-c*coins[i]] + c, dp[i][j]);
+                }
+            }
+        }
+
+//        for (int i = 0; i < rows; i++) {
+//            System.out.println(Arrays.toString(dp[i]));
+//        }
+
+        if (dp[rows-1][cols-1] == Integer.MAX_VALUE) return -1;
+        return dp[rows-1][cols-1];
+    }
+
+
+    /**
+     *【14-1-4】零钱兑换II
+     * 【背包模型 - 完全背包问题（d）】
+     * 「力扣-518」
+     */
+    public int change(int amount, int[] coins) {
+        int rows = coins.length;
+        int cols = amount + 1;
+        int dp[][] = new int[rows][cols];
+
+        for (int c = 0; c < amount / coins[0]; c++) {
+            dp[0][c*coins[0]] = 1;
+        }
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int k = j / coins[i];
+                for (int c = 0; c <= k; c++) {
+                    dp[i][j] += dp[i-1][j-c*coins[i]];
+                }
+            }
+        }
+
+        return dp[rows-1][cols-1];
+    }
+
+
+
+    /*
+    === 路径模型
+     */
+
+    /**
+     *【14-2-1】不同路径
+     * 「力扣-62」
+     */
+    public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            dp[i][0] = 1;
+        }
+        for (int j = 0; j < n; j++) {
+            dp[0][j] = 1;
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
+        }
+
+        return dp[m-1][n-1];
+    }
+
+
+    /**
+     *【14-2-2】不同路径II
+     * 「力扣-63」
+     */
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        /*
+        grid =
+        0   0
+        1   1
+        0   0
+
+        dp =
+         1   1
+        -1  -1
+         1   1
+         */
+        int rows = obstacleGrid.length;
+        int cols = obstacleGrid[0].length;
+        int[][] dp = new int[rows][cols];
+
+        if (obstacleGrid[rows-1][cols-1] == 1 || obstacleGrid[0][0] == 1)
+            return 0;
+
+        if (obstacleGrid[0][0] == 0)
+            dp[0][0] = 1;
+        else
+            dp[0][0] = -1;
+        for (int i = 1; i < rows; i++) {
+            if (obstacleGrid[i][0] == 0 && obstacleGrid[i-1][0] == 0)
+                dp[i][0] = 1;
+            else
+                dp[i][0] = -1;
+        }
+
+        for (int j = 1; j < cols; j++) {
+            if (obstacleGrid[0][j] == 0 && obstacleGrid[0][j-1] == 0)
+                dp[0][j] = 1;
+            else
+                dp[0][j] = -1;
+        }
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
+                if (obstacleGrid[i][j] == 0) {
+                    if (dp[i-1][j] == -1 && dp[i][j-1] == -1)
+                        dp[i][j] = -1;
+                    else
+                        dp[i][j] = (dp[i-1][j] == -1 ? 0 : dp[i-1][j]) + (dp[i][j-1] == -1 ? 0 : dp[i][j-1]);
+                } else {
+                    dp[i][j] = -1;
+                }
+            }
+        }
+
+        return dp[rows-1][cols-1];
+    }
+
+
+    /**
+     *【14-2-3】最小路径和
+     * 「力扣-64」
+     */
+    public int minPathSum(int[][] grid) {
+        /*
+        grid =
+        1   3   1
+        1   5   1
+        4   2   1
+
+        dp =
+        1   4   5
+        2   7   6
+        6   8   7
+
+        路径：1 -> 3 -> 1 -> 1 -> 1
+
+         */
+        if (grid == null || grid.length == 0 || grid[0].length == 0)
+            return 0;
+
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[][] dp = new int[rows][cols];
+
+        /*
+        初始化赋值⚠️：
+        第0列的值只能通过上一行的值过来；
+        第0行第值只能通过左一行的值过来；
+         */
+        dp[0][0] = grid[0][0];
+        for (int i = 1; i < rows; i++) {
+            dp[i][0] = dp[i-1][0] + grid[i][0];
+        }
+        for (int j = 1; j < cols; j++) {
+            dp[0][j] = dp[0][j-1] + grid[0][j];
+        }
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
+                dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+            }
+        }
+
+        return dp[rows-1][cols-1];
+    }
+
+
+    /**
+     *【14-2-4】礼物等最大价值
+     * 「剑指Offer 47」
+     */
+    public int maxValue(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0)
+            return 0;
+
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[][] dp = new int[rows][cols];
+
+        dp[0][0] = grid[0][0];
+        for (int i = 1; i < rows; i++) {
+            dp[i][0] = dp[i-1][0] + grid[i][0];
+        }
+        for (int j = 1; j < cols; j++) {
+            dp[0][j] = dp[0][j-1] + grid[0][j];
+        }
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
+                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+            }
+        }
+
+        return dp[rows-1][cols-1];
+    }
+
+
+    /**
+     *【14-2-5】三角形最小路径和
+     * 「力扣-120」
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        /*
+        triangle =
+        2
+        3   4
+        6   5   7
+        4   1   8   3
+
+        初始化：
+        2
+        5   6
+       11      13
+       15          16
+
+         */
+
+        int rows = triangle.size();
+        int cols = rows;
+        int[][] dp = new int[rows][cols];
+
+        dp[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < rows; i++) {
+            dp[i][0] = dp[i-1][0] + triangle.get(i).get(0);
+        }
+        for (int j = 1; j < cols; j++) {
+            dp[j][j] = dp[j-1][j-1] + triangle.get(j).get(j);
+        }
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < i; j++) {
+                dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j-1]) + triangle.get(i).get(j);
+            }
+        }
+
+        Arrays.sort(dp[rows-1]);
+        return dp[rows-1][0];
+    }
+
+
+
+
+    /*
+    === 打家劫舍 & 买卖股票
+     */
+
+    /**
+     *【14-3-1】打家劫舍
+     * 「力扣-198」
+     */
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if (nums == null || n == 0) return 0;
+        if (n == 1) return nums[0];
+
+        // ⚠️ -> 此处dp数组大小不是n+1
+        int dp[] = new int[n];
+
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0],nums[1]);
+
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.max((dp[i - 2] + nums[i]), dp[i - 1]);
+        }
+
+        return dp[n - 1];
+    }
+
+
+    /**
+     *【14-3-2】打家劫舍II
+     * 「力扣-213」
+     */
+
+
+    /**
+     *【14-3-3】打家劫舍III（树形DP）
+     * 「力扣-337」
+     */
+
+
+    /**
+     *【14-3-4】买卖股票的最佳时机（含手续费）
+     * 「力扣-714」
+     */
+
+
+    /**
+     *【14-3-5】买卖股票的最佳时机（含冷冻期）
+     * 「力扣-309」
+     */
+
+
+
+
+    /*
+    === 爬楼梯问题
+     */
+
+    /**
+     *【14-4-1】爬楼梯
+     * 「力扣-70」
+     */
+
+
+    /**
+     *【14-4-2】零钱兑换
+     * 「力扣-322」
+     */
+
+
+    /**
+     *【14-4-3】零钱兑换II
+     * 「力扣-518」
+     */
+
+
+    /**
+     *【14-4-4】剪绳子
+     * 「剑指Offer 14-I」
+     */
+
+
+    /**
+     *【14-4-5】把数字翻译成字符串
+     * 「剑指Offer 46」
+     */
+
+
+    /**
+     *【14-4-6】单词拆分
+     * 「力扣-139」
+     */
+
+
+
+
+    /*
+    === 匹配问题
+     */
+
+    /**
+     *【14-5-1】最长公共子序列
+     * 「力扣-1143」
+     */
+
+
+    /**
+     *【14-5-2】编辑距离
+     * 「力扣-72」
+     */
+
+
+
+
+    /*
+    === 其他
+     */
+
+    /**
+     *【14-6-1】路径总和III（树形DP）
+     * 「力扣-437」
+     */
+
+
+    /**
+     *【14-6-2】最长递增子序列
+     * 「力扣-300」
+     */
+
+}
