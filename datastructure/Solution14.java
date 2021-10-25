@@ -1,5 +1,7 @@
 package datastructure;
 
+import datastructure.tree.BNode;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +16,7 @@ DP解题步骤：
 
 （3）查看是否存在重复子问题：是否有多个路径到达同一个状态；
 
-（4）* 定义状态：也就是如何记录每一阶段多不重复状态；
+（4）* 定义状态（找到合理的状态是解题的关键）：也就是如何记录每一阶段多不重复状态；
 
 （5）* 定义状态转移方程：找到如何通过上一阶段的状态推导下一个阶段的状态；
 
@@ -65,11 +67,17 @@ DP解题步骤：
 （a）总共有多少种走法？（计数）
 （b）最长/最短路径为多少？（最值）
 
+
 3. 打家劫舍&股票买卖
+    3.1 树形DP
+    + 基于树的数据结构进行推导，一般都是自下向上推，子节点状态推导父节点状态；
+    + 都是基于「后序遍历」来实现；
 
 4. 爬楼梯问题
 
+
 5. 匹配问题（LCS、编辑距离）
+
 
 6. 其他（LIS）
 
@@ -81,7 +89,7 @@ DP解题步骤：
 public class Solution14 {
 
     /*
-    === 背包模型
+    === 模型一：背包模型
      */
 
     /**
@@ -461,7 +469,7 @@ target = 3
 
 
     /*
-    === 路径模型
+    === 模型二： 路径模型
      */
 
     /**
@@ -493,58 +501,35 @@ target = 3
      * 「力扣-63」
      */
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        /*
-        grid =
-        0   0
-        1   1
-        0   0
-
-        dp =
-         1   1
-        -1  -1
-         1   1
-         */
         int rows = obstacleGrid.length;
         int cols = obstacleGrid[0].length;
         int[][] dp = new int[rows][cols];
 
-        if (obstacleGrid[rows-1][cols-1] == 1 || obstacleGrid[0][0] == 1)
-            return 0;
-
-        if (obstacleGrid[0][0] == 0)
-            dp[0][0] = 1;
-        else
-            dp[0][0] = -1;
+        dp[0][0] = obstacleGrid[0][0] == 1 ? 0 : 1;
         for (int i = 1; i < rows; i++) {
-            if (obstacleGrid[i][0] == 0 && obstacleGrid[i-1][0] == 0)
+            if (obstacleGrid[i][0] == 1 || dp[i-1][0] == 0)
+                dp[i][0] = 0;
+            else
                 dp[i][0] = 1;
-            else
-                dp[i][0] = -1;
         }
-
         for (int j = 1; j < cols; j++) {
-            if (obstacleGrid[0][j] == 0 && obstacleGrid[0][j-1] == 0)
-                dp[0][j] = 1;
+            if (obstacleGrid[0][j] == 1 || dp[0][j-1] == 0)
+                dp[0][j] = 0;
             else
-                dp[0][j] = -1;
+                dp[0][j] = 1;
         }
 
         for (int i = 1; i < rows; i++) {
             for (int j = 1; j < cols; j++) {
-                if (obstacleGrid[i][j] == 0) {
-                    if (dp[i-1][j] == -1 && dp[i][j-1] == -1)
-                        dp[i][j] = -1;
-                    else
-                        dp[i][j] = (dp[i-1][j] == -1 ? 0 : dp[i-1][j]) + (dp[i][j-1] == -1 ? 0 : dp[i][j-1]);
-                } else {
-                    dp[i][j] = -1;
-                }
+                if (obstacleGrid[i][j] == 1)
+                    dp[i][j] = 0;
+                else
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
             }
         }
 
         return dp[rows-1][cols-1];
     }
-
 
     /**
      *【14-2-3】最小路径和
@@ -671,16 +656,44 @@ target = 3
 
 
     /*
-    === 打家劫舍 & 买卖股票
+    === 模型三： 打家劫舍 & 买卖股票
      */
 
     /**
      *【14-3-1】打家劫舍
+     * 解法一：
      * 「力扣-198」
      */
     public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int optionN = nums.length;
+        // 0 -> 不偷
+        // 1 -> 偷
+        int stateN = 2;
+        int[][] dp = new int[optionN][stateN];
+
+        dp[0][0] = 0;
+        dp[0][1] = nums[0];
+
+        for (int i = 1; i < optionN; i++) {
+            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1]);
+            dp[i][1] = dp[i-1][0] + nums[i];
+        }
+
+        return Math.max(dp[optionN-1][0], dp[optionN-1][1]);
+    }
+
+
+    /**
+     *【14-3-1】打家劫舍
+     * 解法二：非常规
+     * 「力扣-198」
+     */
+    public int rob2(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
         int n = nums.length;
-        if (nums == null || n == 0) return 0;
         if (n == 1) return nums[0];
 
         // ⚠️ -> 此处dp数组大小不是n+1
@@ -701,30 +714,140 @@ target = 3
      *【14-3-2】打家劫舍II
      * 「力扣-213」
      */
+    public int robII(int[] nums) {
+        if (null == nums) return 0;
+
+        int n = nums.length;
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return nums[0];
+        if (n == 2)
+            return Math.max(nums[0], nums[1]);
+
+        // 第一家不偷的情况：
+        int profit0 = robIIdp(nums, 1, n - 1);
+        // 第一家偷的情况：
+        int profit1 = nums[0] + robIIdp(nums, 2, n - 2);
+
+        return Math.max(profit0, profit1);
+    }
+    private int robIIdp(int[] nums, int start, int end) {
+        int optionN = nums.length;
+        // 0 -> 不偷
+        // 1 -> 偷
+        int stateN = 2;
+        int[][] dp = new int[optionN][stateN];
+
+        dp[start][0] = 0;
+        dp[start][1] = nums[start];
+
+        for (int i = start + 1; i <= end; i++) {
+            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1]);
+            dp[i][1] = dp[i-1][0] + nums[i];
+        }
+        return Math.max(dp[end][0], dp[end][1]);
+    }
 
 
     /**
      *【14-3-3】打家劫舍III（树形DP）
      * 「力扣-337」
      */
+    public int robIII(BNode root) {
+        int[] profit = robIIIPostorder(root);
+        return Math.max(profit[0], profit[1]);
+    }
+    private int[] robIIIPostorder(BNode root) {
+        if (root == null) return new int[]{0,0};
+        int[] leftProfit = robIIIPostorder(root.left);
+        int[] rightProfit = robIIIPostorder(root.right);
+
+        // profit[0] -> 不偷 该节点所产生的最大利润
+        // profit[1] -> 偷   该节点所产生的最大利润
+        int[] profit = new int[2];
+        profit[0] = Math.max(leftProfit[0], leftProfit[1]) + Math.max(rightProfit[0], rightProfit[1]);
+        profit[1] = (leftProfit[0] + rightProfit[0]) + root.data;
+
+        return profit;
+    }
 
 
     /**
      *【14-3-4】买卖股票的最佳时机（含手续费）
      * 「力扣-714」
      */
+    public int maxProfit(int[] prices, int fee) {
+
+        /*
+        fee = 2
+             F    E
+        1   -1    0
+        3   -1    0
+        2   -1    0
+        8   -1    5
+        4    1    5
+        9    1    8
+         */
+
+        int optionN = prices.length;
+        // 0 -> FULL （持有）
+        // 1 -> Empty（不持有）
+        int stateN = 2;
+        // dpValue -> maxProfit
+        int[][] dp = new int[optionN][stateN];
+
+        dp[0][0] = -1 * prices[0];
+        dp[0][1] = 0;
+
+        for (int i = 1; i < optionN; i++) {
+            dp[i][0] = Math.max(dp[i-1][0], (dp[i-1][1] - prices[i]));
+            dp[i][1] = Math.max((dp[i-1][0] + prices[i] - fee), dp[i-1][1]);
+        }
+
+//        for (int i = 0; i < optionN; i++) {
+//            System.out.println(Arrays.toString(dp[i]));
+//        }
+        return Math.max(dp[optionN-1][0], dp[optionN-1][1]);
+    }
 
 
     /**
      *【14-3-5】买卖股票的最佳时机（含冷冻期）
      * 「力扣-309」
      */
+    public int maxProfitII(int[] prices) {
+        if (prices == null || prices.length == 0) return 0;
+
+        int optionN = prices.length;
+        /*
+        最大利润状态：
+        「只要在今天想买入的时候判断一下前一天是不是刚卖出，即可」
+        dp[i][0] -> 第i天 持有
+        dp[i][1] -> 第i天 不持有 且当天刚卖掉（即i-1天持有）
+        dp[i][2] -> 第i天 不持有 且当天没卖掉（即i-1天未持有）
+         */
+        int stateN = 3;
+        int[][] dp = new int[optionN][stateN];
+
+        dp[0][0] = -1 * prices[0];
+        dp[0][1] = 0;
+        dp[0][2] = 0;
+
+        for (int i = 1; i < optionN; i++) {
+            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][2] - prices[i]);
+            dp[i][1] = dp[i-1][0] + prices[i];
+            dp[i][2] = Math.max(dp[i-1][1], dp[i-1][2]);
+        }
+
+        return Math.max(Math.max(dp[optionN-1][0], dp[optionN-1][1]), dp[optionN-1][2]);
+    }
 
 
 
 
     /*
-    === 爬楼梯问题
+    === 模型四： 爬楼梯问题
      */
 
     /**
@@ -766,7 +889,7 @@ target = 3
 
 
     /*
-    === 匹配问题
+    === 模型五： 匹配问题
      */
 
     /**
@@ -784,7 +907,7 @@ target = 3
 
 
     /*
-    === 其他
+    === 模型六： 其他
      */
 
     /**

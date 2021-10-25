@@ -44,7 +44,7 @@ public class Test14 {
          *【14-1-3】零钱兑换
          * 「力扣-322」
          */
-        System.out.println(sl14.coinChange(new int[]{1,2,5}, 11));
+//        System.out.println(sl14.coinChange(new int[]{1,2,5}, 11));
 
         /**
          *【14-2-1】不同路径
@@ -59,7 +59,8 @@ public class Test14 {
          * 「力扣-63」
          */
 //        System.out.println(sl14.uniquePathsWithObstacles(new int[][]{{0,0,0},{0,1,0},{0,0,0}}));
-//        System.out.println(sl14.uniquePathsWithObstacles(new int[][]{{0,0,},{1,1},{0,0}}));
+//        System.out.println(sl14.uniquePathsWithObstacles(new int[][]{{0,1},{0,0}}));
+//        System.out.println(sl14.uniquePathsWithObstacles(new int[][]{{0,0},{1,1},{0,0}}));
 
         /**
          *【14-2-3】最小路径和
@@ -84,6 +85,36 @@ public class Test14 {
 //        arr1.add(new int[]{6,5,7});
 //        arr1.add(new int[]{4,1,8,3});
 //        System.out.println(sl14.minimumTotal(arr1));
+
+        /**
+         *【14-3-1】打家劫舍
+         * 「力扣-198」
+         */
+//        System.out.println(sl14.rob(new int[]{1,2,3,1}));
+//        System.out.println(sl14.rob(new int[]{2,7,9,3,1}));
+
+//        System.out.println(sl14.rob2(new int[]{1,2,3,1}));
+//        System.out.println(sl14.rob2(new int[]{2,7,9,3,1}));
+
+        /**
+         *【14-3-2】打家劫舍II
+         * 「力扣-213」
+         */
+//        System.out.println(sl14.robII(new int[]{2,3,2}));
+//        System.out.println(sl14.robII(new int[]{1,2,3,1}));
+
+        /**
+         *【14-3-4】买卖股票的最佳时机（含手续费）
+         * 「力扣-714」
+         */
+//        System.out.println(sl14.maxProfit(new int[]{1, 3, 2, 8, 4, 9}, 2));
+//        System.out.println(sl14.maxProfit(new int[]{1,3,7,5,10,3}, 3));
+
+        /**
+         *【14-3-5】买卖股票的最佳时机（含冷冻期）
+         * 「力扣-309」
+         */
+//        System.out.println(sl14.maxProfitII(new int[]{1,2,3,0,2}));
 
     }
 
