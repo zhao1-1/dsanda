@@ -10,15 +10,17 @@ import java.util.List;
 
 DP解题步骤：
 
-（1）可用回溯解决：需要穷举搜索才能得到结果的问题（最值、可行、计数等）
+（1）是否可用「回溯」解决：需要穷举搜索才能得到结果的问题（最值、可行、计数等）
+     * 能用dp解决的都可以用回溯解决
 
-（2）构建多阶段决策模型：看是否能将问题求解多过程分为多个阶段；
+（2）构建「多阶段决策模型」：看是否能将问题求解多过程分为多个阶段；
 
-（3）查看是否存在重复子问题：是否有多个路径到达同一个状态；
+（3）查看用回溯解决时是否存在「重复子问题」：是否有多个路径到达同一个状态；
+    * 如果不存在，那么只能用回溯了，dp解决不了。
 
-（4）* 定义状态（找到合理的状态是解题的关键）：也就是如何记录每一阶段多不重复状态；
+（4）定义状态（找到合理的状态是解题的关键）：也就是如何记录每一阶段多不重复状态；
 
-（5）* 定义状态转移方程：找到如何通过上一阶段的状态推导下一个阶段的状态；
+（5）定义状态转移方程：找到如何通过上一阶段的状态推导下一个阶段的状态；
 
 （6）画状态转移表：辅助理解，验证正确性，确定状态转移的初始值；
 
@@ -29,8 +31,8 @@ DP解题步骤：
 
 
 
+// 经典模型分类：
 /*
-经典模型：
 
 1. 背包模型：
 
@@ -84,8 +86,9 @@ DP解题步骤：
  */
 
 
-
-
+/**
+ * DP动态规划（Dynamic Planning）
+ */
 public class Solution14 {
 
     /*
@@ -94,7 +97,40 @@ public class Solution14 {
 
     /**
      *【例A】背包模型 - 0-1背包问题（a）
-     * 解法一：回溯（使用备忘录解决重复子问题）
+     * 解法一：回溯
+     */
+    private int maxW;
+    /*
+    items  -> 选择列表（选/不选）
+    k      -> 阶段
+    cw     -> 路径，记录已经选的物品的总重量
+    target -> 剪枝的条件（背包容量）
+     */
+    private void backTrack1(int[] items, int k, int cw, int target) {
+        if (cw == target || k == items.length) {
+            if (cw > maxW) maxW = cw;
+            return;
+        }
+
+        // 选择一：不装
+        backTrack1(items, k+1, cw, target);
+
+        // 选择二：装
+        if (cw + items[k] <= target)
+            backTrack1(items, k+1, cw+items[k], target);
+        // 都是局部遍历，自动撤销选择
+
+    }
+    public int knapsackA4bt(int[] weight, int target) {
+        this.maxW = Integer.MIN_VALUE;
+        backTrack1(weight, 0, 0, target);
+        return maxW;
+    }
+
+
+    /**
+     *【例A】背包模型 - 0-1背包问题（a）
+     * 解法二：回溯升级（使用备忘录解决重复子问题）
      */
 
 
@@ -102,7 +138,7 @@ public class Solution14 {
      *【例A】背包模型 - 0-1背包问题（a）
      * 有n个物品，选择其中一些物品装入背包，在不超过背包最大重量限制的前提下，
        背包中可装物品总重量的最大值是多少？
-     * 解法二：动态规划
+     * 解法三：动态规划
      */
     public int knapsackA4dp(int[] weight, int target) {
 

@@ -13,6 +13,8 @@ public class Test14 {
          */
 //        System.out.println(sl14.knapsackA4dp(new int[]{2, 2, 4, 6, 3}, 9));
 
+//        System.out.println(sl14.knapsackA4bt(new int[]{2, 2, 4, 6, 3}, 9));
+
         /**
          *【例B】背包问题 - 可行
          */
