@@ -65,6 +65,7 @@ public class Solution5 {
     /**
      * 【5-2】青蛙跳台阶
      * {剑指Offer10-II} {力扣70}
+     * 解法一：递归
      */
     private int[] cache2;
     public int climbStairs(int n) {
@@ -78,6 +79,12 @@ public class Solution5 {
         return (ff(i-1) + ff(i-2)) % MOD;
     }
 
+    /**
+     * 【5-2】青蛙跳台阶
+     * {剑指Offer10-II} {力扣70}
+     * 解法二：DP
+     */
+    // 见【14-4-1】
 
 
     /**

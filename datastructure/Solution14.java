@@ -75,7 +75,17 @@ DP解题步骤：
     + 基于树的数据结构进行推导，一般都是自下向上推，子节点状态推导父节点状态；
     + 都是基于「后序遍历」来实现；
 
-4. 爬楼梯问题
+4. 爬楼梯模型
+每一步可以走x、y或z个台阶，走完n个台阶，
+（a）有多少种走法？「计数」
+    状态定义：int dp[n+1]    dp[i]表示走完i个台阶有多少种走法
+    转移方程：dp[i] = dp[i-x] + dp[i-y] + dp[i-z];
+（b）最少需要多少步？「最值」
+    状态定义：int dp[n+1]    dp[i]表示走完i个台阶最少需要多少步
+    转移方程：dp[i] = Math.min(dp[i-x],dp[i-y],dp[i-z]) + 1;
+（c）能否正好走完台阶？「可行」
+    状态定义：boolean dp[n+1]    dp[i]表示是否正好走完i个台阶;
+    转移方程：dp[i] = dp[i-x] || dp[i-y] || dp[i-z]
 
 
 5. 匹配问题（LCS、编辑距离）
@@ -487,7 +497,7 @@ target = 3
 
     /**
      *【14-1-3】零钱兑换
-     * 【背包模型 - 完全背包问题（c）】
+     * 解法一：【背包模型 - 完全背包问题（c）】
      * 「力扣-322」
      */
     public int coinChange(int[] coins, int amount) {
@@ -536,7 +546,8 @@ target = 3
 
     /**
      *【14-1-4】零钱兑换II
-     * 【背包模型 - 完全背包问题（d）】
+     * 解法一：【背包模型 - 完全背包问题（d）】
+       ⚠️，解法二「爬楼梯模型」不可用！
      * 「力扣-518」
      */
     public int change(int amount, int[] coins) {
@@ -947,18 +958,86 @@ target = 3
     /**
      *【14-4-1】爬楼梯
      * 「力扣-70」
+     * 解法一：dp爬楼梯模型（a）
      */
+    public int climbStairs(int n) {
+        if(n == 1) return 1;
+
+        int[] dp = new int[n+1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+
+    /**
+     *【14-4-1】爬楼梯
+     * 「力扣-70」
+     * 解法二：dp爬楼梯模型（a）
+     */
+    public int climbStairs2(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        for (int i = 1; i < dp.length; i++) {
+            if (i - 1 >= 0) dp[i] += dp[i - 1];
+            if (i - 2 >= 0) dp[i] += dp[i - 2];
+        }
+        return dp[n];
+    }
+
+    /**
+     *【14-4-1】爬楼梯
+     * 「力扣-70」
+     * 解法三：递归
+     */
+    // 见【5-2】
 
 
     /**
      *【14-4-2】零钱兑换
      * 「力扣-322」
+     * 解法二：dp爬楼梯模型（b）
      */
+//    public int coinChange2(int[] coins, int amount) {
+//        int[] dp = new int[amount + 1];
+//        for (int i = 4; i < dp.length; i++) {
+//            dp[i] = minValueArr(coins, dp, i) + 1;
+//        }
+//        return dp[amount];
+//    }
+//    private int minValueArr(int[] x, int[] dp, int index) {
+//        int min = Integer.MAX_VALUE;
+//        for (int i = 0; i < x.length; i++) {
+//            int zzz = dp[index - x[i]];
+//            min = min <= zzz ? min : zzz;
+//        }
+//        return min;
+//    }
+    public int coinChange2(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        for (int i = 0; i < dp.length; i++) { dp[i] = Integer.MAX_VALUE; }
+
+        dp[0] = 0;
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i - coins[j] >= 0 && dp[i - coins[j]] != Integer.MAX_VALUE && dp[i - coins[j]] + 1 < dp[i])
+                    dp[i] = dp[i - coins[j]] + 1;
+            }
+        }
+        if (dp[amount] == Integer.MAX_VALUE) return -1;
+        return dp[amount];
+    }
 
 
     /**
      *【14-4-3】零钱兑换II
      * 「力扣-518」
+     * ⚠️解法二：dp爬楼梯模型（a）「无效！！！」
+     因为：
+     爬楼梯 -> 「1 1 2」 / 「1 2 1」   算两种走法
+     零钱兑 -> 「1 1 2」 / 「1 2 1」   算一种兑换方法
      */
 
 
@@ -966,18 +1045,35 @@ target = 3
      *【14-4-4】剪绳子
      * 「剑指Offer 14-I」
      */
+    public int cuttingRope(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 1; j <= i; j++) {
+                if (dp[i] < j * dp[i - j])
+                    dp[i] = j * dp[i - j];
+            }
+        }
+        return dp[n];
+    }
 
 
     /**
      *【14-4-5】把数字翻译成字符串
      * 「剑指Offer 46」
      */
+//    public int translateNum(int num) {
+//
+//    }
 
 
     /**
      *【14-4-6】单词拆分
      * 「力扣-139」
      */
+//    public boolean wordBreak(String s, List<String> wordDict) {
+//
+//    }
 
 
 

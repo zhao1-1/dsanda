@@ -426,6 +426,14 @@ public class Solution12 {
      *【12-3-1】组合总和（选出某几个数相加为给定和，无重复数据，可以使用多次，不能有重复答案）
      * {力扣-39}
      */
+    private List<List<Integer>> result9;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result9 = new ArrayList<>();
+        return result9;
+    }
+    private void backTrack9(int[] candidates) {
+
+    }
 
 
     /**

@@ -130,6 +130,20 @@ public class Test14 {
         System.out.println(sl14.longestCommonSubsequence("abc", "abc"));
         System.out.println(sl14.longestCommonSubsequence("abc", "def"));
 
+        /**
+         *【14-4-1】爬楼梯
+         * 「力扣-70」
+         */
+//        System.out.println(sl14.climbStairs(2));
+//        System.out.println(sl14.climbStairs(3));
+//        System.out.println(sl14.climbStairs(44));
+
+        /**
+         *【14-4-2】零钱兑换
+         * 「力扣-322」
+         */
+//        System.out.println(sl14.coinChange2(new int[]{1,2,5}, 11));
+
     }
 
 }
