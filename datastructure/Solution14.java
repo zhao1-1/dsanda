@@ -100,38 +100,67 @@ public class Solution14 {
      * 解法一：回溯
      */
     private int maxW;
+    private int[] items;
+    private int target;
     /*
     items  -> 选择列表（选/不选）
     k      -> 阶段
     cw     -> 路径，记录已经选的物品的总重量
     target -> 剪枝的条件（背包容量）
      */
-    private void backTrack1(int[] items, int k, int cw, int target) {
-        if (cw == target || k == items.length) {
+    private void backTrack1(int k, int cw) {
+        if (cw == this.target || k == this.items.length) {
             if (cw > maxW) maxW = cw;
             return;
         }
 
         // 选择一：不装
-        backTrack1(items, k+1, cw, target);
+        backTrack1(k+1, cw);
 
         // 选择二：装
-        if (cw + items[k] <= target)
-            backTrack1(items, k+1, cw+items[k], target);
+        if (cw + items[k] <= this.target)
+            backTrack1(k+1, cw+items[k]);
         // 都是局部遍历，自动撤销选择
-
     }
-    public int knapsackA4bt(int[] weight, int target) {
+    public int knapsackA4bt(int[] weight, int w) {
+        this.items = weight;
+        this.target = w;
         this.maxW = Integer.MIN_VALUE;
-        backTrack1(weight, 0, 0, target);
+        backTrack1(0, 0);
         return maxW;
     }
 
 
     /**
      *【例A】背包模型 - 0-1背包问题（a）
-     * 解法二：回溯升级（使用备忘录解决重复子问题）
+     * 解法二：回溯升级（使用备忘录解决重复子问题）,降低回溯的时间复杂度
      */
+    private boolean[][] cache1; // 默认值false
+    private void backTrack1_2(int k, int cw) {
+        if (cw == this.target || k == items.length) {
+            if (cw > maxW) maxW = cw;
+            return;
+        }
+        // 重复状态，cache里有记录
+        if (this.cache1[k][cw]) return;
+
+        this.cache1[k][cw] = true;
+
+        // 不选择
+        backTrack1_2(k + 1, cw);
+
+        // 选择
+        if (cw + items[k] <= target)
+            backTrack1_2(k + 1, cw + items[k]);
+    }
+    public int knapsackA4bt2(int[] weight, int w) {
+        this.items = weight;
+        this.target = w;
+        this.maxW = Integer.MIN_VALUE;
+        this.cache1 = new boolean[this.items.length][this.target + 1];
+        backTrack1_2(0, 0);
+        return maxW;
+    }
 
 
     /**
