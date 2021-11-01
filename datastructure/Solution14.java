@@ -322,7 +322,8 @@ public class Solution14 {
 
     /**
      *【例E】背包模型 - 二维费用问题
-     * 解法：最好用DP，回溯无法用备忘录解决重复子问题
+     * 解法一：DP
+       最好用DP，回溯无法用备忘录解决重复子问题
      */
     public int maxValueKnapsack(int[] weight, int[] value, int target) {
 
@@ -366,6 +367,34 @@ public class Solution14 {
 
         Arrays.sort(dpValue[optionCount-1]);
         return dpValue[optionCount-1][targetCount-1];
+    }
+
+
+    /**
+     *【例E】背包模型 - 二维费用问题
+     * 解法二：回溯
+       缺点 -> 无法用备忘录缓存，导致时间复杂度为指数级
+     */
+    private int maxValue;
+    private int[] valueItems;
+    public int maxValueKnapsack2(int[] weight, int[] value, int target) {
+        this.items = weight;
+        this.valueItems = value;
+        this.target = target;
+        this.maxValue = Integer.MIN_VALUE;
+        backTrack2(0, 0, 0);
+        return maxValue;
+    }
+    private void backTrack2(int k, int cw, int cv) {
+        if (cw == this.target || k == this.items.length) {
+            if (cv > maxValue) maxValue = cv;
+            return;
+        }
+
+        backTrack2(k + 1, cw, cv);
+
+        if (cw + this.items[k] <= this.target)
+            backTrack2(k + 1, cw + this.items[k], cv + this.valueItems[k]);
     }
 
 
@@ -960,7 +989,33 @@ target = 3
     /**
      *【14-5-1】最长公共子序列
      * 「力扣-1143」
+     * 区分：最长公共子串，这个题
      */
+    public int longestCommonSubsequence(String text1, String text2) {
+        int n = text1.length();
+        int m = text2.length();
+        char[] t1 = text1.toCharArray();
+        char[] t2 = text2.toCharArray();
+
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = 0;
+        }
+        for (int j = 0; j <= m; j++) {
+            dp[0][j] = 0;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (t1[i - 1] == t2[j - 1])
+                    dp[i][j] = Math.max(Math.max(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1] + 1);
+                else
+                    dp[i][j] = Math.max(Math.max(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]);
+            }
+        }
+
+        return dp[n][m];
+    }
 
 
     /**

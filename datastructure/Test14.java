@@ -37,6 +37,8 @@ public class Test14 {
          */
 //        System.out.println(sl14.maxValueKnapsack(new int[]{2, 2, 4, 6, 3}, new int[]{3, 4, 8, 9, 6}, 9));;
 
+//        System.out.println(sl14.maxValueKnapsack2(new int[]{2, 2, 4, 6, 3}, new int[]{3, 4, 8, 9, 6}, 9));
+
         /**
          *【14-1-2】目标和
          * 「力扣-494」
@@ -119,6 +121,14 @@ public class Test14 {
          * 「力扣-309」
          */
 //        System.out.println(sl14.maxProfitII(new int[]{1,2,3,0,2}));
+
+        /**
+         *【14-5-1】最长公共子序列
+         * 「力扣-1143」
+         */
+        System.out.println(sl14.longestCommonSubsequence("abcde", "ace"));
+        System.out.println(sl14.longestCommonSubsequence("abc", "abc"));
+        System.out.println(sl14.longestCommonSubsequence("abc", "def"));
 
     }
 
