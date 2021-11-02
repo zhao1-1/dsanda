@@ -220,7 +220,7 @@ public class Solution6 {
     /**
      *【6-7】颜色分类*
      * {力扣75}
-     * 解法二：借助辅助数组
+     * 解法二：辅助计数数组
      * 时间复杂度：o(n)
      * 空间复杂度：o(1)
      */
@@ -245,7 +245,7 @@ public class Solution6 {
     /**
      *【6-7】颜色分类*
      * {力扣75}
-     * 解法三：
+     * 解法三：双指针
      */
     public int[] sortColors_3(int[] nums) {
         return nums;

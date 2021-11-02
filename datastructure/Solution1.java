@@ -135,6 +135,7 @@ public class Solution1 {
      * {力扣-1}
      * 解法2：哈希表
      */
+    // 见【8-1】
     public int[] twoSum_2(int[] nums, int target) {
         HashMap<Integer, Integer> pools = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
@@ -146,10 +147,18 @@ public class Solution1 {
         return new int[0];
     }
 
+    /**
+     *【1-3】两数之和
+     * {力扣-1}
+     * 解法3：双指针
+     */
+    // 见【15-1-3】
+
 
     /**
      *【1-4】反转字符串
-     * {力扣344}
+     * {力扣-344}
+     * 解法：双指针，见【15-1-1】
      */
     public char[] reverseString(char[] noodles) {
         int left = 0;
