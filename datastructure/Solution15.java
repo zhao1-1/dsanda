@@ -2,6 +2,7 @@ package datastructure;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -266,6 +267,9 @@ public class Solution15 {
         return minIndex;
     }
 
+
+
+
     /*
     【15-2】滑动窗口
      */
@@ -275,24 +279,180 @@ public class Solution15 {
      *【15-2-1】和为s的连续正数序列
      *『剑指Offer 57-II』
      */
+    // 解法一：完美答案，效率最高（只需要遍历一半），滑动窗口
+    public int[][] findContinuousSequence(int target) {
+
+        /*
+        sum
+            1   2   3   4   5   6   7   8   9
+        3   r   l
+        6   r   -   l
+        10  r   -   -   l
+      Y 9       r   -   l
+        7           r   l
+        12          r   -   l
+      Y 9               r   l
+        5                   rl  END
+         */
+
+        List<int[]> result = new ArrayList<>();
+
+        int r = 1;      // 滑动窗口左边界
+        int l = 2;      // 滑动窗口右边界
+        int sum = 3;    // 滑动窗口中数字的和
+
+        while (r <= target / 2) {
+            if (sum < target) {
+                l++;
+                sum += l;
+            } else if (sum > target) {
+                sum -= r;
+                r++;
+            } else {
+                int[] arr = new int[l - r + 1];
+                for (int i = r; i <= l; i++) {
+                    arr[i - r] = i;
+                }
+                result.add(arr);
+                sum -= r;
+                r++;
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+    }
+
+    // 解法二：思路清晰，但是需要全部遍历
+    public int[][] findContinuousSequence2(int target) {
+
+        List<int[]> result = new ArrayList<>();
+
+        int r = 1;
+        int l = 2;
+        int sum = 3;
+
+        // 循环结束条件保证不会有一个值的情况，并且也缩短了循环次数
+        while (l <= target) {
+            if (sum < target) {
+                l++;
+                sum += l;
+            } else if (sum > target) {
+                sum -= r;
+                r++;
+            } else {
+                if (r == l) break;      // 防止指针指向target的时候
+                int[] arr = new int[l - r + 1];
+                for (int i = r; i <= l; i++) {
+                    arr[i - r] = i;
+                }
+                result.add(arr);
+                sum -= r;
+                r++;
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+    }
+
+    // 解法三：暴力枚举
+    public int[][] findContinuousSequence3(int target) {
+        List<int[]> result = new ArrayList<>();
+        int r = 1;
+        int l = 2;
+        while (r <= target - 1) {
+            l = r + 1;
+            int sum = r + l;
+            while (l <= target) {
+                if (sum < target) {
+                    l++;
+                    sum += l;
+                } else if (sum > target) {
+                    r++;
+                    break;
+                } else {
+                    int[] subResult = new int[l - r + 1];
+                    for (int i = 0; i < subResult.length; i++) {
+                        subResult[i] = r + i;
+                    }
+                    result.add(subResult);
+                     r++;
+                     break;
+                }
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+    }
 
 
     /**
      *【15-2-2】最长不含重复字符的子字符串
      *『剑指Offer 48.』
      */
+    public int lengthOfLongestSubstring(String s) {
+        int maxLen = 0;
+
+        int head = 0;
+        int tail = 0;
+        HashSet pools = new HashSet();
+        while (tail < s.length()) {
+            char x = s.charAt(tail);
+            if (!pools.contains(x)) {
+                pools.add(x);
+                maxLen = Math.max(maxLen, tail - head + 1);
+                tail++;
+                continue;
+            }
+            while (pools.contains(x)) {
+                pools.remove(s.charAt(head));
+                head++;
+            }
+        }
+
+        return maxLen;
+    }
 
 
     /**
-     *【15-2-3】找到字符串中所有字母的异位次
+     *【15-2-3】找到字符串中所有字母的异位词
      *『力扣-438』
      */
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+
+        int sn = s.length();
+        int pn = p.length();
+        if (sn < pn) return result;
+
+        int[] sCnt = new int[26];
+        int[] pCnt = new int[26];
+        for (int i = 0; i < pn; i++) {
+            pCnt[p.charAt(i) - 'a']++;
+        }
+
+        int r = 0;
+        int l = 0;
+        while (r < sn) {
+            int currR = s.charAt(r) - 'a';
+            sCnt[currR]++;
+            while (sCnt[currR] > pCnt[currR]) {
+                int currL = s.charAt(l) - 'a';
+                sCnt[currL]--;
+                l++;
+            }
+            if (r - l + 1 == pn)
+                result.add(l);
+            r++;
+        }
+
+        return result;
+    }
 
 
     /**
      *【15-2-4】最小覆盖子串
      *『力扣-76』
      */
+//    public String minWindow(String s, String t) {
+//
+//    }
 
 
 
@@ -329,6 +489,7 @@ public class Solution15 {
      *【15-3-5】接雨水
      *『力扣-42』
      */
+
 
 
 

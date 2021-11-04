@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class Test15 {
     public static void main(String[] args) {
         Solution15 sl15 = new Solution15();
+        CommonUtils cu = new CommonUtils();
 
         /**
          *【15-1-2】数对和
@@ -56,9 +57,40 @@ public class Test15 {
          *【15-1-9】单词距离（类似合并两个有序数组）
          *『面试题 17.11』
          */
-        System.out.println(sl15.findClosest(new String[]{"I","am","a","student","from","a","university","in","a","city"}, "a", "student"));
+//        System.out.println(sl15.findClosest(new String[]{"I","am","a","student","from","a","university","in","a","city"}, "a", "student"));
 
-        System.out.println(sl15.findClosest2(new String[]{"I","am","a","student","from","a","university","in","a","city"}, "a", "student"));
+//        System.out.println(sl15.findClosest2(new String[]{"I","am","a","student","from","a","university","in","a","city"}, "a", "student"));
+
+        /**
+         *【15-2-1】和为s的连续正数序列
+         *『剑指Offer 57-II』
+         */
+//        cu.print2DArr(sl15.findContinuousSequence(9));
+//        cu.print2DArr(sl15.findContinuousSequence(10));
+//        cu.print2DArr(sl15.findContinuousSequence2(9));
+//        cu.print2DArr(sl15.findContinuousSequence2(10));
+//        cu.print2DArr(sl15.findContinuousSequence3(9));
+//        cu.print2DArr(sl15.findContinuousSequence3(10));
+
+        /**
+         *【15-2-2】最长不含重复字符的子字符串
+         *『剑指Offer 48.』
+         */
+//        System.out.println(sl15.lengthOfLongestSubstring("abcabcbb"));
+//        System.out.println(sl15.lengthOfLongestSubstring("bbbbb"));
+//        System.out.println(sl15.lengthOfLongestSubstring("pwwkew"));
+
+        /**
+         *【15-2-3】找到字符串中所有字母的异位词
+         *『力扣-438』
+         */
+//        System.out.println(sl15.findAnagrams("cbaebabacd", "abc"));
+//        System.out.println(sl15.findAnagrams("abab", "ab"));
+
+        /**
+         *【15-2-4】最小覆盖子串
+         *『力扣-76』
+         */
 
     }
 }
