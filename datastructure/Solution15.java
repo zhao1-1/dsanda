@@ -78,29 +78,9 @@ public class Solution15 {
      *『力扣-1』
      * 解法一：Hash
      * 解法二：暴力枚举（穷举）
-     */
-    // 见【1-3】
-
-    /**
-     *【15-1-3】两数之和
-     *『力扣-1』
      * 解法三：双指针
      */
-//    public int[] twoSum(int[] nums, int target) {
-//        Arrays.sort(nums);
-//        int i = 0;
-//        int j = nums.length - 1;
-//        while (i < j) {
-//            if (nums[i] + nums[j] == target) {
-//                return new int[]{i, j};
-//            } else if (nums[i] + nums[j] > target) {
-//                j--;
-//            } else {
-//                i++;
-//            }
-//        }
-//        return new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE};
-//    }
+    // 见【1-3】
 
 
     /**
@@ -471,6 +451,8 @@ public class Solution15 {
      *【15-3-2】买卖股票的最佳时期
      *『力扣-121』
      */
+    // 区分【14-3-4】买卖股票的最佳时机（含手续费）「力扣-714」
+    // 区分【14-3-5】买卖股票的最佳时机（含冷冻期）「力扣-309」
 
 
     /**
@@ -488,7 +470,11 @@ public class Solution15 {
     /**
      *【15-3-5】接雨水
      *『力扣-42』
+     * 解法一：【暴力遍历】找柱状雨量
+     * 解法二：【前后缀统计法】，找柱状雨量
+     * 解法三：【单调栈】，找出每层的雨量
      */
+    // 见【4-12】
 
 
 

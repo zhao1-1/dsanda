@@ -153,6 +153,33 @@ public class Solution1 {
      * 解法3：双指针
      */
     // 见【15-1-3】
+    class NumAndIndex {
+        int num;
+        int index;
+        NumAndIndex(int num_, int index_) {
+            this.num = num_;
+            this.index = index_;
+        }
+    }
+    public int[] twoSum_3(int[] nums, int target) {
+        NumAndIndex[] numAndIndices = new NumAndIndex[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+           numAndIndices[i] = new NumAndIndex(nums[i], i);
+        }
+        Arrays.sort(numAndIndices, (x1, x2) ->  x1.num - x2.num);
+
+        int l = 0;
+        int r = numAndIndices.length - 1;
+        while (l < r) {
+            if (numAndIndices[l].num + numAndIndices[r].num > target)
+                r--;
+            else if (numAndIndices[l].num + numAndIndices[r].num < target)
+                l++;
+            else
+                return new int[]{numAndIndices[l].index, numAndIndices[r].index};
+        }
+        return new int[0];
+    }
 
 
     /**

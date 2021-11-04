@@ -20,15 +20,6 @@ public class Test15 {
 //        System.out.println(sl15.pairSums(new int[]{-2,-1,0,3,5,6,7,9,13,14}, 12));
 
         /**
-         *【15-1-3】两数之和
-         *『力扣-1』
-         * 解法三：双指针
-         */
-//        System.out.println(Arrays.toString(sl15.twoSum(new int[]{2, 7, 11, 15}, 9)));
-//        System.out.println(Arrays.toString(sl15.twoSum(new int[]{3, 2, 4}, 6)));
-//        System.out.println(Arrays.toString(sl15.twoSum(new int[]{3, 3}, 6)));
-
-        /**
          *【15-1-7】移动零（已排序、未排序指针）
          *『力扣-283』
          */
