@@ -83,5 +83,40 @@ public class Test15 {
          *『力扣-76』
          */
 
+        /**
+         *【15-3-1】最大子序和
+         *『力扣-53』
+         */
+        System.out.println(sl15.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+        System.out.println(sl15.maxSubArray(new int[]{1}));
+        System.out.println(sl15.maxSubArray(new int[]{0}));
+        System.out.println(sl15.maxSubArray(new int[]{-1}));
+        System.out.println(sl15.maxSubArray(new int[]{-1000}));
+
+        /**
+         *【15-3-2】买卖股票的最佳时期
+         *『力扣-121』
+         */
+//        System.out.println(sl15.maxProfit(new int[]{7,1,5,3,6,4}));
+//        System.out.println(sl15.maxProfit(new int[]{7,6,4,3,1}));
+//        System.out.println(sl15.maxProfit2(new int[]{7,1,5,3,6,4}));
+//        System.out.println(sl15.maxProfit2(new int[]{7,6,4,3,1}));
+
+        /**
+         *【15-3-3】除自身以外数组的乘积
+         *『力扣-238』
+         */
+        System.out.println(Arrays.toString(sl15.productExceptSelf(new int[]{1,2,3,4})));
+        System.out.println(Arrays.toString(sl15.productExceptSelf(new int[]{1,2,3,0,4})));
+
+        System.out.println(Arrays.toString(sl15.productExceptSelf2(new int[]{1,2,3,4})));
+        System.out.println(Arrays.toString(sl15.productExceptSelf2(new int[]{1,2,3,0,4})));
+
+        System.out.println(Arrays.toString(sl15.productExceptSelf2p(new int[]{1,2,3,4})));
+        System.out.println(Arrays.toString(sl15.productExceptSelf2p(new int[]{1,2,3,0,4})));
+
+        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,4})));
+        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,0,4})));
+
     }
 }

@@ -438,6 +438,15 @@ public class Solution15 {
 
     /*
     【15-3】前后缀统计
+
+    类型：
+        + 前缀和、后缀和
+        + 前缀积、后缀积
+        + 前缀最大、后缀最大
+
+    特点：
+        支持频繁 + 快速的区间统计
+
      */
 
 
@@ -445,20 +454,179 @@ public class Solution15 {
      *【15-3-1】最大子序和
      *『力扣-53』
      */
+    // 解法一：前后缀统计
+    public int maxSubArray(int[] nums) {
+        /*
+        leftS  = {-2, -1, -4, 0, -1, 1, 2, -3, 1}
+                                        x
+        rightS = {1 , 3, 2, 5, 1 , 2 , 0, -1, 4}
+                            x
+        */
+        int n = nums.length;
+
+        int leftMaxI = 0;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+
+        }
+
+        int rightMaxI = n - 1;
+
+        int result = 0;
+        for (int i = rightMaxI; i <= leftMaxI; i++) {
+            result += nums[i];
+        }
+        return result;
+    }
+
+
+    // 解法二：滑动窗口
 
 
     /**
      *【15-3-2】买卖股票的最佳时期
      *『力扣-121』
+     // 区分【14-3-4】买卖股票的最佳时机（含手续费）「力扣-714」
+     // 区分【14-3-5】买卖股票的最佳时机（含冷冻期）「力扣-309」
      */
-    // 区分【14-3-4】买卖股票的最佳时机（含手续费）「力扣-714」
-    // 区分【14-3-5】买卖股票的最佳时机（含冷冻期）「力扣-309」
+    // 解法一：暴力枚举 -> 超时：时间复杂度o(n^2)
+    public int maxProfit(int[] prices) {
+        int maxValue = Integer.MIN_VALUE;
+        for (int i = 0; i < prices.length - 1; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+               maxValue = Math.max(maxValue, prices[j] - prices[i]);
+            }
+        }
+        if (maxValue < 0) maxValue = 0;
+        return maxValue;
+    }
+
+    // 解法二：后缀最大 -> 时间复杂度o(n)
+    public int maxProfit2(int[] prices) {
+        /*
+        prices  = {7, 1, 5, 3, 6, 4}
+                        <-      <-
+        maxCurr = {7, 6, 6, 6, 6, 4}
+         */
+        int n = prices.length;
+        int[] maxCurr = new int[n];
+        maxCurr[n - 1] = prices[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            maxCurr[i] = Math.max(prices[i], maxCurr[i + 1]);
+        }
+
+        int maxValue = Integer.MIN_VALUE;
+        for (int i = 0; i < n - 1; i++) {
+            maxValue = Math.max(maxValue, maxCurr[i + 1] - prices[i]);
+        }
+        if (maxValue < 0) maxValue = 0;
+        return maxValue;
+    }
 
 
     /**
      *【15-3-3】除自身以外数组的乘积
      *『力扣-238』
      */
+    // 解法一：暴力枚举 -> 时间复杂度o(n^2)
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            int multi = 1;
+            for (int j = 0; j < n; j++) {
+                if (j == i) continue;
+                multi *= nums[j];
+            }
+            result[i] = multi;
+        }
+        return result;
+    }
+
+    // 解法二：前后缀积   -> 时间复杂度o(n)，空间复杂度o(n)
+    public int[] productExceptSelf2(int[] nums) {
+        /*
+        nums   = {1, 2, 3, 4}
+        leftM  = {1, 2, 6, 24}
+        rightM = {24, 24, 12, 4}
+        result = {24, 12, 8, 6}
+         */
+        int n = nums.length;
+        int[] leftM = new int[n];       // 存储前缀积（包含当前值）
+        int[] rightM = new int[n];      // 存储后缀积（包含当前值）
+        leftM[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            leftM[i] = leftM[i - 1] * nums[i];
+        }
+        rightM[n - 1] = nums[n - 1];
+        for (int i = n - 2; i >= 0 ; i--) {
+            rightM[i] = rightM[i + 1] * nums[i];
+        }
+
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = 1;
+            if (i > 0) result[i] *= leftM[i - 1];
+            if (i < n - 1) result[i] *= rightM[i + 1];
+        }
+        return result;
+    }
+
+    // 解法二+：在解法二的基础上进行的升级
+    public int[] productExceptSelf2p(int[] nums) {
+        /*
+        nums   = {1, 2, 3, 4}
+        leftM  = {1, 1, 2, 6}
+        rightM = {24, 12, 4, 1}
+        result = {24, 12, 8, 6}
+         */
+        int n = nums.length;
+        int[] leftM = new int[n];       // 存储前缀积（不包含当前值）
+        int[] rightM = new int[n];      // 存储后缀积（不包含当前值）
+        leftM[0] = 1;
+        for (int i = 1; i < n; i++) {
+            leftM[i] = leftM[i - 1] * nums[i - 1];
+        }
+        rightM[n - 1] = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            rightM[i] = rightM[i + 1] * nums[i + 1];
+        }
+
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            result[i] = leftM[i] * rightM[i];
+        }
+        return result;
+    }
+
+    // 解法三：前后缀积优化（参照解法二+）  -> 时间复杂度o(n)，空间复杂度o(1)
+    public int[] productExceptSelf3(int[] nums) {
+        /*
+        nums    = {1, 2, 3, 4}
+                    ->
+        result1 = {1, 1, 2, 6}
+                    <-
+        result2 = {24, 12, 8 ,6}
+         */
+        int n = nums.length;
+        int[] result = new int[n];      // 结果数组直接叠加前后缀积
+
+        // 叠加前缀积
+        int leftM = 1;
+        for (int i = 0; i < n; i++) {
+            result[i] = leftM;
+            leftM *= nums[i];
+        }
+
+        // 叠加后缀积
+        int rightM = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] *= rightM;
+            rightM *= nums[i];
+        }
+        return result;
+    }
+
 
 
     /**
