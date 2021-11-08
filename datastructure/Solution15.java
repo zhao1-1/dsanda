@@ -9,6 +9,10 @@ import java.util.List;
  * @author bin2.zhao (D52B48 in ZhangMen)
  * @since 2021/11/1 13:00
  */
+
+/**
+ * 技巧题
+ */
 public class Solution15 {
 
     /*
@@ -454,9 +458,13 @@ public class Solution15 {
      *【15-3-1】最大子序和
      *『力扣-53』
      */
-    // 解法一：前后缀统计
+    // 解法一：滑动窗口（正常思路）
+
+    // 解法二：前后缀统计
     public int maxSubArray(int[] nums) {
         /*
+        nums   = {-2, 1, -3, 4, -1, 2, 1, -5, 4}
+
         leftS  = {-2, -1, -4, 0, -1, 1, 2, -3, 1}
                                         x
         rightS = {1 , 3, 2, 5, 1 , 2 , 0, -1, 4}
@@ -466,11 +474,25 @@ public class Solution15 {
 
         int leftMaxI = 0;
         int sum = 0;
+        int sumMax = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
-
+            sum += nums[i];
+            if (sum > sumMax) {
+                leftMaxI = i;
+                sumMax = sum;
+            }
         }
 
         int rightMaxI = n - 1;
+        sum = 0;
+        sumMax = Integer.MIN_VALUE;
+        for (int i = n - 1; i >= 0; i--) {
+            sum += nums[i];
+            if (sum > sumMax) {
+                rightMaxI = i;
+                sumMax = sum;
+            }
+        }
 
         int result = 0;
         for (int i = rightMaxI; i <= leftMaxI; i++) {
@@ -478,9 +500,6 @@ public class Solution15 {
         }
         return result;
     }
-
-
-    // 解法二：滑动窗口
 
 
     /**
@@ -633,6 +652,11 @@ public class Solution15 {
      *【15-3-4】翻转数位
      *『面试题 05.03.』
      */
+    public int reverseBits(int num) {
+        CommonUtils cu = new CommonUtils();
+        int[] binary = cu.decimal2binary(num, 32);
+        return 0;
+    }
 
 
     /**
@@ -649,24 +673,87 @@ public class Solution15 {
 
     /*
     【15-4】位运算
+    题型：
+        （1）与【&】：
+            + 判断某一位是否为1；
+            + 设置某位为0；
+            + 判断奇偶；
+        （2）或【｜】：设置某位为1；
+        （3）异或【^】：反转位（对应位相同为0，不同为1）；「寻找出现一次的数字」
+        （4）取反【~】：按位取反；
+        （5）左移【<<】：乘以2（x *= 2）；
+            + 正数左移，低位补0；
+            + 负数左移，低位补0；
+        （6）右移【>>】：除以2（x /= 2）；「二分查找」
+            + 正数右移：高位补0；
+            + 负数右移：高位补1；
+            + 「Java有一个逻辑右移（>>>），无论正负，右移高位都是补0」
+        （7）十进制 ==> 二进制
+        （8）二进制 ==> 十进制
      */
 
     /**
-     *【15-4-1】位1的个数
+     *【15-4-1】位1的个数（汉明重量）
      *『力扣-191』
      */
+    // 解法一：n值保持不变
+    public int hammingWeight(int n) {
+        int countOne = 0;
+        int mask = 1;
+        for (int i = 0; i < 32; i++) {
+            if ((n & mask) != 0) countOne++;
+            mask <<= 1;
+        }
+        return countOne;
+    }
+
+    // 解法二：n值移位变化，无法处理负数！
+    /*
+    11111111111111111111111111111101 为负数
+    如果用算数右移（>>），无论怎么右移，高位永远都是1，所以会运行超时；
+    如果用逻辑右移（>>>），完美解决负数问题！
+     */
+    public int hammingWeight2(int n) {
+        int countOne = 0;
+        while (n != 0) {
+            if ((n & 1) != 0) countOne++;
+            n >>>= 1;
+        }
+        return countOne;
+    }
 
 
     /**
      *【15-4-2】汉明距离
      *『力扣-461』
      */
+    public int hammingDistance(int x, int y) {
+        /*
+        1 = 0 0 0 1
+        4 = 0 1 0 0
+      ^     0 1 0 1
+         */
+        //（a）先异或运算
+        int r = x ^ y;
+
+        //（b）转换成"求r的位1的个数"题
+        return this.hammingWeight(r);
+    }
 
 
     /**
      *【15-4-3】整数转换
      *『面试题 05.06』
      */
+    // 解法：转换为「汉明距离」问题
+    public int convertInteger(int A, int B) {
+
+        //（a）先异或运算
+        int r = A ^ B;
+
+        //（b）转换成"求r的位1的个数"题
+        return this.hammingWeight(r);
+    }
 
 
     /**
@@ -685,10 +772,28 @@ public class Solution15 {
      *【15-4-6】消失的数字
      *『面试题 17.14.』
      */
+    // 解法一：排序
+
+    // 解法二：位图
+
+    // 解法三：求和找缺
+    public int missingNumber3(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        int sumZ = 0;
+        for (int i = 0; i < nums.length + 1; i++) {
+            sumZ += i;
+        }
+        return sumZ - sum;
+    }
+
+    // 解法四：位运算
 
 
     /**
-     *【15-4-7】数组中数字出现的次数
+     *【15-4-7】数组中数字出现的次数（找到两个单身狗）
      *『剑指Offer 56-I』
      */
 
@@ -708,7 +813,15 @@ public class Solution15 {
     /**
      *【15-4-10】2的幂
      *『力扣-231』
+     // 区分【5-7】
      */
+    // 解法：转换成「汉明重量」问题
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) return false;
+        int countOne = this.hammingWeight(n);
+        return countOne == 1;
+    }
+
 
 
 }

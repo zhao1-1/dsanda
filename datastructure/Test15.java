@@ -87,11 +87,11 @@ public class Test15 {
          *【15-3-1】最大子序和
          *『力扣-53』
          */
-        System.out.println(sl15.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
-        System.out.println(sl15.maxSubArray(new int[]{1}));
-        System.out.println(sl15.maxSubArray(new int[]{0}));
-        System.out.println(sl15.maxSubArray(new int[]{-1}));
-        System.out.println(sl15.maxSubArray(new int[]{-1000}));
+//        System.out.println(sl15.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+//        System.out.println(sl15.maxSubArray(new int[]{1}));
+//        System.out.println(sl15.maxSubArray(new int[]{0}));
+//        System.out.println(sl15.maxSubArray(new int[]{-1}));
+//        System.out.println(sl15.maxSubArray(new int[]{-1000}));
 
         /**
          *【15-3-2】买卖股票的最佳时期
@@ -106,17 +106,52 @@ public class Test15 {
          *【15-3-3】除自身以外数组的乘积
          *『力扣-238』
          */
-        System.out.println(Arrays.toString(sl15.productExceptSelf(new int[]{1,2,3,4})));
-        System.out.println(Arrays.toString(sl15.productExceptSelf(new int[]{1,2,3,0,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf(new int[]{1,2,3,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf(new int[]{1,2,3,0,4})));
 
-        System.out.println(Arrays.toString(sl15.productExceptSelf2(new int[]{1,2,3,4})));
-        System.out.println(Arrays.toString(sl15.productExceptSelf2(new int[]{1,2,3,0,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf2(new int[]{1,2,3,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf2(new int[]{1,2,3,0,4})));
 
-        System.out.println(Arrays.toString(sl15.productExceptSelf2p(new int[]{1,2,3,4})));
-        System.out.println(Arrays.toString(sl15.productExceptSelf2p(new int[]{1,2,3,0,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf2p(new int[]{1,2,3,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf2p(new int[]{1,2,3,0,4})));
 
-        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,4})));
-        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,0,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,4})));
+//        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,0,4})));
+
+        /**
+         *【15-4-1】位1的个数（汉明重量）
+         *『力扣-191』
+         */
+//        System.out.println(sl15.hammingWeight(cu.binary2decimalII(new int[]{00000000000000000000000000000011})));
+//        System.out.println(sl15.hammingWeight(cu.binary2decimalII(new int[]{00000000000000000000000000000001})));
+//        System.out.println(sl15.hammingWeight(cu.binary2decimalII(new int[]{00000000000000000000000000000000})));
+//        System.out.println(sl15.hammingWeight(cu.binary2decimalII(new int[]{00000000000000000000000000011111})));
+//        System.out.println(sl15.hammingWeight(cu.binary2decimalII(new int[]{00000000000000000000000000001011})));
+//        System.out.println(sl15.hammingWeight(cu.binary2decimalII(new int[]{00000000000000000000000010000000})));
+
+        /**
+         *【15-4-2】汉明距离
+         *『力扣-461』
+         */
+//        System.out.println(sl15.hammingDistance(1, 4));
+//        System.out.println(sl15.hammingDistance(3, 1));
+
+        /**
+         *【15-4-3】整数转换
+         *『面试题 05.06』
+         */
+//        System.out.println(sl15.convertInteger(29, 15));
+//        System.out.println(sl15.convertInteger(1, 2));
+
+        /**
+         *【15-4-10】2的幂
+         *『力扣-231』
+         */
+        System.out.println(sl15.isPowerOfTwo(1));
+        System.out.println(sl15.isPowerOfTwo(16));
+        System.out.println(sl15.isPowerOfTwo(3));
+        System.out.println(sl15.isPowerOfTwo(4));
+        System.out.println(sl15.isPowerOfTwo(5));
 
     }
 }
