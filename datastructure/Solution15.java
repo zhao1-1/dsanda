@@ -676,18 +676,24 @@ public class Solution15 {
     题型：
         （1）与【&】：
             + 判断某一位是否为1;
-              x & mask != 0; -> 该位为1
-              x & mask == 0; -> 该位为0
+              A & (1 << i) != 0; -> 第i位为1（i范围：0 ~ 31）
+              A & (1 << i) == 0; -> 第i位为0
             + 设置某位为0；
             + 判断奇偶（包括负数）；
-              x & 1 == 0; -> 偶数
-              x & 1 == 1; -> 寄数
+              A & 1 == 0; -> 偶数
+              A & 1 == 1; -> 寄数
 
-        （2）或【｜】：设置某位为1；
+        （2）或【｜】：
+            + 设置某位为1；
+              A |= (1 << i);  ->  将x的第i位设置为1；
 
         （3）异或【^】：反转位（对应位相同为0，不同为1）
-            + 寻找出现一次的数字；
+            + 寻找只出现一次的数字；
+              x == x ^ A ^ A ^ B ^ B ^ C ^ C......;
             + 无临时变量交换两个数字；
+              A ^= B;
+              B ^= A;
+              A ^= B;
 
         （4）取反【~】：按位取反；
 
@@ -730,7 +736,7 @@ public class Solution15 {
      */
 
     /**
-     *【15-4-1】位1的个数（汉明重量）
+     *【15-4-1】汉明重量（位1的个数）
      *『力扣-191』
      */
     // 解法一：n值保持不变
@@ -745,12 +751,12 @@ public class Solution15 {
     }
 
     // 解法二：n值移位变化，无法处理负数！
-    /*
-    11111111111111111111111111111101 为负数
-    如果用算数右移（>>），无论怎么右移，高位永远都是1，所以会运行超时；
-    如果用逻辑右移（>>>），完美解决负数问题！
-     */
     public int hammingWeight2(int n) {
+        /*
+        11111111111111111111111111111101 为负数
+        如果用算数右移（>>），无论怎么右移，高位永远都是1，所以会运行超时；
+        如果用逻辑右移（>>>），完美解决负数问题！
+         */
         int countOne = 0;
         while (n != 0) {
             if ((n & 1) != 0) countOne++;
@@ -761,7 +767,7 @@ public class Solution15 {
 
 
     /**
-     *【15-4-2】汉明距离
+     *【15-4-2】汉明距离（两数不相同位的个数）
      *『力扣-461』
      */
     public int hammingDistance(int x, int y) {
@@ -797,21 +803,106 @@ public class Solution15 {
      *【15-4-4】配对交换
      *『面试题 05.07』
      */
+    // 解法一：转换成二进制数组再交换
+    public int exchangeBits(int num) {
+        int[] binary = new int[CommonUtils.INT_BITS];
+        CommonUtils cu = new CommonUtils();
+        binary = cu.decimal2binary(num);
+        /*
+        num 范围 [0, 2^30 - 1]
+        最大是：00111111111111111111111111111111
+        即，31、32两个位置永远是0
+         */
+        for (int i = 0; i < 30; i+=2) {
+            int temp = binary[i];
+            binary[i] = binary[i + 1];
+            binary[i + 1] = temp;
+        }
+        return cu.binary2decimal(binary);
+    }
+
+    // 解法二：直接位运算
+    public int exchangeBits2(int num) {
+        int ret = 0;
+
+        for (int i = 0; i < 30; i+=2) {
+            int oddBit = (num & (1 << i));              // 获得奇数位bit值
+            int eveBit = (num & (1 << (i + 1)));        // 获得偶数位bit值
+
+            if (oddBit != 0) ret |= (1 << (i + 1));     // 如果奇数位不为0（则为1），将偶数位设置为"1"；
+            if (eveBit != 0) ret |= (1 << i);           // 如果偶数位不为0（则为1），将奇数位设置为"1"；
+        }
+        return ret;
+    }
 
 
     /**
      *【15-4-5】插入
      *『面试题 05.01.』
      */
+    // 解法一：分别转换成二进制位再插入
+    public int insertBits(int N, int M, int i, int j) {
+        /*
+        i = 31;
+        j = 11;
+
+        01000100001000111111011000001101 == 1143207437 -> N
+        i                   j
+        00000000000011111000010011001001 == 1017033    -> M
+                    S
+        01111100001001100100111000001101 == 2082885133 -> 输出结果
+        0M                   N
+         */
+        CommonUtils cu = new CommonUtils();
+        int[] binaryN = cu.decimal2binary(N);
+        int[] binaryM = cu.decimal2binary(M);
+
+        int startM = 0;
+        while (startM < binaryM.length) {
+            if (binaryM[startM] != 0) break;
+            startM++;
+        }
+
+        int indexM = CommonUtils.INT_BITS - 1;
+        int indexN = CommonUtils.INT_BITS - 1 - i;
+        while (indexN >= (CommonUtils.INT_BITS - 1 - j)) {
+            if (indexM >= startM)
+                binaryN[indexN] = binaryM[indexM];
+            else
+                binaryN[indexN] = 0;
+            indexN--;
+            indexM--;
+        }
+        return cu.binary2decimal(binaryN);
+    }
 
 
     /**
-     *【15-4-6】消失的数字
+     *【15-4-6】消失的数字（找到一个单身狗）
      *『面试题 17.14.』
      */
-    // 解法一：排序
+    // 解法一：排序（时间复杂度差一些）
+    public int missingNumber1(int[] nums) {
+        // 排序函数时间复杂度高，o(n log n)
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i) return i;
+        }
+        // nums = {0, 1, 2}，则认为缺失的是"3"。
+        return nums.length;
+    }
 
-    // 解法二：位图
+    // 解法二：位图（空间复杂度差一些）
+    public int missingNumber2(int[] nums) {
+        boolean[] bitmap = new boolean[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            bitmap[nums[i]] = true;
+        }
+        for (int i = 0; i < bitmap.length; i++) {
+            if (!bitmap[i]) return i;
+        }
+        return nums.length;
+    }
 
     // 解法三：求和找缺
     public int missingNumber3(int[] nums) {
@@ -826,19 +917,131 @@ public class Solution15 {
         return sumZ - sum;
     }
 
-    // 解法四：位运算
+    // 解法四：位运算（找到一个单身狗）
+    public int missingNumber4(int[] nums) {
+        /*
+        原理：
+        x == x ^ A ^ A ^ B ^ B ^ C ^ C......
+         */
+        int ret = 0;
+        for (int i = 0; i < nums.length + 1; i++) {
+            ret ^= i;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            ret ^= nums[i];
+        }
+        return ret;
+    }
 
 
     /**
      *【15-4-7】数组中数字出现的次数（找到两个单身狗）
      *『剑指Offer 56-I』
+
+     * 时间复杂度要求o(n)
+       空间复杂度要求o(1)
      */
+    public int[] singleNumbers(int[] nums) {
+        //（1）得到两个不单身的异或值（混在一起了）
+        int xorResult = 0;
+        for (int i = 0; i < nums.length; i++) {
+            xorResult ^= nums[i];
+        }
+
+        //（2）找到xorResult的第一个不同位（即，值为"1"的位）
+        int tag = 1;
+        while ((xorResult & tag) == 0) {
+            tag <<= 1;
+        }
+
+        //（3）将混在一起的单身狗分开
+        /*
+        将所有的数分成两组，一组是tag所在位同singleA相同的，一组是tag所在位同singleB相同的
+         */
+        int singleA = 0;
+        int singleB = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if ((nums[i] & tag) == 0) {
+                singleA ^= nums[i];
+            } else {
+                singleB ^= nums[i];
+            }
+        }
+        return new int[]{singleA, singleB};
+    }
 
 
     /**
-     *【15-4-8】数组中数字出现的次数II
+     *【15-4-8】数组中数字出现的次数II（找到一个单身狗，其他都是出现三次）
      *『剑指Offer 56-II』
      */
+    // 解法一：用公共方法（十进制 <==> 二进制）
+    public int singleNumber1(int[] nums) {
+        /*
+        nums = {31,11,20,11,11,31,10,20,31};
+        single = 10;
+
+        Single -> 0 1 0 1 0     == 10
+
+        A1     -> 0 1 0 1 1     == 11
+        A2     -> 0 1 0 1 1
+        A3     -> 0 1 0 1 1
+
+        B1     -> 1 0 1 0 0     == 20
+        B2     -> 1 0 1 0 0
+        B3     -> 1 0 1 0 0
+
+        C1     -> 1 1 1 1 1     == 31
+        C2     -> 1 1 1 1 1
+        C3     -> 1 1 1 1 1
+
+        %3     -> 0 1 0 1 0     (ret)
+         */
+
+        //（1）将所有的数都转换成binary数组形式
+        CommonUtils cu = new CommonUtils();
+        int n = nums.length;
+        int[][] numsBinary = new int[n][CommonUtils.INT_BITS];
+        for (int i = 0; i < n; i++) {
+            numsBinary[i] = cu.decimal2binary(nums[i]);
+        }
+
+        //（2）某一位的全部nums相加同3求余数
+        final int ThreePlayer = 3;
+        int[] singleBinary = new int[CommonUtils.INT_BITS];
+        for (int i = 0; i < CommonUtils.INT_BITS; i++) {
+            int bitSum = 0;
+            for (int j = 0; j < n; j++) {
+                bitSum += numsBinary[j][i];
+            }
+            singleBinary[i] = bitSum % ThreePlayer;
+        }
+
+        //（3）将单身狗binary数组转换为decimal输出
+        return cu.binary2decimal(singleBinary);
+    }
+
+    // 解法二：一把梭哈
+    public int singleNumber2(int[] nums) {
+        int n = nums.length;
+        int[] singleBinary = new int[32];
+        int mask = 1;
+        for (int i = 31; i >= 0; i--) {
+            for (int j = 0; j < n; j++) {
+                if ((nums[j] & mask) != 0)
+                    singleBinary[i] = (singleBinary[i] + 1) % 3;
+            }
+            mask <<= 1;
+        }
+
+        int single = 0;
+        mask = 1;
+        for (int i = 31; i >= 0; i--) {
+            if (singleBinary[i] == 1) single += mask;
+            mask <<= 1;
+        }
+        return single;
+    }
 
 
     /**
@@ -879,12 +1082,12 @@ public class Solution15 {
     }
 
     // 解法二：技巧（只允许出现一个"1"）
-    /*
-    负值也有效！
-    10000000000000000000000000000000 == -2147483648 != 0
-    只有一个"1"，所以解法一需要判断非负。
-     */
     public boolean isPowerOfTwo2(int n) {
+        /*
+        负值也有效！
+        10000000000000000000000000000000 == -2147483648 != 0
+        只有一个"1"，所以解法一需要判断非负。
+         */
         while (n != 0) {
             if ((n & 1) == 1) {
                 if (n >> 1 == 0) return true;

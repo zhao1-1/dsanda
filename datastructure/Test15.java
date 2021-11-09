@@ -126,53 +126,35 @@ public class Test15 {
         /**
          * 十进制转二进制
          */
-        // 低位 -> 高位
 //        System.out.println(Arrays.toString(cu.decimal2binary(1)));
 //        System.out.println(Arrays.toString(cu.decimal2binary(-2147483648)));
 //        System.out.println(Arrays.toString(cu.decimal2binary(-2147483647)));
 //        System.out.println(Arrays.toString(cu.decimal2binary(-2147483646)));
 //        System.out.println(Arrays.toString(cu.decimal2binary(0)));
+//        System.out.println(Arrays.toString(cu.decimal2binary(1073741824)));
+//        System.out.println(Arrays.toString(cu.decimal2binary(-1073741824)));
 //        System.out.println(Arrays.toString(cu.decimal2binary(-1)));
+//        System.out.println(Arrays.toString(cu.decimal2binary(-2)));
+//        System.out.println(Arrays.toString(cu.decimal2binary(-4)));
 //        System.out.println(Arrays.toString(cu.decimal2binary(2147483647)));
-
-        // 高位 -> 低位
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(1)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(-2147483648)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(-2147483647)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(-2147483646)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(0)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(1073741824)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(-1073741824)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(-1)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(-2)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(2147483647)));
-//        System.out.println(Arrays.toString(cu.decimal2binaryII(1073741823)));
+//        System.out.println(Arrays.toString(cu.decimal2binary(1073741823)));
 
 
         /**
          * 二进制转十进制
          */
-        // 低位 -> 高位
-//        System.out.println(cu.binary2decimal("10000000000000000000000000000000"));    // 1
-//        System.out.println(cu.binary2decimal("00000000000000000000000000000001"));    // -2147483648
+//        System.out.println(cu.binary2decimal("00000000000000000000000000000001"));    // 1
+//        System.out.println(cu.binary2decimal("10000000000000000000000000000000"));    // -2147483648
 //        System.out.println(cu.binary2decimal("10000000000000000000000000000001"));    // -2147483647
-//        System.out.println(cu.binary2decimal("01000000000000000000000000000001"));    // -2147483646
+//        System.out.println(cu.binary2decimal("10000000000000000000000000000010"));    // -2147483646
 //        System.out.println(cu.binary2decimal("00000000000000000000000000000000"));    // 0
+//        System.out.println(cu.binary2decimal("01000000000000000000000000000000"));    // 1073741824
+//        System.out.println(cu.binary2decimal("11000000000000000000000000000000"));    // -1073741824
 //        System.out.println(cu.binary2decimal("11111111111111111111111111111111"));    // -1
-//        System.out.println(cu.binary2decimal("11111111111111111111111111111110"));    // 2147483647
-
-        // 高位 -> 低位
-//        System.out.println(cu.binary2decimalII("00000000000000000000000000000001"));    // 1
-//        System.out.println(cu.binary2decimalII("10000000000000000000000000000000"));    // -2147483648
-//        System.out.println(cu.binary2decimalII("10000000000000000000000000000001"));    // -2147483647
-//        System.out.println(cu.binary2decimalII("10000000000000000000000000000010"));    // -2147483646
-//        System.out.println(cu.binary2decimalII("00000000000000000000000000000000"));    // 0
-//        System.out.println(cu.binary2decimalII("01000000000000000000000000000000"));    // 1073741824
-//        System.out.println(cu.binary2decimalII("11000000000000000000000000000000"));    // -1073741824
-//        System.out.println(cu.binary2decimalII("11111111111111111111111111111111"));    // -1
-//        System.out.println(cu.binary2decimalII("11111111111111111111111111111110"));    // -2
-//        System.out.println(cu.binary2decimalII("01111111111111111111111111111111"));    // 2147483647
-//        System.out.println(cu.binary2decimalII("00111111111111111111111111111111"));    // 1073741823
+//        System.out.println(cu.binary2decimal("11111111111111111111111111111110"));    // -2
+//        System.out.println(cu.binary2decimal("11111111111111111111111111111100"));    // -4
+//        System.out.println(cu.binary2decimal("01111111111111111111111111111111"));    // 2147483647
+//        System.out.println(cu.binary2decimal("00111111111111111111111111111111"));    // 1073741823 == (2 ^ 30 - 1)
 
         /**
          * 位移运算
@@ -189,6 +171,8 @@ public class Test15 {
 //        System.out.println(-2147483648 >>> 1);
 //        System.out.println(-2147483647 >>> 1);
 //        System.out.println(2147483647 >>> 1);
+
+//        System.out.println(Math.pow(2, 30) - 1);    // 1073741823
 
         /**
          *【15-4-1】位1的个数（汉明重量）
@@ -217,6 +201,47 @@ public class Test15 {
          */
 //        System.out.println(sl15.convertInteger(29, 15));
 //        System.out.println(sl15.convertInteger(1, 2));
+
+        /**
+         *【15-4-4】配对交换
+         *『面试题 05.07』
+         */
+//        System.out.println(sl15.exchangeBits(2));
+//        System.out.println(sl15.exchangeBits(3));
+
+//        System.out.println(sl15.exchangeBits2(2));
+//        System.out.println(sl15.exchangeBits2(3));
+
+        /**
+         *【15-4-5】插入
+         *『面试题 05.01.』
+         */
+//        System.out.println(sl15.insertBits(1024, 19, 2, 6));
+//        System.out.println(sl15.insertBits(0, 31, 0, 4));
+//        System.out.println(sl15.insertBits(1143207437, 1017033, 11, 31));
+
+        /**
+         *【15-4-6】消失的数字
+         *『面试题 17.14.』
+         */
+//        System.out.println(sl15.missingNumber4(new int[]{9,6,4,2,3,5,7,0,1}));
+//        System.out.println(sl15.missingNumber4(new int[]{0, 1, 3}));
+//        System.out.println(sl15.missingNumber4(new int[]{0, 1, 2}));
+//        System.out.println(8 ^ 3 ^ 3 ^ 2 ^ 2 ^ 1 ^ 1);
+
+        /**
+         *【15-4-7】数组中数字出现的次数（找到两个单身狗）
+         *『剑指Offer 56-I』
+         */
+//        System.out.println(Arrays.toString(sl15.singleNumbers(new int[]{1,2,10,4,1,4,3,3})));
+//        System.out.println(Arrays.toString(sl15.singleNumbers(new int[]{4,1,4,6})));
+
+        /**
+         *【15-4-8】数组中数字出现的次数II（找到一个单身狗，其他都是出现三次）
+         *『剑指Offer 56-II』
+         */
+//        System.out.println(sl15.singleNumber2(new int[]{9,1,7,9,7,9,7}));
+//        System.out.println(sl15.singleNumber2(new int[]{3,4,3,3}));
 
         /**
          *【15-4-9】交换数字
