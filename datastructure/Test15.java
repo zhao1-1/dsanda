@@ -87,11 +87,14 @@ public class Test15 {
          *【15-3-1】最大子序和
          *『力扣-53』
          */
-//        System.out.println(sl15.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
-//        System.out.println(sl15.maxSubArray(new int[]{1}));
-//        System.out.println(sl15.maxSubArray(new int[]{0}));
-//        System.out.println(sl15.maxSubArray(new int[]{-1}));
-//        System.out.println(sl15.maxSubArray(new int[]{-1000}));
+//        System.out.println(sl15.maxSubArray3(new int[]{-2,1,-3,4,-1,2,1,-5,4}));
+//        System.out.println(sl15.maxSubArray3(new int[]{1}));
+//        System.out.println(sl15.maxSubArray3(new int[]{0}));
+//        System.out.println(sl15.maxSubArray3(new int[]{-1}));
+//        System.out.println(sl15.maxSubArray3(new int[]{-1000}));
+//        System.out.println(sl15.maxSubArray3(new int[]{-2, -1}));
+//        System.out.println(sl15.maxSubArray3(new int[]{-1, 0, -2}));
+//        System.out.println(sl15.maxSubArray3(new int[]{-2, -1, -2}));
 
         /**
          *【15-3-2】买卖股票的最佳时期
@@ -117,6 +120,17 @@ public class Test15 {
 
 //        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,4})));
 //        System.out.println(Arrays.toString(sl15.productExceptSelf3(new int[]{1,2,3,0,4})));
+
+        /**
+         *【15-3-4】翻转数位
+         *『面试题 05.03.』
+         */
+//        System.out.println(sl15.reverseBits2(-1));
+//        System.out.println(sl15.reverseBits2(-2147483648));
+//        System.out.println(sl15.reverseBits2(0));
+//        System.out.println(sl15.reverseBits2(1));
+//        System.out.println(sl15.reverseBits2(7));
+//        System.out.println(sl15.reverseBits2(1775));
 
 
         /**

@@ -91,14 +91,9 @@ public class Solution15 {
      *【15-1-4】三数之和
      *『力扣-15』
      * 解法一：hash
-     */
-    // 见【8-2】
-
-    /**
-     *【15-1-4】三数之和
-     *『力扣-15』
      * 解法二：双指针
      */
+    // 见【8-2】
 
 
     /**
@@ -458,9 +453,73 @@ public class Solution15 {
      *【15-3-1】最大子序和
      *『力扣-53』
      */
-    // 解法一：滑动窗口（正常思路）
+    // 解法一：暴力枚举（时间复杂度o(n^2)，超时）
+    public int maxSubArray1(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum += nums[j];
+                max = Math.max(max, sum);
+            }
+        }
+        return max;
+    }
 
-    // 解法二：前后缀统计
+    // 解法二：贪心 / 滑动窗口
+    public int maxSubArray2(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            max = Math.max(max, sum);
+            // 开始贪心：如果sum小于0，重新开始找子序串
+            if (sum < 0) sum = 0;
+        }
+        return max;
+    }
+
+    // 解法三：前后缀和统计
+    public int maxSubArray3(int[] nums) {
+       /*
+        nums     = {-2, 1, -3, 4, -1, 2, 1, -5, 4}
+        leftSum  = {-2, -1, -4, 0, -1, 1, 2, -3, 1}
+                            x
+        rightMax = {2, 2, 2, 2, 2, 2, 2, 1, 1}
+                                x
+        */
+        if (nums.length == 1) return nums[0];
+        int[] sum = new int[nums.length];
+        int[] max = new int[nums.length];
+
+        int currSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            currSum += nums[i];
+            sum[i] = currSum;
+        }
+
+        int currMax = Integer.MIN_VALUE;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            currMax = Math.max(currMax, sum[i]);
+            max[i] = currMax;
+        }
+
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (i == 0) {
+                result = max[0];
+            } else {
+                result = Math.max(result, (max[i] - max[i - 1]));
+            }
+        }
+        return result;
+    }
+
+    // 解法四：dp
+
+    // 解法五：分治
+
+    // 前后缀统计（自己的思路，但是是错误的！）
     public int maxSubArray(int[] nums) {
         /*
         nums   = {-2, 1, -3, 4, -1, 2, 1, -5, 4}
@@ -477,7 +536,7 @@ public class Solution15 {
         int sumMax = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
             sum += nums[i];
-            if (sum > sumMax) {
+            if (sum >= sumMax) {
                 leftMaxI = i;
                 sumMax = sum;
             }
@@ -488,11 +547,13 @@ public class Solution15 {
         sumMax = Integer.MIN_VALUE;
         for (int i = n - 1; i >= 0; i--) {
             sum += nums[i];
-            if (sum > sumMax) {
+            if (sum >= sumMax) {
                 rightMaxI = i;
                 sumMax = sum;
             }
         }
+
+        if (rightMaxI > leftMaxI) return Math.max(nums[rightMaxI], nums[leftMaxI]);
 
         int result = 0;
         for (int i = rightMaxI; i <= leftMaxI; i++) {
@@ -500,6 +561,7 @@ public class Solution15 {
         }
         return result;
     }
+
 
 
     /**
@@ -647,15 +709,93 @@ public class Solution15 {
     }
 
 
-
     /**
-     *【15-3-4】翻转数位
+     *【15-3-4】翻转数位（"0"位前后"1"的最大个数）
      *『面试题 05.03.』
      */
-    public int reverseBits(int num) {
+    // 解法一：暴力解法
+    // 注意：时间复杂度并不是o(n^2)，而是o(an)！
+    public int reverseBits1(int num) {
         CommonUtils cu = new CommonUtils();
-//        int[] binary = cu.decimal2binary(num);
-        return 0;
+        int[] binary = cu.decimal2binary(num);
+
+        // k -> 第一个"1"出现的位置的前一个（必须把1前面的0带上）
+        int k = 0;
+        while (k < 32 && binary[k] == 0) {
+            k++;
+        }
+        int n = binary.length;
+
+        // 如果num是负数，k为0，即binary[0] == 1，开头就是"1"，那么无需带前面的"0"了（因为前面没有）
+        if (k != 0)
+            k -= 1;
+        else
+            k = 0;
+
+        // 暴力搜寻
+        int maxCount = 0;
+        for (int i = k; i < n; i++) {
+            if (binary[i] == 0) {
+                int count = 1;
+                int j = i - 1;      // 向"0"前搜"1"
+                while (j >= k && binary[j] == 1){
+                    count++;
+                    j--;
+                }
+
+                j = i + 1;          // 向"0"后搜"1"
+                while (j < n && binary[j] == 1) {
+                    count++;
+                    j++;
+                }
+                maxCount = Math.max(maxCount, count);
+            }
+        }
+
+        // 为了考虑-1的那个情况（就是32位都是"1"）
+        if (k == 0 && maxCount == 0)
+            return 32;
+        else
+            return maxCount;
+    }
+
+    // 解法二：
+    public int reverseBits2(int num) {
+        // -1的情况必须单独考虑
+        if (num == -1) return 32;
+
+        CommonUtils cu = new CommonUtils();
+        int[] binary = cu.decimal2binary(num);
+
+        int countTemp = 0;
+
+        // 前缀统计："0"向左的"1"的数量
+        int[] leftOneCount = new int[CommonUtils.INT_BITS];
+        for (int i = 0; i < binary.length; i++) {
+            if (binary[i] == 1) countTemp++;
+            if (binary[i] == 0) {
+                leftOneCount[i] = countTemp;
+                countTemp = 0;
+            }
+        }
+
+        // 后缀统计："0"向右的"1"的数量
+        int[] rightOneCount = new int[CommonUtils.INT_BITS];
+        countTemp = 0;
+        for (int i = binary.length - 1; i >= 0; i--) {
+            if (binary[i] == 1) countTemp++;
+            if (binary[i] == 0) {
+                rightOneCount[i] = countTemp;
+                countTemp = 0;
+            }
+        }
+
+        // 统计最大"1"的个数（别忘了中间的"0"自己算一个）
+        int maxOneCount = 0;
+        for (int i = 0; i < CommonUtils.INT_BITS; i++) {
+            maxOneCount = Math.max(maxOneCount, leftOneCount[i] + rightOneCount[i]);
+        }
+        return maxOneCount + 1;
     }
 
 
@@ -858,8 +998,7 @@ public class Solution15 {
         int[] binaryM = cu.decimal2binary(M);
 
         int startM = 0;
-        while (startM < binaryM.length) {
-            if (binaryM[startM] != 0) break;
+        while (startM < binaryM.length && binaryM[startM] == 0) {
             startM++;
         }
 

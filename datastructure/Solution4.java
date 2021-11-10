@@ -282,22 +282,22 @@ public class Solution4 {
     public int trap_2(int[] height) {
         int n = height.length;
 
-        // 前缀统计
+        // 前缀最大统计
         int[] leftMax = new int[n];
         for (int i = 1; i < n - 1; i++) {
-            leftMax[i] = height[i-1] > leftMax[i-1] ? height[i-1] : leftMax[i-1];
+            leftMax[i] = Math.max(height[i - 1], leftMax[i - 1]);
         }
 
-        // 后缀统计
+        // 后缀最大统计
         int[] rightMax = new int[n];
         for (int i = n - 2; i > 0; i--) {
-            rightMax[i] = height[i+1] > rightMax[i+1] ? height[i+1] : rightMax[i+1];
+            rightMax[i] = Math.max(height[i + 1], rightMax[i + 1]);
         }
 
         // 计算每个柱子之上承载的雨量
         int result = 0;
         for (int i = 1; i < n - 1; i++) {
-            int barCarry = (leftMax[i] < rightMax[i] ? leftMax[i] : rightMax[i]) - height[i];
+            int barCarry = (Math.min(leftMax[i], rightMax[i])) - height[i];
             result += barCarry > 0 ? barCarry : 0;
         }
         return result;
