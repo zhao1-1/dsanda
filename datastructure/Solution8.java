@@ -2,6 +2,13 @@ package datastructure;
 
 import java.util.*;
 
+/**
+ * 【08. 哈希】
+ * 题型：
+   1. 查找；
+   2. 统计；
+   3. 判重；
+ */
 public class Solution8 {
 
     /**
@@ -28,24 +35,172 @@ public class Solution8 {
 
 
     /**
-     *【8-1】两数之和
+     *【8-1】两数之和（要求输出下标）
      * {力扣-1}
      */
-    // 见【1-3】解法二
+
+    // 解法一：暴力枚举（同【1-3】）
+    public int[] twoSum_1(int[] nums, int target) {
+        int n = nums.length;
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+
+    // 解法二：哈希（最优解）
+    public int[] twoSum_2(int[] nums, int target) {
+        HashMap<Integer, Integer> pools = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (pools.containsKey(target - nums[i])) {
+                return new int[]{pools.get(target-nums[i]), i};
+            }
+            pools.put(nums[i], i);
+        }
+        return new int[0];
+    }
+
+    // 解法三：排序 + 双指针（同【15-1-3】）
+    class NumAndIndex {
+        int num;
+        int index;
+        NumAndIndex(int num_, int index_) {
+            this.num = num_;
+            this.index = index_;
+        }
+    }
+    public int[] twoSum_3(int[] nums, int target) {
+        NumAndIndex[] numAndIndices = new NumAndIndex[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            numAndIndices[i] = new NumAndIndex(nums[i], i);
+        }
+        Arrays.sort(numAndIndices, (x1, x2) ->  x1.num - x2.num);
+
+        int l = 0;
+        int r = numAndIndices.length - 1;
+        while (l < r) {
+            if (numAndIndices[l].num + numAndIndices[r].num > target)
+                r--;
+            else if (numAndIndices[l].num + numAndIndices[r].num < target)
+                l++;
+            else
+                return new int[]{numAndIndices[l].index, numAndIndices[r].index};
+        }
+        return new int[0];
+    }
+
 
 
     /**
-     *【8-2】三数之和
+     *【8-2】三数之和（去重）
      * {力扣-15}
-     * 解法一：Hash
+     * 总结：
+       暴力枚举的时间复杂度是o(n^3)
+       减少时间复杂度本质（无论是通过双指针还是通过hash），最主要的根本原因还是由于“排序”！
+       一个有序性的数组，搜寻的时间复杂度从 n，锐减成log n，本质还是利用“二分查找”原理！
      */
+    // 解法一：排序 + Hash去重（不推荐）
+    public List<List<Integer>> threeSum_1(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        int n = nums.length;
+        int target = 0;
+        Arrays.sort(nums);
 
-    /**
-     *【8-2】三数之和
-     * {力扣-15}
-     * 解法二：双指针
-     */
-    // 见【15-1-4】
+        HashMap<Integer, Integer> pools = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            pools.put(nums[i], i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) continue;             // 避免a重复
+            for (int j = i + 1; j < n; j++) {
+                if (j != i + 1 && nums[j] == nums[j - 1]) continue;     // 避免b重复
+                int c = target - (nums[i] + nums[j]);
+                if (!pools.containsKey(c)) continue;
+                if (pools.get(c) > j) {                                 // 通过hash避免c重复
+                    List<Integer> subResult = new ArrayList<>();
+                    subResult.add(nums[i]);
+                    subResult.add(nums[j]);
+                    subResult.add(c);
+                    result.add(subResult);
+                }
+            }
+        }
+        return result;
+    }
+
+    // 解法二：排序 + 双指针（同【15-1-4】）（最优解）
+    public List<List<Integer>> threeSum_2(int[] nums) {
+        /*
+        nums = {-1, 0, 1, 2, -1, -4}
+        sort = {-4, -1, -1, 0, 1, 2}
+
+        nums = {-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4}
+        sort = {-4, -3, -2, -1, -1, 0, 0, 1, 2, 3, 4}
+         */
+        List<List<Integer>> result = new ArrayList<>();
+        int target = 0;
+        int n = nums.length;
+
+        Arrays.sort(nums);
+
+        int head;
+        int tail;
+        for (int i = 0; i < n - 2; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) continue;     // 避免a重复
+            head = i + 1;
+            tail = n - 1;
+            while (head < tail) {
+                if (head > i + 1 && nums[head] == nums[head - 1]) {             // 避免b重复
+                    head++;
+                    continue;
+                }
+                if (tail < n - 1 && nums[tail] == nums[tail + 1]) {             // 避免c重复
+                    tail--;
+                    continue;
+                }
+                if (nums[head] + nums[tail] == target - nums[i]) {
+                    List<Integer> subResult = new ArrayList<>();
+                    subResult.add(nums[i]);
+                    subResult.add(nums[head]);
+                    subResult.add(nums[tail]);
+                    result.add(subResult);
+                    head++;
+                    tail--;
+                } else if (nums[head] + nums[tail] > target - nums[i]) {
+                    tail--;
+                } else {
+                    head++;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    // 解法三：暴力枚举（如果要求去重，则此法不适用）
+    public List<List<Integer>> threeSum_3(int[] nums) {
+        int target = 0;
+        List result = new ArrayList();
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
+                    if (nums[i] + nums[j] + nums[k] == target) {
+                        List<Integer> subResult = new ArrayList<>();
+                        subResult.add(nums[i]);
+                        subResult.add(nums[j]);
+                        subResult.add(nums[k]);
+                        result.add(subResult);
+                    }
+                }
+            }
+        }
+        return result;
+    }
 
 
 
@@ -108,8 +263,8 @@ public class Solution8 {
     /**
      *【8-8】数组中重复的数字
      * {剑指Offer-03}
-     * 解法一：哈希
      */
+    // 解法一：哈希
     public int findRepeatNumber(int[] nums) {
         HashSet pools = new HashSet();
         for (int num : nums) {
@@ -119,11 +274,7 @@ public class Solution8 {
         return -1;
     }
 
-    /**
-     *【8-8】数组中重复的数字
-     * {剑指Offer-03}
-     * 解法二：排序后遍历判断
-     */
+    // 解法二：排序后遍历判断
     public int findRepeatNumber_2(int[] nums) {
         Arrays.sort(nums);
         for (int i = 0; i < nums.length -1; i++) {
@@ -132,11 +283,7 @@ public class Solution8 {
         return -1;
     }
 
-    /**
-     *【8-8】数组中重复的数字
-     * {剑指Offer-03}
-     * 解法三：位图
-     */
+     // 解法三：位图
 
 
 

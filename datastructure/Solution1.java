@@ -116,70 +116,11 @@ public class Solution1 {
     /**
      *【1-3】两数之和
      * {力扣-1}
-     * 解法1：暴力枚举
-     */
-    public int[] twoSum(int[] nums, int target) {
-        int n = nums.length;
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                if (nums[i] + nums[j] == target) {
-                    return new int[]{i, j};
-                }
-            }
-        }
-        return new int[0];
-    }
-
-    /**
-     *【1-3】两数之和
-     * {力扣-1}
-     * 解法2：哈希表
+     * 解法一：暴力枚举
+     * 解法二：哈希表
+     * 解法三：双指针
      */
     // 见【8-1】
-    public int[] twoSum_2(int[] nums, int target) {
-        HashMap<Integer, Integer> pools = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (pools.containsKey(target - nums[i])) {
-                return new int[]{pools.get(target-nums[i]), i};
-            }
-            pools.put(nums[i], i);
-        }
-        return new int[0];
-    }
-
-    /**
-     *【1-3】两数之和
-     * {力扣-1}
-     * 解法3：双指针
-     */
-    // 见【15-1-3】
-    class NumAndIndex {
-        int num;
-        int index;
-        NumAndIndex(int num_, int index_) {
-            this.num = num_;
-            this.index = index_;
-        }
-    }
-    public int[] twoSum_3(int[] nums, int target) {
-        NumAndIndex[] numAndIndices = new NumAndIndex[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-           numAndIndices[i] = new NumAndIndex(nums[i], i);
-        }
-        Arrays.sort(numAndIndices, (x1, x2) ->  x1.num - x2.num);
-
-        int l = 0;
-        int r = numAndIndices.length - 1;
-        while (l < r) {
-            if (numAndIndices[l].num + numAndIndices[r].num > target)
-                r--;
-            else if (numAndIndices[l].num + numAndIndices[r].num < target)
-                l++;
-            else
-                return new int[]{numAndIndices[l].index, numAndIndices[r].index};
-        }
-        return new int[0];
-    }
 
 
     /**

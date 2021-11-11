@@ -245,9 +245,34 @@ public class Solution6 {
     /**
      *【6-7】颜色分类*
      * {力扣75}
-     * 解法三：双指针
+     * 解法三：双指针（思路同【6-6】双指针的解法）
      */
     public int[] sortColors_3(int[] nums) {
+        int n = nums.length;
+        int head1 = 0;
+        int tail1 = n - 1;
+
+        // 先把"2"都移动到最后面
+        while (head1 < tail1) {
+            while (head1 != 2) head1++;
+            while (tail1 == 2) tail1--;
+            this.swap(nums, head1, tail1);
+            head1++;
+            tail1--;
+        }
+
+        // 再处理"0" "1"的顺序
+        int head2 = 0;
+        int tail2 = head1;
+        if (nums[tail2] == 2) tail2--;
+        while (head2 < tail2) {
+            while (head2 == 0) head2++;
+            while (tail2 == 1) tail2--;
+            this.swap(nums, head2, tail2);
+            head2++;
+            tail2--;
+        }
+
         return nums;
     }
 

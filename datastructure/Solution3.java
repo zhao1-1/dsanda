@@ -751,9 +751,8 @@ public class Solution3 {
     /**
      *【3-13】相交链表
      * {力扣-160}
-     // 解法1：【双指针循环遍历】（官方）
-     // 解析过程见Leecode官方图解！
      */
+    // 解法一：【双指针循环遍历】（官方：解析过程见力扣官方图解！）
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
         ListNode pA = headA, pB = headB;
@@ -764,12 +763,7 @@ public class Solution3 {
         return pA;
     }
 
-
-    /**
-     *【3-13】相交链表
-     * {力扣-160}
-     // 解法2：【哈希表记录】
-     */
+    // 解法二：【哈希表记录】
     public ListNode getIntersectionNode_2(ListNode headA, ListNode headB) {
         Set<ListNode> nodePools = new HashSet<>();
         ListNode currA = headA;
@@ -785,13 +779,7 @@ public class Solution3 {
         return null;
     }
 
-
-    /**
-     *【3-13】相交链表
-     * {力扣-160}
-     // 解法3：【循环计数】
-     * 时间复杂度同官方解法1，都是两个链表需要循环两遍
-     */
+    // 解法三：【循环计数】（时间复杂度同官方解法1，都是两个链表需要循环两遍）
     public ListNode getIntersectionNode_3(ListNode headA, ListNode headB) {
         ListNode currA = headA;
         ListNode currB = headB;

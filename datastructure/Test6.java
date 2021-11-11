@@ -104,18 +104,18 @@ public class Test6 {
         /**
          * 归并排序（链表实现）
          */
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a01)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a02)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a03)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a04)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a05)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a06)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a07)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a08)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a09)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a10)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a11)));
-        sl3.printList(sortUtil.mergeSort(sl3.buildList(a12)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a01)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a02)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a03)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a04)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a05)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a06)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a07)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a08)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a09)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a10)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a11)));
+//        sl3.printList(sortUtil.mergeSort(sl3.buildList(a12)));
 
 
 
@@ -196,16 +196,16 @@ public class Test6 {
          * {LeetCode75}
          * 解法二：借助辅助数组
          */
-//        int[] color1 = new int[]{2,0,2,1,1,0};
-//        int[] color2 = new int[]{2,0,1};
-//        int[] color3 = new int[]{0};
-//        int[] color4 = new int[]{1};
-//        int[] color5 = new int[]{2,0};
-//        System.out.println(Arrays.toString(sl6.sortColors_2(color1)));
-//        System.out.println(Arrays.toString(sl6.sortColors_2(color2)));
-//        System.out.println(Arrays.toString(sl6.sortColors_2(color3)));
-//        System.out.println(Arrays.toString(sl6.sortColors_2(color4)));
-//        System.out.println(Arrays.toString(sl6.sortColors_2(color5)));
+        int[] color1 = new int[]{2,0,2,1,1,0};
+        int[] color2 = new int[]{2,0,1};
+        int[] color3 = new int[]{0};
+        int[] color4 = new int[]{1};
+        int[] color5 = new int[]{2,0};
+        System.out.println(Arrays.toString(sl6.sortColors_3(color1)));
+        System.out.println(Arrays.toString(sl6.sortColors_3(color2)));
+        System.out.println(Arrays.toString(sl6.sortColors_3(color3)));
+        System.out.println(Arrays.toString(sl6.sortColors_3(color4)));
+        System.out.println(Arrays.toString(sl6.sortColors_3(color5)));
 
 
         /**

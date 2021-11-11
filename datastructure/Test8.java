@@ -48,13 +48,19 @@ public class Test8 {
          *【8-1】两数之和
          * {LeetCode-1}
          */
-        // 见【1-3】解法二
+//        System.out.println(Arrays.toString(sl8.twoSum_3(new int[]{2, 7, 11, 15}, 9)));
+//        System.out.println(Arrays.toString(sl8.twoSum_3(new int[]{3, 2, 4}, 6)));
+//        System.out.println(Arrays.toString(sl8.twoSum_3(new int[]{3, 2, 6, 4}, 7)));
+//        System.out.println(Arrays.toString(sl8.twoSum_3(new int[]{3, 3}, 6)));
 
 
         /**
          *【8-2】三数之和
          * {LeetCode-15}
          */
+//        System.out.println(sl8.threeSum_2(new int[]{-1,0,1,2,-1,-4}));
+//        System.out.println(sl8.threeSum_2(new int[]{-2,0,1,1,2}));
+//        System.out.println(sl8.threeSum_2(new int[]{-1,0,1,2,-1,-4,-2,-3,3,0,4}));
 
 
         /**

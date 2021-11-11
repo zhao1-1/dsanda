@@ -28,6 +28,8 @@ public class Solution15 {
         1. 快速排序：partition()函数
         2. 选择排序：已排序，未排序区间
         3. 插入排序：已排序，未排序区间
+    （c）减少时间复杂度：
+        通过双指针减少暴力枚举的时间复杂度，往往都需要伴随着“排序”
      */
 
     /**
@@ -37,21 +39,17 @@ public class Solution15 {
     // 见【1-4】
 
 
+
     /**
      *【15-1-2】数对和
      *『面试题 16.24.』
-     * 解法一：暴力穷举
      * 时间复杂度：o(n^2)
      */
+    // 解法一：暴力穷举
 
     // 能否用回溯？因为也数据组合的问题
 
-    /**
-     *【15-1-2】数对和
-     *『面试题 16.24.』
-     * 解法二：双指针
-     * 时间复杂度：复杂度在排序上o(n log n) + 后面求解实际上相当于循环一遍o(n)
-     */
+    // 解法二：双指针（时间复杂度：复杂度在排序上o(n log n) + 后面求解实际上相当于循环一遍o(n)）
     public List<List<Integer>> pairSums(int[] nums, int target) {
         // 先排序是关键！
         Arrays.sort(nums);
@@ -77,6 +75,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-1-3】两数之和
      *『力扣-1』
@@ -84,7 +83,8 @@ public class Solution15 {
      * 解法二：暴力枚举（穷举）
      * 解法三：双指针
      */
-    // 见【1-3】
+    // 见【8-1】
+
 
 
     /**
@@ -94,6 +94,7 @@ public class Solution15 {
      * 解法二：双指针
      */
     // 见【8-2】
+
 
 
     /**
@@ -106,6 +107,7 @@ public class Solution15 {
     // 见【6-6】
 
 
+
     /**
      *【15-1-6】颜色分类
      *『力扣-75』
@@ -116,11 +118,12 @@ public class Solution15 {
     // 见【6-7】
 
 
+
     /**
      *【15-1-7】移动零（已排序、未排序指针）
      *『力扣-283』
-     * 解法一：辅助数组
      */
+    // 解法一：辅助数组
     public int[] moveZeroes(int[] nums) {
         int[] result = new int[nums.length];
         int iR = 0;
@@ -132,12 +135,7 @@ public class Solution15 {
         return result;
     }
 
-
-    /**
-     *【15-1-7】移动零（已排序、未排序指针）
-     *『力扣-283』
-     * 解法二：双指针（模仿快排思想）
-     */
+    // 解法二：双指针（模仿快排思想）
     public void moveZeroes2(int[] nums) {
         /*
         [0,p]       非0
@@ -166,11 +164,12 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-1-8】最小差（类似合并两个有序数组）
      *『面试题 16.06』
-     * 解法一：暴力枚举
      */
+    // 解法一：暴力枚举
     public int smallestDifference(int[] a, int[] b) {
         long minD = Long.MAX_VALUE;
         for (int ai = 0; ai < a.length; ai++) {
@@ -182,12 +181,7 @@ public class Solution15 {
         return (int)minD;
     }
 
-
-    /**
-     *【15-1-8】最小差（类似合并两个有序数组）
-     *『面试题 16.06』
-     * 解法二：双指针
-     */
+    // 解法二：排序 + 双指针
     public int smallestDifference2(int[] a, int[] b) {
         /*
         注意：int类型越界
@@ -217,12 +211,12 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-1-9】单词距离（类似合并两个有序数组）
      *『面试题 17.11』
-     * 解法一：暴力枚举
-       无法通过AC，时间复杂度太高了o(n^2)，超时！
      */
+    // 解法一：暴力枚举（无法通过AC，时间复杂度太高了o(n^2)，超时！）
     public int findClosest(String[] words, String word1, String word2) {
         int minIndex = Integer.MAX_VALUE;
         for (int i1 = 0; i1 < words.length; i1++) {
@@ -234,11 +228,7 @@ public class Solution15 {
         return minIndex;
     }
 
-    /**
-     *【15-1-9】单词距离（类似合并两个有序数组）
-     *『面试题 17.11』
-     * 解法二：双指针（快慢针）
-     */
+    // 解法二：双指针（快慢针）
     public int findClosest2(String[] words, String word1, String word2) {
         int minIndex = words.length + 1;
         int slow = 0;
@@ -249,10 +239,10 @@ public class Solution15 {
 
 
 
+
     /*
     【15-2】滑动窗口
      */
-
 
     /**
      *【15-2-1】和为s的连续正数序列
@@ -361,6 +351,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-2-2】最长不含重复字符的子字符串
      *『剑指Offer 48.』
@@ -387,6 +378,7 @@ public class Solution15 {
 
         return maxLen;
     }
+
 
 
     /**
@@ -425,6 +417,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-2-4】最小覆盖子串
      *『力扣-76』
@@ -432,6 +425,8 @@ public class Solution15 {
 //    public String minWindow(String s, String t) {
 //
 //    }
+
+
 
 
 
@@ -605,6 +600,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-3-3】除自身以外数组的乘积
      *『力扣-238』
@@ -709,12 +705,12 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-3-4】翻转数位（"0"位前后"1"的最大个数）
      *『面试题 05.03.』
      */
-    // 解法一：暴力解法
-    // 注意：时间复杂度并不是o(n^2)，而是o(an)！
+    // 解法一：暴力解法（注意：时间复杂度并不是o(n^2)，而是o(an)！）
     public int reverseBits1(int num) {
         CommonUtils cu = new CommonUtils();
         int[] binary = cu.decimal2binary(num);
@@ -799,6 +795,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-3-5】接雨水
      *『力扣-42』
@@ -807,6 +804,7 @@ public class Solution15 {
      * 解法三：【单调栈】，找出每层的雨量
      */
     // 见【4-12】
+
 
 
 
@@ -906,6 +904,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-4-2】汉明距离（两数不相同位的个数）
      *『力扣-461』
@@ -924,6 +923,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-4-3】整数转换
      *『面试题 05.06』
@@ -937,6 +937,7 @@ public class Solution15 {
         //（b）转换成"求r的位1的个数"题
         return this.hammingWeight(r);
     }
+
 
 
     /**
@@ -974,6 +975,7 @@ public class Solution15 {
         }
         return ret;
     }
+
 
 
     /**
@@ -1014,6 +1016,7 @@ public class Solution15 {
         }
         return cu.binary2decimal(binaryN);
     }
+
 
 
     /**
@@ -1073,6 +1076,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-4-7】数组中数字出现的次数（找到两个单身狗）
      *『剑指Offer 56-I』
@@ -1108,6 +1112,7 @@ public class Solution15 {
         }
         return new int[]{singleA, singleB};
     }
+
 
 
     /**
@@ -1183,6 +1188,7 @@ public class Solution15 {
     }
 
 
+
     /**
      *【15-4-9】交换数字
      *『面试题 16.01.』
@@ -1206,6 +1212,7 @@ public class Solution15 {
         numbers[0] ^= numbers[1];
         return numbers;
     }
+
 
 
     /**
