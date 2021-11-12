@@ -194,18 +194,13 @@ public class Test6 {
         /**
          *【6-7】颜色分类*
          * {LeetCode75}
-         * 解法二：借助辅助数组
          */
-        int[] color1 = new int[]{2,0,2,1,1,0};
-        int[] color2 = new int[]{2,0,1};
-        int[] color3 = new int[]{0};
-        int[] color4 = new int[]{1};
-        int[] color5 = new int[]{2,0};
-        System.out.println(Arrays.toString(sl6.sortColors_3(color1)));
-        System.out.println(Arrays.toString(sl6.sortColors_3(color2)));
-        System.out.println(Arrays.toString(sl6.sortColors_3(color3)));
-        System.out.println(Arrays.toString(sl6.sortColors_3(color4)));
-        System.out.println(Arrays.toString(sl6.sortColors_3(color5)));
+        System.out.println(Arrays.toString(sl6.sortColors_3(new int[]{2,0,2,1,1,0})));
+        System.out.println(Arrays.toString(sl6.sortColors_3(new int[]{2,1,0,2,1,1,0})));
+        System.out.println(Arrays.toString(sl6.sortColors_3(new int[]{2, 0, 1})));
+        System.out.println(Arrays.toString(sl6.sortColors_3(new int[]{0})));
+        System.out.println(Arrays.toString(sl6.sortColors_3(new int[]{1})));
+        System.out.println(Arrays.toString(sl6.sortColors_3(new int[]{2, 0})));
 
 
         /**

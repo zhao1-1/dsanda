@@ -42,7 +42,6 @@ public class Solution5 {
         return f(i-1) + f(i-2);
     }
 
-
     /**
      * 【5-1】斐波那契数列
      * 解法三：循环
@@ -60,6 +59,7 @@ public class Solution5 {
         }
         return result;
     }
+
 
 
     /**
@@ -87,6 +87,7 @@ public class Solution5 {
     // 见【14-4-1】
 
 
+
     /**
      *【5-3】三步问题
      * {面金08.01}
@@ -111,7 +112,6 @@ public class Solution5 {
         cache3[n] = ((waysToStepRecursion(n-1) + waysToStepRecursion(n-2)) % MOD + waysToStepRecursion(n-3)) % MOD;
         return cache3[n];
     }
-
 
     /**
      *【5-3】三步问题
@@ -185,23 +185,17 @@ public class Solution5 {
     }
 
 
+
     /**
      * 【5-5】反转链表
      * {剑指Offer24}
-     * 前三个解法都是非递归，见【3-8】
-     * 解法四：递归法
-     * 时间复杂度：o(n)，不分叉的一根递归树
-     * 空间复杂度：o(n)，注意，并非原地反转哦，虽然没有开辟新空间，但是存在函数栈调用。
+     // 解法一：【辅助三指针法】（原地反转）---自己想出来的，但是不通用，而且说不定下次再做就想不出来了。
+     // 解法二：【头插法】（原地反转）--- 自己实现，不咋完美，很啰嗦，很容易出bug
+     // 解法三：【头插法】（原地反转）---标准答案
+     // 解法四：递归
      */
-    public ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) return head;
-//        if (head == null) return null;
-//        if (head.next == null) return head;
-        ListNode reverseNode = reverseList(head.next);
-        head.next.next = head;
-        head.next = null;
-        return reverseNode;
-    }
+    // 见【3-8】
+
 
 
     /**
@@ -228,6 +222,7 @@ public class Solution5 {
 
         return newHead;
     }
+
 
 
     /**
@@ -356,7 +351,6 @@ public class Solution5 {
         if (A == 0 || B == 0) return 0;
         return A > B ? A + multiply_2(A, B - 1) : B + multiply_2(B, A - 1);
     }
-
 
     /**
      *【5-8】递归乘法*

@@ -55,6 +55,7 @@ public class Solution6 {
     }
 
 
+
     /**
      *【6-2】有效的字母异位词
      * {力扣-242}
@@ -117,10 +118,12 @@ public class Solution6 {
     }
 
 
+
     /**
      *【6-4】会议室
      * {力扣252}
      */
+
 
 
     /**
@@ -130,6 +133,7 @@ public class Solution6 {
 //    public int[][] merge(int[][] intervals) {
 //
 //    }
+
 
 
     /**
@@ -157,7 +161,6 @@ public class Solution6 {
         return nums;
     }
 
-
     /**
      * 【6-6】调整数组顺序使奇数位于偶数前面
      * {剑指Offer21}
@@ -183,7 +186,6 @@ public class Solution6 {
         return nums;
     }
 
-
     /**
      * 【6-6】调整数组顺序使奇数位于偶数前面
      * {剑指Offer21}
@@ -206,9 +208,12 @@ public class Solution6 {
     }
 
 
+
     /**
      *【6-7】颜色分类*
      * {力扣75}
+     */
+    /**
      * 解法一：直接用排序函数
      * 时间复杂度：o(nlogn)
      * 空间复杂度：o(1)
@@ -218,8 +223,6 @@ public class Solution6 {
     }
 
     /**
-     *【6-7】颜色分类*
-     * {力扣75}
      * 解法二：辅助计数数组
      * 时间复杂度：o(n)
      * 空间复杂度：o(1)
@@ -242,11 +245,7 @@ public class Solution6 {
         return nums;
     }
 
-    /**
-     *【6-7】颜色分类*
-     * {力扣75}
-     * 解法三：双指针（思路同【6-6】双指针的解法）
-     */
+    // 解法三：双指针（思路同【6-6】双指针的解法）
     public int[] sortColors_3(int[] nums) {
         int n = nums.length;
         int head1 = 0;
@@ -254,27 +253,41 @@ public class Solution6 {
 
         // 先把"2"都移动到最后面
         while (head1 < tail1) {
-            while (head1 != 2) head1++;
-            while (tail1 == 2) tail1--;
-            this.swap(nums, head1, tail1);
+            // 注意：此处不能用while循环改造
+            if (nums[head1] != 2) {
+                head1++;
+                continue;
+            }
+            if (nums[tail1] == 2) {
+                tail1--;
+                continue;
+            }
+            CommonUtils.swap(nums, head1, tail1);
             head1++;
             tail1--;
         }
 
         // 再处理"0" "1"的顺序
         int head2 = 0;
-        int tail2 = head1;
+        int tail2 = tail1;
         if (nums[tail2] == 2) tail2--;
         while (head2 < tail2) {
-            while (head2 == 0) head2++;
-            while (tail2 == 1) tail2--;
-            this.swap(nums, head2, tail2);
+            if (nums[head2] == 0) {
+                head2++;
+                continue;
+            }
+            if (nums[tail2] == 1) {
+                tail2--;
+                continue;
+            }
+            CommonUtils.swap(nums, head2, tail2);
             head2++;
             tail2--;
         }
 
         return nums;
     }
+
 
 
     /**
@@ -284,11 +297,13 @@ public class Solution6 {
     // 见SortUtil.insertionSort(ListNode head)
 
 
+
     /**
      *【6-9】链表归并排序*
      * {力扣148}
      */
     // 见SortUtil.mergeSort(ListNode head)
+
 
 
     /**
@@ -334,16 +349,16 @@ public class Solution6 {
             while (i < j && arr[i] > beacon) i++;
             while (i < j && arr[j] < beacon) j--;
             if (i < j) {
-                swap(arr, i, j);
+                CommonUtils.swap(arr, i, j);
                 i++;
                 j--;
             }
         }
         if (j >= l && arr[j] < beacon) {
-            swap(arr,j,r);
+            CommonUtils.swap(arr,j,r);
             return j;
         } else {
-            swap(arr,j+1,r);
+            CommonUtils.swap(arr,j+1,r);
             return j+1;
         }
     }
@@ -405,18 +420,13 @@ public class Solution6 {
 
         for (; maxSign <= r - 1; maxSign++) {
             if (arr[maxSign] < beacon) {
-                swap(arr, minSign + 1, maxSign);
+                CommonUtils.swap(arr, minSign + 1, maxSign);
                 minSign++;
             }
         }
-        swap(arr, minSign + 1, r);
+        CommonUtils.swap(arr, minSign + 1, r);
 
         return minSign + 1;
-    }
-    private void swap(int[] x, int i, int j) {
-        int temp = x[i];
-        x[i] = x[j];
-        x[j] = temp;
     }
 
     /**
@@ -445,7 +455,6 @@ public class Solution6 {
         }
         return reversePairsCount;
     }
-
 
     /**
      *【6-12】数组中的逆序对**

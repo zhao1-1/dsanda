@@ -24,6 +24,7 @@ public class CommonUtils {
     }
 
 
+
     /**
      * 二进制转十进制
        binary -> 0 ~ 31 -> 高位 ~ 低位
@@ -100,6 +101,55 @@ public class CommonUtils {
         }
 
         return binary;
+    }
+
+
+
+    /**
+     * 交换数组中俩元素
+     */
+    public static void swap(int[] x, int i, int j) {
+        int temp = x[i];
+        x[i] = x[j];
+        x[j] = temp;
+    }
+
+
+
+    /**
+     * 输入数组生成链表
+     */
+    public static ListNode buildList(int[] inputArray) {
+        if (null == inputArray || inputArray.length ==0) return null;
+        ListNode head = new ListNode();
+        ListNode p = head;
+        for (int i = 0; i < inputArray.length; i++) {
+            p.val = inputArray[i];
+            if (i != inputArray.length - 1) {
+                p.next = new ListNode();
+                p = p.next;
+            }
+        }
+        p.next = null;
+        return head;
+    }
+
+
+
+    /**
+     * 打印输出链表
+     */
+    public static void printList(ListNode head) {
+        ListNode newHead = new ListNode();
+        newHead.next = head;
+        ListNode p = newHead;
+        while (p.next != null) {
+            System.out.print(p.next.val + " -> ");
+            p = p.next;
+        }
+        System.out.print("NULL");
+        System.out.println("");
+        System.out.println("------------");
     }
 
 }

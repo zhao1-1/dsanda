@@ -47,11 +47,7 @@ public class Test5 {
         /**
          *【5-5】反转链表
          */
-        Solution3 sl3 = new Solution3();
-//        sl5.reversePrint(sl3.buildList(new int[]{1,3,2}));
-//        sl5.reversePrint(sl3.buildList(new int[]{2}));
-//        sl5.reversePrint(sl3.buildList(new int[]{1,2,3,4,5,6,7,8,9,10}));
-
+        // 见【3-8】
 
         /**
          * 【5-6】合并两个排序的链表*
