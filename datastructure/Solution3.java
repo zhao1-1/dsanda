@@ -765,7 +765,7 @@ public class Solution3 {
         return pA;
     }
 
-    // 解法二：【哈希表记录】
+    // 解法二：【哈希表记录】（同【8-3】）
     public ListNode getIntersectionNode_2(ListNode headA, ListNode headB) {
         Set<ListNode> nodePools = new HashSet<>();
         ListNode currA = headA;

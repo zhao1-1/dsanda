@@ -82,6 +82,8 @@ public class Test8 {
          * {面金-02.01}
          */
         // 区分【3-2】，这俩不一样！本题必须借助Hash表
+//        CommonUtils.printList(sl8.removeDuplicateNodes(CommonUtils.buildList(new int[]{1, 2, 3, 3, 2, 1})));
+//        CommonUtils.printList(sl8.removeDuplicateNodes(CommonUtils.buildList(new int[]{1, 1, 1, 1, 2})));
 
 
         /**
@@ -101,20 +103,26 @@ public class Test8 {
          *【8-7】判断是否互为字符重排
          * {面金-01.02}
          */
+//        System.out.println(sl8.CheckPermutation_1("abc", "bca"));
+//        System.out.println(sl8.CheckPermutation_1("abc", "bad"));
+//        System.out.println(sl8.CheckPermutation_1("abc", "abcd"));
+//        System.out.println(sl8.CheckPermutation_1("abcf", "abc"));
+//        System.out.println(sl8.CheckPermutation_1("abcf", "abcg"));
 
 
         /**
          *【8-8】数组中重复的数字
          * {剑指Offer-03}
          */
-//        System.out.println(sl8.findRepeatNumber(new int[]{2, 3, 1, 0, 2, 5, 3}));
-//        System.out.println(sl8.findRepeatNumber(new int[]{2, 3, 1, 0, 3, 5, 2}));
+//        System.out.println(sl8.findRepeatNumber_1(new int[]{2, 3, 1, 0, 2, 5, 3}));
+//        System.out.println(sl8.findRepeatNumber_1(new int[]{2, 3, 1, 0, 3, 5, 2}));
 
 
         /**
          *【8-9】有效的字母异位词
          * {LeetCode-242}
          */
+        // 见【6-2】
 
 
         /**
@@ -128,12 +136,17 @@ public class Test8 {
          *【8-11】只出现一次的数字
          * {LeetCode-136}
          */
+//        System.out.println(sl8.singleNumber_2(new int[]{2,2,1}));
+//        System.out.println(sl8.singleNumber_2(new int[]{2,1,3,1,3}));
+//        System.out.println(sl8.singleNumber_2(new int[]{4,1,2,1,2}));
 
 
         /**
          *【8-12】两个数组的交集
          * {LeetCode-349}
          */
+//        System.out.println(Arrays.toString(sl8.intersection_1(new int[]{1,2,2,1}, new int[]{2,2})));
+//        System.out.println(Arrays.toString(sl8.intersection_1(new int[]{4,9,5}, new int[]{9,4,9,8,4})));
 
 
         /**

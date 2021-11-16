@@ -211,6 +211,7 @@ public class Solution8 {
     // 见【3-13】解法二
 
 
+
     /**
      *【8-4】环形链表
      * {力扣e-141}
@@ -218,11 +219,29 @@ public class Solution8 {
     // 见【3-12】解法二
 
 
+
     /**
      *【8-5】移除链表中的重复节点
      * {面金-02.01}
      */
     // 区分【3-2】，这俩不一样！本题必须借助Hash表
+    public ListNode removeDuplicateNodes(ListNode head) {
+        HashSet<Integer> pools = new HashSet<>();
+        ListNode newHead = new ListNode();
+        ListNode newTail = newHead;
+        ListNode curr = head;
+        while (curr != null) {
+            if (!pools.contains(curr.val)) {
+                pools.add(curr.val);
+                newTail.next = curr;
+                newTail = curr;
+            }
+            curr = curr.next;
+        }
+        newTail.next = null;
+        return newHead.next;
+    }
+
 
 
     /**
@@ -251,13 +270,71 @@ public class Solution8 {
     }
 
 
+
     /**
      *【8-7】判断是否互为字符重排
      * {面金-01.02}
      */
-//    public boolean CheckPermutation(String s1, String s2) {
-//
-//    }
+    // 解法一：排序
+    public boolean CheckPermutation_1(String s1, String s2) {
+        if (s1.length() != s2.length()) return false;
+        char[] s1Arr = s1.toCharArray();
+        char[] s2Arr = s2.toCharArray();
+        Arrays.sort(s1Arr);
+        Arrays.sort(s2Arr);
+        for (int i = 0; i < s1Arr.length; i++) {
+            if (s1Arr[i] != s2Arr[i]) return false;
+        }
+        return true;
+    }
+
+    // 解法二：位图
+    public boolean CheckPermutation_2(String s1, String s2) {
+        // 快速逃逸
+        if (s1.length() != s2.length()) return false;
+
+        int[] bitMap = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            bitMap[s1.charAt(i) - 'a']++;
+        }
+        int currIndex = 0;
+        for (int i = 0; i < s2.length(); i++) {
+            currIndex = s2.charAt(i) - 'a';
+            bitMap[currIndex]--;
+            // 剪枝，快速逃逸
+            if (bitMap[currIndex] < 0) return false;
+        }
+        for (int i = 0; i < bitMap.length; i++) {
+            if (bitMap[i] != 0) return false;
+        }
+        return true;
+    }
+
+    // 解法三：hash
+    public boolean CheckPermutation_3(String s1, String s2) {
+        if (s1.length() != s2.length()) return false;
+
+        HashMap<Character, Integer> pools = new HashMap<>();
+        for (int i = 0; i < s1.length(); i++) {
+            char key = s1.charAt(i);
+            int count = 1;
+            if (pools.containsKey(key))
+                count += pools.get(key);
+            pools.put(key, count);
+        }
+        for (int i = 0; i < s2.length(); i++) {
+            char key = s2.charAt(i);
+            if (!pools.containsKey(key)) return false;
+            int count = pools.get(key);
+            if (count == 0) return false;
+            pools.put(key, --count);
+        }
+        for (int i = 0; i < s1.length(); i++) {
+            if (pools.get(s1.charAt(i)) != 0) return false;
+        }
+        return true;
+    }
+
 
 
     /**
@@ -284,6 +361,16 @@ public class Solution8 {
     }
 
      // 解法三：位图
+     public int findRepeatNumber_3(int[] nums) {
+        boolean[] bitMap = new boolean[100000];
+         for (int i = 0; i < nums.length; i++) {
+             if (!bitMap[nums[i]])
+                 bitMap[nums[i]] = true;
+             else
+                 return nums[i];
+         }
+         return -1;
+     }
 
 
 
@@ -292,6 +379,7 @@ public class Solution8 {
      * {力扣-242}
      */
     // 见【6-2】
+
 
 
     /**
@@ -315,24 +403,116 @@ public class Solution8 {
 
 
 
-
     /**
      *【8-11】只出现一次的数字
      * {力扣-136}
      */
+    // 解法一：排序
+    public int singleNumber_1(int[] nums) {
+        Arrays.sort(nums);
+        int i = 0;
+        // 由于存在一个不同，所以nums.length一定是奇数
+        for (; i < nums.length - 2; i+=2) {
+            if (nums[i] != nums[i + 1]) return nums[i];
+        }
+        return nums[i];
+    }
+
+    // 解法二：hash
+    public int singleNumber_2(int[] nums) {
+        HashSet<Integer> pools = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (pools.contains(nums[i]))
+                pools.remove(nums[i]);
+            else
+                pools.add(nums[i]);
+        }
+        List<Integer> result = new ArrayList<>();
+        for (Integer ele : pools) {
+            result.add(ele);
+        }
+        return result.get(0);
+    }
+
+    // 解法三：位图（不建议使用，bitMap太大）
+
+    // 解法四：位运算（见【15-4-11】）
+    public int singleNumber_4(int[] nums) {
+        int result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            result ^= nums[i];
+        }
+        return result;
+    }
+
 
 
     /**
      *【8-12】两个数组的交集
      * {力扣-349}
+     * 拓展：
+       (1) k个数组的交集
+       (2) 两个有序链表的合并
+       (3) k个有序链表的合并
      */
+    // 解法一：排序 + 双指针
+    public int[] intersection_1(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        LinkedList<Integer> result = new LinkedList();
+        int i1 = 0;
+        int i2 = 0;
+        while (i1 < nums1.length && i2 < nums2.length) {
+            if (nums1[i1] < nums2[i2])
+                i1++;
+            else if (nums1[i1] > nums2[i2])
+                i2++;
+            else {
+                // 这种写法很cool
+                if (Objects.isNull(result.peekLast()) || nums1[i1] != result.peekLast())
+                    result.add(nums1[i1]);
+                i1++;
+                i2++;
+            }
+        }
+
+        int[] resultArr = new int[result.size()];
+        for (int i = 0; i < resultArr.length; i++) {
+            resultArr[i] = result.poll();
+        }
+        return resultArr;
+    }
+
+    // 解法二：hash
+    public int[] intersection_2(int[] nums1, int[] nums2) {
+        HashSet<Integer> pools = new HashSet<>();
+        for (int i = 0; i < nums1.length; i++) {
+            pools.add(nums1[i]);
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < nums2.length; i++) {
+            if (pools.contains(nums2[i])) {
+                pools.remove(nums2[i]);
+                result.add(nums2[i]);
+            }
+        }
+
+        int[] resultArr = new int[result.size()];
+        for (int i = 0; i < resultArr.length; i++) {
+            resultArr[i] = result.get(i);
+        }
+        return resultArr;
+    }
+
 
 
     /**
      *【8-13】数组的相对排序*
      * {力扣-1122}
-     * "自己一把梭"：hash + sort
      */
+    // 解法："自己一把梭"：hash + sort
     public int[] relativeSortArray(int[] arr1, int[] arr2) {
         int[] result = new int[arr1.length];
 
@@ -375,6 +555,7 @@ public class Solution8 {
     }
 
 
+
     /**
      *【8-14】设计哈希映射（自己实现HashMap）
      * {力扣-706}
@@ -382,11 +563,13 @@ public class Solution8 {
     // 见【8-0.1】
 
 
+
     /**
      *【8-15】LRU缓存机制
      * {力扣-146}
      */
     // 见【8-0.4】
+
 
 
     /**
