@@ -156,10 +156,10 @@ public class Solution10 {
             if (maxHeap.size() < k)
                 maxHeap.offer(new QEle2(distance, i));
             else
-            if (maxHeap.size() > 0 && distance < maxHeap.peek().distance) {
-                maxHeap.poll();
-                maxHeap.offer(new QEle2(distance, i));
-            }
+                if (maxHeap.size() > 0 && distance < maxHeap.peek().distance) {
+                    maxHeap.poll();
+                    maxHeap.offer(new QEle2(distance, i));
+                }
         }
         int[][] result = new int[k][];
         int i = 0;
@@ -256,21 +256,6 @@ public class Solution10 {
         }
     }
 
-
-    /**
-     *【10-5】超级丑数
-     *「力扣-313」
-     */
-//    public int nthSuperUglyNumber(int n, int[] primes) {
-//
-//    }
-
-
-
-    /**
-     *【10-6】实现Trie（前缀树）
-     *「力扣-208」
-     */
 
 
 }
