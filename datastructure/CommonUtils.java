@@ -13,7 +13,7 @@ public class CommonUtils {
     /**
      * 二维数组的打印
      */
-    public void print2DArr(int[][] x) {
+    public static void print2DArr(int[][] x) {
         System.out.print("[");
         for (int i = 0; i < x.length - 1; i++) {
             System.out.print(Arrays.toString(x[i]) + ", ");
@@ -30,7 +30,7 @@ public class CommonUtils {
        binary -> 0 ~ 31 -> 高位 ~ 低位
        因为计算机底层就是按照从高到底存储bit的
      */
-    public int binary2decimal(String binaryStr) {
+    public static int binary2decimal(String binaryStr) {
         int[] binary = new int[binaryStr.length()];
         for (int i = 0; i < binary.length; i++) {
             binary[i] = binaryStr.charAt(i) - '0';
@@ -44,7 +44,7 @@ public class CommonUtils {
         }
         return decimal;
     }
-    public int binary2decimal(int[] binary) {
+    public static int binary2decimal(int[] binary) {
         int decimal= 0;
         int mask = 1;   // 2 ^ 0 = 1
         for (int i = binary.length - 1; i >= 0; i--) {
@@ -54,7 +54,7 @@ public class CommonUtils {
         return decimal;
     }
 
-    public int binary2decimalII(String binaryStr) {
+    public static int binary2decimalII(String binaryStr) {
         int[] binary = new int[binaryStr.length()];
         for (int i = 0; i < binary.length; i++) {
             binary[i] = binaryStr.charAt(i) - '0';
@@ -66,7 +66,7 @@ public class CommonUtils {
         }
         return decimal;
     }
-    public int binary2decimalII(int[] binary) {
+    public static int binary2decimalII(int[] binary) {
         int decimal = 0;
         for (int i = 0; i < binary.length; i++) {
             decimal = (decimal << 1) + binary[i];
@@ -80,7 +80,7 @@ public class CommonUtils {
        binary -> 0 ~ 31 -> 高位 ~ 低位
      */
     // 缺点：decimal值被破坏，只有Java能处理负数
-    public int[] decimal2binary(int decimal) {
+    public static int[] decimal2binary(int decimal) {
         int[] binary = new int[INT_BITS];
         int i = binary.length - 1;
         while (decimal != 0) {
@@ -92,7 +92,7 @@ public class CommonUtils {
     }
 
     // 优点：decimal值保持不变，且任何语言都可以处理负数（即有符号数）
-    public int[] decimal2binaryII(int decimal) {
+    public static int[] decimal2binaryII(int decimal) {
         int[] binary = new int[INT_BITS];
         int mask = 1;
         for (int i = INT_BITS - 1; i >= 0; i--) {

@@ -26,7 +26,7 @@ public class Solution3 {
                 p = p.next;
             }
         }
-        this.printList(newHead.next);
+        CommonUtils.printList(newHead.next);
         return newHead.next;
     }
 
@@ -43,7 +43,7 @@ public class Solution3 {
         }
         //（2）考虑：头节点
         if (val == head.val) head = head.next;
-        this.printList(head);
+        CommonUtils.printList(head);
         return head;
     }
 
@@ -64,7 +64,7 @@ public class Solution3 {
             }
             p = temp;
         }
-        this.printList(newHead.next);
+        CommonUtils.printList(newHead.next);
         return newHead.next;
     }
 
@@ -82,7 +82,7 @@ public class Solution3 {
         }
         // 亮点在这里，结束处理的时候，一定要把尾节点的next置为null！
         newTail.next = null;
-        this.printList(newHead.next);
+        CommonUtils.printList(newHead.next);
         return newHead.next;
     }
 
@@ -128,7 +128,7 @@ public class Solution3 {
                 p = p.next;
             }
         }
-        this.printList(head);
+        CommonUtils.printList(head);
         return head;
     }
 
@@ -147,7 +147,7 @@ public class Solution3 {
         }
         // 这里结束的时候，尾指针的next必须指向null，否则断不开，11233这种情况就打印1233了！
         newTail.next = null;
-        this.printList(newHead.next);
+        CommonUtils.printList(newHead.next);
         return newHead.next;
     }
 
@@ -182,7 +182,7 @@ public class Solution3 {
         if (p1 == null) tail.next = p2;
         if (p2 == null) tail.next = p1;
 
-        this.printList(newHead.next);
+        CommonUtils.printList(newHead.next);
         return newHead.next;
     }
 
@@ -223,7 +223,7 @@ public class Solution3 {
             p2 = p2.next;
         }
         if (isTen != 0) rTail.next = new ListNode(1);
-        this.printList(rHead.next);
+        CommonUtils.printList(rHead.next);
         return rHead.next;
     }
 
@@ -254,7 +254,7 @@ public class Solution3 {
 //            sum /= 10;
 //            rTail = rTail.next;
 //        }
-//        this.printList(rHead.next);
+//        CommonUtils.printList(rHead.next);
 //        return rHead.next;
 //    }
 
@@ -278,7 +278,7 @@ public class Solution3 {
             slow = slow.next;
         }
 
-        this.printList(slow);
+        CommonUtils.printList(slow);
 
         return slow;
     }
@@ -300,7 +300,7 @@ public class Solution3 {
             p = p.next;
             pLoc++;
         }
-        this.printList(p);
+        CommonUtils.printList(p);
         return p;
     }
 
@@ -324,7 +324,7 @@ public class Solution3 {
             latter = latter.next;
             former = former.next;
         }
-        this.printList(former);
+        CommonUtils.printList(former);
         return former;
     }
 
@@ -356,7 +356,7 @@ public class Solution3 {
 
         // 这一部分的考虑很牛逼，否则12345，删除倒数第五个，很容易仍输出12345
         if (latter == null) {
-            this.printList(former.next);
+            CommonUtils.printList(former.next);
             return former.next;
         } else {
             latter = latter.next;
@@ -367,7 +367,7 @@ public class Solution3 {
             latter = latter.next;
         }
         former.next = former.next.next;
-        this.printList(head);
+        CommonUtils.printList(head);
         return head;
     }
 
@@ -395,7 +395,7 @@ public class Solution3 {
         }
         p2.next = p1;
         head.next = null;
-        this.printList(p2);
+        CommonUtils.printList(p2);
         return p2;
     }
 
@@ -413,7 +413,7 @@ public class Solution3 {
         }
         p.next = newHead.next;
         newHead.next = p;
-        this.printList(newHead.next);
+        CommonUtils.printList(newHead.next);
         return newHead.next;
     }
 
@@ -427,7 +427,7 @@ public class Solution3 {
             newHead = curr;
             curr = temp;
         }
-        this.printList(newHead);
+        CommonUtils.printList(newHead);
         return newHead;
     }
 
@@ -572,7 +572,7 @@ public class Solution3 {
             p1.next = p3;
         p2.next = p3.next;
         p3.next = evenNode;
-        this.printList(oddNode);
+        CommonUtils.printList(oddNode);
         return oddNode;
     }
 
@@ -599,7 +599,7 @@ public class Solution3 {
             evenTail = temp;
         }
         oddTail.next = evenHead;
-        this.printList(oddHead);
+        CommonUtils.printList(oddHead);
         return oddHead;
     }
 
@@ -638,7 +638,7 @@ public class Solution3 {
             count++;
         }
         oddTail.next = evenHead.next;
-        this.printList(oddHead.next);
+        CommonUtils.printList(oddHead.next);
         return oddHead.next;
     }
 
@@ -817,35 +817,6 @@ public class Solution3 {
 
 
     // ============= 公共方法 ==================
-
-    public ListNode buildList(int[] inputArray) {
-        if (null == inputArray || inputArray.length ==0) return null;
-        ListNode head = new ListNode();
-        ListNode p = head;
-        for (int i = 0; i < inputArray.length; i++) {
-            p.val = inputArray[i];
-            if (i != inputArray.length - 1) {
-                p.next = new ListNode();
-                p = p.next;
-            }
-        }
-        p.next = null;
-        return head;
-    }
-
-    public void printList(ListNode head) {
-        ListNode newHead = new ListNode();
-        newHead.next = head;
-        ListNode p = newHead;
-        while (p.next != null) {
-            System.out.print(p.next.val + " -> ");
-            p = p.next;
-        }
-        System.out.print("NULL");
-        System.out.println("");
-        System.out.println("------------");
-    }
-
 
     /**
      *【3-12.2】环形链表的生成

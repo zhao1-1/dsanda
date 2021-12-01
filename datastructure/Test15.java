@@ -1,6 +1,7 @@
 package datastructure;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * @author bin2.zhao (D52B48 in ZhangMen)
@@ -9,7 +10,6 @@ import java.util.Arrays;
 public class Test15 {
     public static void main(String[] args) {
         Solution15 sl15 = new Solution15();
-        CommonUtils cu = new CommonUtils();
 
         /**
          *【15-1-2】数对和
@@ -56,12 +56,12 @@ public class Test15 {
          *【15-2-1】和为s的连续正数序列
          *『剑指Offer 57-II』
          */
-//        cu.print2DArr(sl15.findContinuousSequence(9));
-//        cu.print2DArr(sl15.findContinuousSequence(10));
-//        cu.print2DArr(sl15.findContinuousSequence2(9));
-//        cu.print2DArr(sl15.findContinuousSequence2(10));
-//        cu.print2DArr(sl15.findContinuousSequence3(9));
-//        cu.print2DArr(sl15.findContinuousSequence3(10));
+//        CommonUtils.print2DArr(sl15.findContinuousSequence(9));
+//        CommonUtils.print2DArr(sl15.findContinuousSequence(10));
+//        CommonUtils.print2DArr(sl15.findContinuousSequence2(9));
+//        CommonUtils.print2DArr(sl15.findContinuousSequence2(10));
+//        CommonUtils.print2DArr(sl15.findContinuousSequence3(9));
+//        CommonUtils.print2DArr(sl15.findContinuousSequence3(10));
 
         /**
          *【15-2-2】最长不含重复字符的子字符串
@@ -140,35 +140,35 @@ public class Test15 {
         /**
          * 十进制转二进制
          */
-//        System.out.println(Arrays.toString(cu.decimal2binary(1)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-2147483648)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-2147483647)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-2147483646)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(0)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(1073741824)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-1073741824)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-1)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-2)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(-4)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(2147483647)));
-//        System.out.println(Arrays.toString(cu.decimal2binary(1073741823)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(1)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-2147483648)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-2147483647)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-2147483646)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(0)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(1073741824)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-1073741824)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-1)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-2)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(-4)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(2147483647)));
+//        System.out.println(Arrays.toString(CommonUtils.decimal2binary(1073741823)));
 
 
         /**
          * 二进制转十进制
          */
-//        System.out.println(cu.binary2decimal("00000000000000000000000000000001"));    // 1
-//        System.out.println(cu.binary2decimal("10000000000000000000000000000000"));    // -2147483648
-//        System.out.println(cu.binary2decimal("10000000000000000000000000000001"));    // -2147483647
-//        System.out.println(cu.binary2decimal("10000000000000000000000000000010"));    // -2147483646
-//        System.out.println(cu.binary2decimal("00000000000000000000000000000000"));    // 0
-//        System.out.println(cu.binary2decimal("01000000000000000000000000000000"));    // 1073741824
-//        System.out.println(cu.binary2decimal("11000000000000000000000000000000"));    // -1073741824
-//        System.out.println(cu.binary2decimal("11111111111111111111111111111111"));    // -1
-//        System.out.println(cu.binary2decimal("11111111111111111111111111111110"));    // -2
-//        System.out.println(cu.binary2decimal("11111111111111111111111111111100"));    // -4
-//        System.out.println(cu.binary2decimal("01111111111111111111111111111111"));    // 2147483647
-//        System.out.println(cu.binary2decimal("00111111111111111111111111111111"));    // 1073741823 == (2 ^ 30 - 1)
+//        System.out.println(CommonUtils.binary2decimal("00000000000000000000000000000001"));    // 1
+//        System.out.println(CommonUtils.binary2decimal("10000000000000000000000000000000"));    // -2147483648
+//        System.out.println(CommonUtils.binary2decimal("10000000000000000000000000000001"));    // -2147483647
+//        System.out.println(CommonUtils.binary2decimal("10000000000000000000000000000010"));    // -2147483646
+//        System.out.println(CommonUtils.binary2decimal("00000000000000000000000000000000"));    // 0
+//        System.out.println(CommonUtils.binary2decimal("01000000000000000000000000000000"));    // 1073741824
+//        System.out.println(CommonUtils.binary2decimal("11000000000000000000000000000000"));    // -1073741824
+//        System.out.println(CommonUtils.binary2decimal("11111111111111111111111111111111"));    // -1
+//        System.out.println(CommonUtils.binary2decimal("11111111111111111111111111111110"));    // -2
+//        System.out.println(CommonUtils.binary2decimal("11111111111111111111111111111100"));    // -4
+//        System.out.println(CommonUtils.binary2decimal("01111111111111111111111111111111"));    // 2147483647
+//        System.out.println(CommonUtils.binary2decimal("00111111111111111111111111111111"));    // 1073741823 == (2 ^ 30 - 1)
 
         /**
          * 位移运算
@@ -186,21 +186,24 @@ public class Test15 {
 //        System.out.println(-2147483647 >>> 1);
 //        System.out.println(2147483647 >>> 1);
 
-//        System.out.println(Math.pow(2, 30) - 1);    // 1073741823
+//        System.out.println(Math.pow(2, 31) * -1);   // -2147483648
+//        System.out.println(Integer.MIN_VALUE);      // -2147483648
+//        System.out.println(Integer.MAX_VALUE);      //  2147483647
+//        System.out.println(Math.pow(2, 31) - 1);    //  2147483647
 
         /**
          *【15-4-1】位1的个数（汉明重量）
          *『力扣-191』
          */
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("00000000000000000000000000000011")));
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("00000000000000000000000000000001")));
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("00000000000000000000000000000000")));
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("00000000000000000000000000011111")));
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("00000000000000000000000000001011")));
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("00000000000000000000000010000000")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("00000000000000000000000000000011")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("00000000000000000000000000000001")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("00000000000000000000000000000000")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("00000000000000000000000000011111")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("00000000000000000000000000001011")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("00000000000000000000000010000000")));
 
-//        System.out.println(sl15.hammingWeight(cu.binary2decimalII("10000000000000000000000010000000")));
-//        System.out.println(sl15.hammingWeight2(cu.binary2decimalII("10000000000000000000000010000000")));
+//        System.out.println(sl15.hammingWeight(CommonUtils.binary2decimalII("10000000000000000000000010000000")));
+//        System.out.println(sl15.hammingWeight2(CommonUtils.binary2decimalII("10000000000000000000000010000000")));
 
         /**
          *【15-4-2】汉明距离
@@ -274,12 +277,12 @@ public class Test15 {
 //        System.out.println(sl15.isPowerOfTwo2(4));
 //        System.out.println(sl15.isPowerOfTwo2(5));
 
-//        System.out.println(sl15.isPowerOfTwo(cu.binary2decimalII("10000000000000000000000000000000")));
-//        System.out.println(sl15.isPowerOfTwo(cu.binary2decimalII("10000000000000000000000000000010")));
-//        System.out.println(sl15.isPowerOfTwo(cu.binary2decimalII("10000000000000000100000000000000")));
-//        System.out.println(sl15.isPowerOfTwo(cu.binary2decimalII("00000000000000000000000000000000")));
-//        System.out.println(sl15.isPowerOfTwo(cu.binary2decimalII("00000000000000000000000000000001")));
-//        System.out.println(sl15.isPowerOfTwo(cu.binary2decimalII("00000000000000000000000000000010")));
+//        System.out.println(sl15.isPowerOfTwo(CommonUtils.binary2decimalII("10000000000000000000000000000000")));
+//        System.out.println(sl15.isPowerOfTwo(CommonUtils.binary2decimalII("10000000000000000000000000000010")));
+//        System.out.println(sl15.isPowerOfTwo(CommonUtils.binary2decimalII("10000000000000000100000000000000")));
+//        System.out.println(sl15.isPowerOfTwo(CommonUtils.binary2decimalII("00000000000000000000000000000000")));
+//        System.out.println(sl15.isPowerOfTwo(CommonUtils.binary2decimalII("00000000000000000000000000000001")));
+//        System.out.println(sl15.isPowerOfTwo(CommonUtils.binary2decimalII("00000000000000000000000000000010")));
 
     }
 }
