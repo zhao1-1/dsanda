@@ -1,6 +1,10 @@
 package datastructure;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author bin2.zhao (D52B48 in ZhangMen)
@@ -150,6 +154,54 @@ public class CommonUtils {
         System.out.print("NULL");
         System.out.println("");
         System.out.println("------------");
+    }
+
+    /**
+     * 获取给定时间的周数（该周数范围）
+     */
+    public static String getWeekNum(Date date) {
+        // 参数校验
+        if (Objects.isNull(date)) {
+            return "param is null";
+        }
+
+        /*
+        定义输出结果（如果年份为当前年份，则不显示）：
+        + 第51周（12/13 - 12/19）
+        + 2020年 第50周（12/06 - 12/12）
+         */
+        StringBuilder result = new StringBuilder();
+
+        // 时间设置
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+        Calendar currCalendar = Calendar.getInstance();
+        currCalendar.setTime(new Date());
+        Calendar targetCalendar = Calendar.getInstance();
+        targetCalendar.setTime(date);
+        targetCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+
+        // 获取目标年数及当前年数
+        Integer targetYear = targetCalendar.get(Calendar.YEAR);
+        Integer currYear = currCalendar.get(Calendar.YEAR);
+        if(null != targetYear && null != currYear && !targetYear.equals(currYear)) {
+            result.append(currYear.toString() + "年 ");
+        }
+
+        // 获取目标时间的周数
+        Integer weekNum = targetCalendar.get(Calendar.WEEK_OF_YEAR);
+        if (null != weekNum) {
+            result.append("第" + weekNum.toString() + "周");
+        }
+
+        // 获取目标周数的时间范围
+        result.append("（");
+        targetCalendar.set(Calendar.DAY_OF_WEEK, targetCalendar.getFirstDayOfWeek());
+        result.append(sdf.format(targetCalendar.getTime()) + " - ");
+        targetCalendar.add(Calendar.DAY_OF_WEEK, 6);
+        result.append(sdf.format(targetCalendar.getTime()) + "）");
+
+        // 返回目标日期格式
+        return result.toString();
     }
 
 }
