@@ -184,7 +184,7 @@ public class CommonUtils {
         Integer targetYear = targetCalendar.get(Calendar.YEAR);
         Integer currYear = currCalendar.get(Calendar.YEAR);
         if(null != targetYear && null != currYear && !targetYear.equals(currYear)) {
-            result.append(currYear.toString() + "年 ");
+            result.append(targetYear.toString() + "年 ");
         }
 
         // 获取目标时间的周数
