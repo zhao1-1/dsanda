@@ -3,9 +3,7 @@ package datastructure;
 //import datastructure.hash.LRUCache;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 public class Test8 {
     public static void main(String[] args) {
@@ -181,5 +179,30 @@ public class Test8 {
 //                new int[]{44, 72, 57, 92, 95, 76, 53, 76, 46, 22, 55, 22, 57, 31, 31, 96, 63, 89, 76, 70, 66, 81, 58, 63, 81, 47, 21, 55, 55, 57, 25, 24, 65, 40, 92, 84, 83, 98, 59, 98, 97, 50, 41, 67, 39, 99, 30, 50, 24, 34, 22, 44, 72, 38, 60, 20, 25, 68, 25, 35, 59, 54, 53, 50, 66, 82, 71, 96, 38, 23, 29, 53, 39, 87, 100, 91, 37, 78, 66, 53, 35, 74, 100, 72, 81, 50, 70, 85, 78, 84, 42, 95, 79, 74, 20, 78, 52, 69, 90, 94})));
 
 
+        /**
+         * 测试空map，无key返回情况，类内传值
+           语法符合规定，不会报错，null可以传递进去。
+         */
+        Map<Integer, String> map = new HashMap();
+        System.out.println("value is -> " + map.get(3));
+        System.out.println("value is -> " + map.get(null));
+
+        testA tA = new Test8().new testA();
+        tA.setA(map.get(null));
+        System.out.println(tA.getA());
+
+    }
+
+    public class testA {
+        private String a = "gui";
+        private Integer b;
+
+        public String getA() {
+            return a;
+        }
+
+        public void setA(String a) {
+            this.a = a;
+        }
     }
 }
