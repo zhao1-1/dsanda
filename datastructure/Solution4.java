@@ -167,6 +167,9 @@ public class Solution4 {
         for (int i = 0; i < pushed.length; i++) {
             pushedStack.push(pushed[i]);
             // 注意：此处比较Integer类型，必须用.equals()方法比较！！
+            /*
+            值为284超出正负128范围，不能用Integer的缓存，创建的是两个不同的284对象，双等号比较的是引用地址，肯定不相同！
+             */
             while (!pushedStack.isEmpty() && pushedStack.peek().equals(poppedStack.peek())) {
                 pushedStack.pop();
                 poppedStack.pop();

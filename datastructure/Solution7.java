@@ -16,10 +16,12 @@ public class Solution7 {
     （3）返回值永远是：
         return middle;
         ** 不要是low或high **
-    （4）low 和 high 的更新永远是：
+    （4）middle = low + (high - low) / 2;
+        // 防止int越界的写法，(low + high) / 2 有发生int越界的可能
+    （5）low 和 high 的更新永远是：
         low = middle + 1;
         high = middle - 1;
-    （5）特殊情况：
+    （6）特殊情况：
         + 对于 "low == high" ：
           必要的时候，在while内部补充退出条件（比如查找第一个/最后一个命中的值）；
         + 对于 "非确定性查找" ：
@@ -77,7 +79,7 @@ public class Solution7 {
 
     /**
      *【7-0.1-1】查找第一个等于目标值的元素
-     * {跟谁学21春招}
+     * {跟谁学21春招} {黑湖科技二面}
      */
     public int searchFirstTarget(int[] nums, int target) {
         // 快速通行
@@ -215,6 +217,7 @@ public class Solution7 {
 
     /**
      *【7-0.4-1】循环有序数组中查找元素x（没有重复数据）
+     * {力扣-33} {拼多多一面}
      */
     public int searchInCycleSortedArr(int[] cs_nums, int target) {
         int low = 0;
